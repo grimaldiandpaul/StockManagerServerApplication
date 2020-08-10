@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		12B4F87024E1E47B0073DB58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */; };
+		12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88424E1E6960073DB58 /* LogEntryType.swift */; };
+		12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88524E1E6970073DB58 /* LoggingManager.swift */; };
+		12B4F88A24E1E6970073DB58 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88624E1E6970073DB58 /* Log.swift */; };
+		12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88724E1E6970073DB58 /* LogEntrySource.swift */; };
+		12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */; };
 		12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE34B824E1E3B3008234FF /* AppDelegate.swift */; };
 		12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE34BA24E1E3B3008234FF /* ContentView.swift */; };
 		12CE34BD24E1E3B5008234FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34BC24E1E3B5008234FF /* Assets.xcassets */; };
@@ -18,6 +23,11 @@
 
 /* Begin PBXFileReference section */
 		12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		12B4F88424E1E6960073DB58 /* LogEntryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntryType.swift; sourceTree = "<group>"; };
+		12B4F88524E1E6970073DB58 /* LoggingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
+		12B4F88624E1E6970073DB58 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		12B4F88724E1E6970073DB58 /* LogEntrySource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntrySource.swift; sourceTree = "<group>"; };
+		12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingSweeper.swift; sourceTree = "<group>"; };
 		12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockManagerServerApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CE34B824E1E3B3008234FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12CE34BA24E1E3B3008234FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +133,11 @@
 		12B4F87A24E1E5B40073DB58 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
+				12B4F88624E1E6970073DB58 /* Log.swift */,
+				12B4F88724E1E6970073DB58 /* LogEntrySource.swift */,
+				12B4F88424E1E6960073DB58 /* LogEntryType.swift */,
+				12B4F88524E1E6970073DB58 /* LoggingManager.swift */,
+				12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -368,7 +383,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */,
+				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
+				12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */,
+				12B4F88A24E1E6970073DB58 /* Log.swift in Sources */,
+				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
