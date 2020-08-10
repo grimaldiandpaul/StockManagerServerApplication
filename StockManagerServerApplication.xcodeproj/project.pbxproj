@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,9 @@
 		12CE34C324E1E3B5008234FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34C124E1E3B5008234FF /* Main.storyboard */; };
 		733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */; };
 		733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */; };
+		733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC924E1FEBC0034AE08 /* DataValidation.swift */; };
+		733B1CCD24E201330034AE08 /* StockManagerDotTechModels in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CCC24E201330034AE08 /* StockManagerDotTechModels */; };
+		733B1CCF24E2018D0034AE08 /* InventoryItemDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CCE24E2018D0034AE08 /* InventoryItemDataExtensions.swift */; };
 		A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +47,8 @@
 		2F3065749B4EC29137993702 /* Pods-StockManagerServerApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockManagerServerApplication.release.xcconfig"; path = "Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication.release.xcconfig"; sourceTree = "<group>"; };
 		733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
 		733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
+		733B1CC924E1FEBC0034AE08 /* DataValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataValidation.swift; path = StockManagerServerApplication/App/Services/Database/DataValidation.swift; sourceTree = SOURCE_ROOT; };
+		733B1CCE24E2018D0034AE08 /* InventoryItemDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItemDataExtensions.swift; sourceTree = "<group>"; };
 		936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockManagerServerApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -53,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */,
+				733B1CCD24E201330034AE08 /* StockManagerDotTechModels in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +172,7 @@
 		12B4F87D24E1E5B40073DB58 /* DataValidation */ = {
 			isa = PBXGroup;
 			children = (
+				733B1CC924E1FEBC0034AE08 /* DataValidation.swift */,
 			);
 			path = DataValidation;
 			sourceTree = "<group>";
@@ -273,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */,
+				733B1CCE24E2018D0034AE08 /* InventoryItemDataExtensions.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -303,6 +311,9 @@
 			dependencies = (
 			);
 			name = StockManagerServerApplication;
+			packageProductDependencies = (
+				733B1CCC24E201330034AE08 /* StockManagerDotTechModels */,
+			);
 			productName = StockManagerServerApplication;
 			productReference = 12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */;
 			productType = "com.apple.product-type.application";
@@ -330,6 +341,9 @@
 				Base,
 			);
 			mainGroup = 12CE34AC24E1E3B3008234FF;
+			packageReferences = (
+				733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */,
+			);
 			productRefGroup = 12CE34B624E1E3B3008234FF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -400,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */,
 				12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */,
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
@@ -408,6 +423,7 @@
 				12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */,
 				12B4F88A24E1E6970073DB58 /* Log.swift in Sources */,
 				12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */,
+				733B1CCF24E2018D0034AE08 /* InventoryItemDataExtensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
 			);
@@ -614,6 +630,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grimaldiandpaul/StockManagerDotTechModels";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		733B1CCC24E201330034AE08 /* StockManagerDotTechModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */;
+			productName = StockManagerDotTechModels;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 12CE34AD24E1E3B3008234FF /* Project object */;
 }
