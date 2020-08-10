@@ -19,6 +19,8 @@
 		12CE34BD24E1E3B5008234FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34BC24E1E3B5008234FF /* Assets.xcassets */; };
 		12CE34C024E1E3B5008234FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34BF24E1E3B5008234FF /* Preview Assets.xcassets */; };
 		12CE34C324E1E3B5008234FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34C124E1E3B5008234FF /* Main.storyboard */; };
+		733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */; };
+		733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */; };
 		A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		12CE34C524E1E3B5008234FF /* StockManagerServerApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StockManagerServerApplication.entitlements; sourceTree = "<group>"; };
 		1F6D57CAFF99640E3E212AED /* Pods-StockManagerServerApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockManagerServerApplication.debug.xcconfig"; path = "Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		2F3065749B4EC29137993702 /* Pods-StockManagerServerApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockManagerServerApplication.release.xcconfig"; path = "Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication.release.xcconfig"; sourceTree = "<group>"; };
+		733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
+		733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
 		936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockManagerServerApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,6 +80,7 @@
 		12B4F87324E1E5B40073DB58 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				733B1CC224E1F28A0034AE08 /* Database */,
 				12B4F87424E1E5B40073DB58 /* TextMessaging */,
 				12B4F87524E1E5B40073DB58 /* WebApp */,
 				12B4F87624E1E5B40073DB58 /* Routing */,
@@ -186,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				12B4F88124E1E5B60073DB58 /* Date */,
+				733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -261,6 +267,14 @@
 				2F3065749B4EC29137993702 /* Pods-StockManagerServerApplication.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		733B1CC224E1F28A0034AE08 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		7A904DEB6761DDD933B6321F /* Frameworks */ = {
@@ -387,6 +401,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */,
+				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
+				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
 				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
 				12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */,
