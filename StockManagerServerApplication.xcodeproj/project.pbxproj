@@ -536,7 +536,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"StockManagerServerApplication/Preview Content\"";
-				DEVELOPMENT_TEAM = P3QT9AKU76;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = StockManagerServerApplication/Info.plist;
@@ -561,7 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"StockManagerServerApplication/Preview Content\"";
-				DEVELOPMENT_TEAM = P3QT9AKU76;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = StockManagerServerApplication/Info.plist;
