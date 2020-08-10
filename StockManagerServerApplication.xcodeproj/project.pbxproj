@@ -13,6 +13,7 @@
 		12B4F88A24E1E6970073DB58 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88624E1E6970073DB58 /* Log.swift */; };
 		12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88724E1E6970073DB58 /* LogEntrySource.swift */; };
 		12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */; };
+		12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F89124E1EE270073DB58 /* DateExtensions.swift */; };
 		12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE34B824E1E3B3008234FF /* AppDelegate.swift */; };
 		12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE34BA24E1E3B3008234FF /* ContentView.swift */; };
 		12CE34BD24E1E3B5008234FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34BC24E1E3B5008234FF /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		12B4F88624E1E6970073DB58 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		12B4F88724E1E6970073DB58 /* LogEntrySource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntrySource.swift; sourceTree = "<group>"; };
 		12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingSweeper.swift; sourceTree = "<group>"; };
+		12B4F89124E1EE270073DB58 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockManagerServerApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CE34B824E1E3B3008234FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12CE34BA24E1E3B3008234FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		12B4F88124E1E5B60073DB58 /* Date */ = {
 			isa = PBXGroup;
 			children = (
+				12B4F89124E1EE270073DB58 /* DateExtensions.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
 				12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */,
 				12B4F88A24E1E6970073DB58 /* Log.swift in Sources */,
+				12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
 			);
