@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import FirebaseFirestore
-import StockManagerDotTechModels
+import Firebase
 import Telegraph
 
 class FirebaseWrapper {

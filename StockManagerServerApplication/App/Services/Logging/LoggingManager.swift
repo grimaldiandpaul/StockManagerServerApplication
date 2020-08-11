@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseFirestore
+import Firebase
 
 class LoggingManager {
     

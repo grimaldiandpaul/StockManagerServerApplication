@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CocoaAsyncSocket",
+        "repositoryURL": "https://github.com/robbiehanson/CocoaAsyncSocket.git",
+        "state": {
+          "branch": null,
+          "revision": "0e00c967a010fc43ce528bd633d032f17158d393",
+          "version": "7.6.4"
+        }
+      },
+      {
+        "package": "HTTPParserC",
+        "repositoryURL": "https://github.com/Building42/HTTPParserC.git",
+        "state": {
+          "branch": null,
+          "revision": "6fa23997359a65eccfc06808ab85f2e121a84290",
+          "version": "2.9.2"
+        }
+      },
+      {
+        "package": "StockManagerDotTechModels",
+        "repositoryURL": "https://github.com/grimaldiandpaul/StockManagerDotTechModels",
+        "state": {
+          "branch": "master",
+          "revision": "b1cea96cd25112cbfc2225cee5a9f2a47d2f7896",
+          "version": null
+        }
+      },
+      {
+        "package": "Telegraph",
+        "repositoryURL": "https://github.com/Building42/Telegraph",
+        "state": {
+          "branch": null,
+          "revision": "9c3d479a46624e4a8d5267898324b4716a42ba3e",
+          "version": "0.28.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

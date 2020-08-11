@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FirebaseFirestore
+import Firebase
 
 struct Log {
     var message: String

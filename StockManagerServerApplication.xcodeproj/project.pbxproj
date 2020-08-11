@@ -34,10 +34,10 @@
 		733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC924E1FEBC0034AE08 /* DataValidation.swift */; };
 		733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD024E33FF60034AE08 /* LocationExtensions.swift */; };
 		733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD224E341BE0034AE08 /* TelegraphServer.swift */; };
-		733B1CD624E342020034AE08 /* Telegraph in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* Telegraph */; };
+		733B1CD624E342020034AE08 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* SwiftPackageProductDependency */; };
 		73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */; };
 		73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */; };
-		A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */; };
+		B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +75,7 @@
 		733B1CD224E341BE0034AE08 /* TelegraphServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelegraphServer.swift; path = StockManagerServerApplication/App/Services/Routing/TelegraphServer.swift; sourceTree = SOURCE_ROOT; };
 		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
 		73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRouteHandlers.swift; sourceTree = "<group>"; };
-		936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockManagerServerApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StockManagerServerApplication.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */,
-				733B1CD624E342020034AE08 /* Telegraph in Frameworks */,
+				733B1CD624E342020034AE08 /* BuildFile in Frameworks */,
+				B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +375,7 @@
 		7A904DEB6761DDD933B6321F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */,
+				8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -391,7 +391,7 @@
 				12CE34B124E1E3B3008234FF /* Sources */,
 				12CE34B224E1E3B3008234FF /* Frameworks */,
 				12CE34B324E1E3B3008234FF /* Resources */,
-				3621B7803861C3180C200252 /* [CP] Embed Pods Frameworks */,
+				D5FCE56827602E12FABD48D8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -399,7 +399,7 @@
 			);
 			name = StockManagerServerApplication;
 			packageProductDependencies = (
-				733B1CD524E342020034AE08 /* Telegraph */,
+				733B1CD524E342020034AE08 /* SwiftPackageProductDependency */,
 			);
 			productName = StockManagerServerApplication;
 			productReference = 12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */;
@@ -429,8 +429,8 @@
 			);
 			mainGroup = 12CE34AC24E1E3B3008234FF;
 			packageReferences = (
-				733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */,
-				733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */,
+				733B1CCB24E201330034AE08 /* RemoteSwiftPackageReference */,
+				733B1CD424E342020034AE08 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 12CE34B624E1E3B3008234FF /* Products */;
 			projectDirPath = "";
@@ -478,21 +478,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3621B7803861C3180C200252 /* [CP] Embed Pods Frameworks */ = {
+		D5FCE56827602E12FABD48D8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -733,7 +733,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */ = {
+		733B1CCB24E201330034AE08 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/grimaldiandpaul/StockManagerDotTechModels";
 			requirement = {
@@ -741,7 +741,7 @@
 				kind = branch;
 			};
 		};
-		733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */ = {
+		733B1CD424E342020034AE08 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Building42/Telegraph";
 			requirement = {
@@ -752,9 +752,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		733B1CD524E342020034AE08 /* Telegraph */ = {
+		733B1CD524E342020034AE08 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */;
+			package = 733B1CD424E342020034AE08 /* RemoteSwiftPackageReference */;
 			productName = Telegraph;
 		};
 /* End XCSwiftPackageProductDependency section */
