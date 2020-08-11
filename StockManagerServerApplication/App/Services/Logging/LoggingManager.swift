@@ -16,7 +16,10 @@ class LoggingManager {
     var logs = [Log]()
     
     class func log(_ message: String, source: LogEntrySource = .general, type: LogEntryType = .general){
+        
         let newLog = Log(message: message, time: Timestamp(date: Date()), source: source, type: type)
+        
+        print(newLog.output)
         
         LoggingManager.main.logs.append(newLog)
         
