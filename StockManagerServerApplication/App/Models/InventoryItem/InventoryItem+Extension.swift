@@ -9,8 +9,13 @@ import Foundation
 import FirebaseFirestore
 
 extension InventoryItem {
-    var totalInStoreQuantity: Int{
-        return self.backstockQuantity + self.customerAccessibleQuantity
+    var totalInStoreQuantity: Int?{
+        if let backstockQuantity = self.backstockQuantity,
+            let customerAccessibleQuantity = self.customerAccessibleQuantity {
+            return backstockQuantity + customerAccessibleQuantity
+        } else {
+            return nil
+        }
     }
     
     static func from(_ object: [String:Any]) -> InventoryItem {
@@ -48,5 +53,39 @@ extension InventoryItem {
         }
         
         return item
+    }
+    
+    var json: [String:Any]? {
+        var result = [String:Any]()
+        
+        if self.id != "" {
+            result["id"] = self.id
+        }
+        
+        if self.userDesignatedID != "" {
+            result["userDesignatedID"] = self.userDesignatedID
+        }
+        
+        if self.name != "" {
+            result["name"] = self.name
+        }
+        
+        if !self.locations.isEmpty {
+            result["locations"] = self.locations.map({$0.json})
+        }
+        
+        if let dateLastPurchased = self.dateLastPurchased {
+            result["dateLastPurchased"] = dateLastPurchased
+        }
+        
+        if let customerAccessibleQuantity = self.customerAccessibleQuantity {
+            result["customerAccessibleQuantity"] = customerAccessibleQuantity
+        }
+        
+        if let backstockQuantity = self.backstockQuantity {
+            result["backstockQuantity"] = backstockQuantity
+        }
+        
+        return result
     }
 }

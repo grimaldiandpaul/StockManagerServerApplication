@@ -67,13 +67,13 @@ struct InventoryItem: Identifiable {
      
     Description: The quantity of this item available for purchase by customers
     */
-    var customerAccessibleQuantity: Int
+    var customerAccessibleQuantity: Int?
     
     /**
      
     Description: The quantity of this item NOT available for purchase by customers. This may be because the item is unprocessed, on hold, etc.
     */
-    var backstockQuantity: Int
+    var backstockQuantity: Int?
     
     /**
      
@@ -84,13 +84,17 @@ struct InventoryItem: Identifiable {
     
     
     
-    init(userDesignatedID: String = "", name: String = "", locations: [Location] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int = 0, backstockQuantity: Int = 0) {
-        self.id = UUID().uuidString
+    init(userDesignatedID: String = "", name: String = "", locations: [Location] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int? = nil, backstockQuantity: Int? = nil) {
+        self.id = UUID.uuidStringTwentyCharsNoDashes
         self.userDesignatedID = userDesignatedID
         self.name = name
         self.locations = locations
         self.dateLastPurchased = dateLastPurchased
-        self.customerAccessibleQuantity = customerAccessibleQuantity
-        self.backstockQuantity = backstockQuantity
+        if let customerAccessibleQuantity = customerAccessibleQuantity {
+            self.customerAccessibleQuantity = customerAccessibleQuantity
+        }
+        if let backstockQuantity = backstockQuantity {
+            self.backstockQuantity = backstockQuantity
+        }
     }
 }

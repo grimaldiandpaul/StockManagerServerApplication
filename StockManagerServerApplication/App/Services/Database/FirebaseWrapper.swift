@@ -8,11 +8,12 @@
 import Foundation
 import FirebaseFirestore
 import StockManagerDotTechModels
+import Telegraph
 
 class FirebaseWrapper {
     
     static let root = Firestore.firestore()
-    typealias FirebaseWrapperResult = (String?, Bool) -> ()
+    typealias FirebaseWrapperResult = (String?, Bool) -> HTTPResponse
     
     class func reference(_ itemUUIDString: String, store: String) -> DocumentReference {
         return FirebaseWrapper.root
@@ -27,7 +28,7 @@ class FirebaseWrapper {
         DataValidation.validateFields(item: item) { (err, result) in
             if let err = err {
                 print(err)
-                completion("Item could not be created", false)
+                let _ = completion("Item could not be created", false)
             } else {
                 FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
                     if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
@@ -35,16 +36,16 @@ class FirebaseWrapper {
                             FirebaseWrapper.reference(item.id, store: store).setData(json) { (err) in
                                 if let err = err {
                                     print(err)
-                                    completion("Item could not be created due to an error with our database service.", false)
+                                    let _ = completion("Item could not be created due to an error with our database service.", false)
                                 } else {
-                                    completion(nil, true)
+                                    let _ = completion(nil, true)
                                 }
                             }
                         } else {
-                            completion("Item could not be created because of an error in serialization for database storage.", false)
+                            let _ = completion("Item could not be created because of an error in serialization for database storage.", false)
                         }
                     } else {
-                        completion("Item could not be created because an item with this ID already exists.", false)
+                        let _ = completion("Item could not be created because an item with this ID already exists.", false)
                     }
                 }
                 
@@ -58,7 +59,7 @@ class FirebaseWrapper {
         DataValidation.validateFields(item: item) { (err, result) in
             if let err = err {
                 print(err)
-                completion("Item could not be updated", false)
+                let _ = completion("Item could not be updated", false)
             } else {
                 FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
                     if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
@@ -66,16 +67,16 @@ class FirebaseWrapper {
                             FirebaseWrapper.reference(item.id, store: store).updateData(json) { (err) in
                                 if let err = err {
                                     print(err)
-                                    completion("Item could not be updated due to an error with our database service.", false)
+                                    let _ = completion("Item could not be updated due to an error with our database service.", false)
                                 } else {
-                                    completion(nil, true)
+                                    let _ = completion(nil, true)
                                 }
                             }
                         } else {
-                            completion("Item could not be updated because of an error in serialization for database storage.", false)
+                            let _ = completion("Item could not be updated because of an error in serialization for database storage.", false)
                         }
                     } else {
-                        completion("Item could not be updated because an item with this ID does not already exist.", false)
+                        let _ = completion("Item could not be updated because an item with this ID does not already exist.", false)
                     }
                 }
                 
@@ -91,11 +92,11 @@ class FirebaseWrapper {
                 FirebaseWrapper.reference(item.id, store: store).delete { (err) in
                     if let err = err {
                         print(err)
-                        completion("Item could not be deleted due to an error with our database service.", false)
+                        let _ = completion("Item could not be deleted due to an error with our database service.", false)
                     }
                 }
             } else {
-                completion("Item could not be delete because an item with this ID does not exist.", false)
+                let _ = completion("Item could not be delete because an item with this ID does not exist.", false)
             }
         }
         

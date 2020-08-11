@@ -32,6 +32,11 @@
 		733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */; };
 		733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */; };
 		733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC924E1FEBC0034AE08 /* DataValidation.swift */; };
+		733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD024E33FF60034AE08 /* LocationExtensions.swift */; };
+		733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD224E341BE0034AE08 /* TelegraphServer.swift */; };
+		733B1CD624E342020034AE08 /* Telegraph in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* Telegraph */; };
+		73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */; };
+		73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */; };
 		A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +71,10 @@
 		733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
 		733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
 		733B1CC924E1FEBC0034AE08 /* DataValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataValidation.swift; path = StockManagerServerApplication/App/Services/Database/DataValidation.swift; sourceTree = SOURCE_ROOT; };
+		733B1CD024E33FF60034AE08 /* LocationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtensions.swift; sourceTree = "<group>"; };
+		733B1CD224E341BE0034AE08 /* TelegraphServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelegraphServer.swift; path = StockManagerServerApplication/App/Services/Routing/TelegraphServer.swift; sourceTree = SOURCE_ROOT; };
+		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
+		73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRouteHandlers.swift; sourceTree = "<group>"; };
 		936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockManagerServerApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -75,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */,
+				733B1CD624E342020034AE08 /* Telegraph in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +151,9 @@
 		12B4F87624E1E5B40073DB58 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
+				733B1CD224E341BE0034AE08 /* TelegraphServer.swift */,
+				73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */,
+				73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -269,6 +282,7 @@
 				12B4F8AD24E2077E0073DB58 /* Location.swift */,
 				12B4F8AE24E2077E0073DB58 /* LocationType+Extensions.swift */,
 				12B4F8AF24E2077E0073DB58 /* LocationType.swift */,
+				733B1CD024E33FF60034AE08 /* LocationExtensions.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -385,6 +399,7 @@
 			);
 			name = StockManagerServerApplication;
 			packageProductDependencies = (
+				733B1CD524E342020034AE08 /* Telegraph */,
 			);
 			productName = StockManagerServerApplication;
 			productReference = 12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */;
@@ -415,6 +430,7 @@
 			mainGroup = 12CE34AC24E1E3B3008234FF;
 			packageReferences = (
 				733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */,
+				733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */,
 			);
 			productRefGroup = 12CE34B624E1E3B3008234FF /* Products */;
 			projectDirPath = "";
@@ -492,12 +508,15 @@
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
 				12B4F8BD24E2077F0073DB58 /* Packaging+Extensions.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
+				733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */,
 				123F83EF24E336890084D5B8 /* UUID.swift in Sources */,
 				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
 				12B4F8B924E2077F0073DB58 /* Location.swift in Sources */,
 				12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */,
+				73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */,
 				12B4F8BE24E2077F0073DB58 /* InventoryItem+Extension.swift in Sources */,
+				73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */,
 				12B4F8BB24E2077F0073DB58 /* LocationType.swift in Sources */,
 				12B4F8BC24E2077F0073DB58 /* Packaging.swift in Sources */,
 				12B4F8B824E2077F0073DB58 /* Errors.swift in Sources */,
@@ -506,6 +525,7 @@
 				12B4F8BF24E2077F0073DB58 /* InventoryItem.swift in Sources */,
 				12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
+				733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,7 +741,23 @@
 				kind = branch;
 			};
 		};
+		733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Building42/Telegraph";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.28.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		733B1CD524E342020034AE08 /* Telegraph */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */;
+			productName = Telegraph;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 12CE34AD24E1E3B3008234FF /* Project object */;
 }
