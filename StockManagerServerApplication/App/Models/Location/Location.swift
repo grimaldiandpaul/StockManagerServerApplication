@@ -7,18 +7,22 @@
 
 import Foundation
 
-open class Location {
+struct Location: Codable {
     
-    open var aisle : String
-    open var aisleSection : String
-    open var spot : String
-    open var description : String
+    var aisle : String
+    var aisleSection : String
+    var spot : String
+    var description : String
+    var type : LocationType
+    var accessibility : Accessibility
     
     public init(_ description: String){
         self.aisle = ""
         self.aisleSection = ""
         self.spot = ""
         self.description = description
+        self.type = .unknown
+        self.accessibility = .unprocessed
     }
     
     public init(aisle: String, aisleSection: String, spot: String = "", description: String = ""){
@@ -26,6 +30,8 @@ open class Location {
         self.aisleSection = aisleSection
         self.spot = spot
         self.description = description
+        self.type = .unknown
+        self.accessibility = .unprocessed
     }
     
 }

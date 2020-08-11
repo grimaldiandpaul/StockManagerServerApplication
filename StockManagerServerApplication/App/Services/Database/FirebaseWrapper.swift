@@ -22,14 +22,14 @@ class FirebaseWrapper {
             .document(itemUUIDString)
     }
     
-    class func createItem(_ object: [String:Any], store: String, completion: @escaping FirebaseWrapperResult) {
+    class func createItem(_ item: InventoryItem, store: String, completion: @escaping FirebaseWrapperResult) {
         
-        DataValidation.validateFields(object: object) { (err, result) in
+        DataValidation.validateFields(item: item) { (err, result) in
             if let err = err {
                 print(err)
                 completion("Item could not be created", false)
             } else {
-                FirebaseWrapper.
+                //FirebaseWrapper.
             }
         }
     }

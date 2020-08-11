@@ -12,16 +12,12 @@ class DataValidation {
     static let main = DataValidation()
     typealias DataValidationResult = (String?, Bool) -> ()
     
-    class func validateFields(object: [String:Any], completion: @escaping DataValidationResult) {
+    class func validateFields(item: InventoryItem, completion: @escaping DataValidationResult) {
         
-        if let id = object["id"] as? String {
-            if id == "" {
-                completion("ID field cannot be empty", false)
-            } else {
-                completion(nil, true)
-            }
+        if item.id == "" {
+            completion("ID field cannot be empty", false)
         } else {
-            completion("Could not parse ID field", false)
+            completion(nil, true)
         }
     }
 }

@@ -19,8 +19,9 @@ enum LogEntrySource: String, Codable {
     case routing = "Routing"
     case database = "Database"
     case limitations = "Limitations"
+    case itemDecoding = "Item Decoding"
     
     static var all: [LogEntrySource] {
-        return [.webApp, .dataValidation, .authentication, .stripeBilling, .textMessaging, .logging, .routing, .database, .limitations]
+        return [.webApp, .dataValidation, .authentication, .stripeBilling, .textMessaging, .logging, .routing, .database, .limitations, .itemDecoding]
     }
 }

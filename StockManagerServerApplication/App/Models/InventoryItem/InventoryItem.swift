@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 /**
  
@@ -26,30 +27,30 @@ let item = InventoryItem(name: "An Item", locations: [(Location("Somewhere"), .j
 ```
  
 */
-open class InventoryItem: Identifiable, Codable {
+struct InventoryItem: Identifiable, Codable {
     
     /**
      
     Description: The internal identifier, specific to our system.
     Type: [`UUID`](https://developer.apple.com/documentation/foundation/uuid)
     */
-    open var id : String
+    var id : String
     
     /**
      
     Description: Identifier optional if client has their own system identifier
     */
-    open var userDesignatedID: String
+    var userDesignatedID: String
     
     /**
      
     Description: The name of the item
     */
-    open var name: String
+    var name: String
     
     /**
      
-    An array of tuples describing an inventory item's location and accessibility
+    An array Locations
      
     ### Tuple Members: ###
         
@@ -60,30 +61,30 @@ open class InventoryItem: Identifiable, Codable {
     2: [`Accessibility`](https://docs.stockmanager.tech/docs/Accessibility)
      
     */
-    open var locations: [(Location, LocationType, Accessibility)]
+    var locations: [Location]
     
     /**
      
     Description: The quantity of this item available for purchase by customers
     */
-    open var customerAccessibleQuantity: Int
+    var customerAccessibleQuantity: Int
     
     /**
      
     Description: The quantity of this item NOT available for purchase by customers. This may be because the item is unprocessed, on hold, etc.
     */
-    open var backstockQuantity: Int
+    var backstockQuantity: Int
     
     /**
      
     Description: The date that this item was last purchased from a register at this location. (Independent of any store returns)
     Type: [`Date`](https://developer.apple.com/documentation/foundation/date)
     */
-    open var dateLastPurchased: Date?
+    var dateLastPurchased: Timestamp?
     
     
     
-    public init(userDesignatedID: String = "", name: String, locations: [(Location, LocationType, Accessibility)] = [], dateLastPurchased: Date? = nil, customerAccessibleQuantity: Int = 0, backstockQuantity: Int = 0) {
+    init(userDesignatedID: String = "", name: String, locations: [(Location, LocationType, Accessibility)] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int = 0, backstockQuantity: Int = 0) {
         self.id = UUID().uuidString
         self.userDesignatedID = userDesignatedID
         self.name = name

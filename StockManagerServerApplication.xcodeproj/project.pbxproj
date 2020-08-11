@@ -31,7 +31,6 @@
 		733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */; };
 		733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */; };
 		733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC924E1FEBC0034AE08 /* DataValidation.swift */; };
-		733B1CCF24E2018D0034AE08 /* InventoryItemDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CCE24E2018D0034AE08 /* InventoryItemDataExtensions.swift */; };
 		A75F4515A12A386BF39D10B4 /* Pods_StockManagerServerApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +64,6 @@
 		733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
 		733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
 		733B1CC924E1FEBC0034AE08 /* DataValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataValidation.swift; path = StockManagerServerApplication/App/Services/Database/DataValidation.swift; sourceTree = SOURCE_ROOT; };
-		733B1CCE24E2018D0034AE08 /* InventoryItemDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItemDataExtensions.swift; sourceTree = "<group>"; };
 		936962C9B83D21D94C5B25F3 /* Pods_StockManagerServerApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StockManagerServerApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -345,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */,
-				733B1CCE24E2018D0034AE08 /* InventoryItemDataExtensions.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -496,7 +493,6 @@
 				12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */,
 				12B4F8BF24E2077F0073DB58 /* InventoryItem.swift in Sources */,
 				12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */,
-				733B1CCF24E2018D0034AE08 /* InventoryItemDataExtensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
 			);

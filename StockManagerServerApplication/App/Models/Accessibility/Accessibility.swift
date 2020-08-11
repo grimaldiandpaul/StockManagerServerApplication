@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Accessibility {
-    case processed
-    case unprocessed
+enum Accessibility: String, Codable {
+    case processed = "Processed"
+    case unprocessed = "Unprocessed"
 }

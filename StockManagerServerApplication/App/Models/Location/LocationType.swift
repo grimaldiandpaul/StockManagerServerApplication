@@ -7,17 +7,17 @@
 
 import Foundation
 
-public enum LocationType{
-    case jHook
-    case sideStack
-    case shelfSpace
-    case pod
-    case floorModel
-    case topStock
-    case backroomStock
-    case incoming
-    case outgoing
-    case unprocessed
-    case bottomStock
-    case unknown
+enum LocationType: String, Codable {
+    case jHook = "J-Hook"
+    case sideStack = "Side Stack"
+    case shelfSpace = "Shelf Space"
+    case pod = "Pod"
+    case floorModel = "Floor Model"
+    case topStock = "Top Stock"
+    case backroomStock = "Backroom Stock"
+    case incoming = "Incoming"
+    case outgoing = "Outgoing"
+    case unprocessed = "Unprocessed"
+    case bottomStock = "Bottom Stock"
+    case unknown = "Unknown"
 }
