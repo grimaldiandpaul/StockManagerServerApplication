@@ -23,11 +23,11 @@ This is the base class for an inventory-managed product in the StockManagerAPI.
 ## Usage
     
 ```swift
-let item = InventoryItem(name: "An Item", locations: [(Location("Somewhere"), .jHook, .processed)], customerAccessibleQuantity: 0, backstockQuantity: 0)
+let item = InventoryItem(
 ```
  
 */
-struct InventoryItem: Identifiable, Codable {
+struct InventoryItem: Identifiable {
     
     /**
      
@@ -84,7 +84,7 @@ struct InventoryItem: Identifiable, Codable {
     
     
     
-    init(userDesignatedID: String = "", name: String, locations: [(Location, LocationType, Accessibility)] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int = 0, backstockQuantity: Int = 0) {
+    init(userDesignatedID: String = "", name: String = "", locations: [Location] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int = 0, backstockQuantity: Int = 0) {
         self.id = UUID().uuidString
         self.userDesignatedID = userDesignatedID
         self.name = name

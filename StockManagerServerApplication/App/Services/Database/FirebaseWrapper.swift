@@ -23,15 +23,82 @@ class FirebaseWrapper {
     }
     
     class func createItem(_ item: InventoryItem, store: String, completion: @escaping FirebaseWrapperResult) {
-        
+        #warning("check if store exists")
         DataValidation.validateFields(item: item) { (err, result) in
             if let err = err {
                 print(err)
                 completion("Item could not be created", false)
             } else {
-                //FirebaseWrapper.
+                FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
+                    if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
+                        if let json = item.json {
+                            FirebaseWrapper.reference(item.id, store: store).setData(json) { (err) in
+                                if let err = err {
+                                    print(err)
+                                    completion("Item could not be created due to an error with our database service.", false)
+                                } else {
+                                    completion(nil, true)
+                                }
+                            }
+                        } else {
+                            completion("Item could not be created because of an error in serialization for database storage.", false)
+                        }
+                    } else {
+                        completion("Item could not be created because an item with this ID already exists.", false)
+                    }
+                }
+                
             }
         }
+    }
+    
+    
+    class func updateItem(_ item: InventoryItem, store: String, completion: @escaping FirebaseWrapperResult) {
+        #warning("check if store exists")
+        DataValidation.validateFields(item: item) { (err, result) in
+            if let err = err {
+                print(err)
+                completion("Item could not be updated", false)
+            } else {
+                FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
+                    if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
+                        if let json = item.json {
+                            FirebaseWrapper.reference(item.id, store: store).updateData(json) { (err) in
+                                if let err = err {
+                                    print(err)
+                                    completion("Item could not be updated due to an error with our database service.", false)
+                                } else {
+                                    completion(nil, true)
+                                }
+                            }
+                        } else {
+                            completion("Item could not be updated because of an error in serialization for database storage.", false)
+                        }
+                    } else {
+                        completion("Item could not be updated because an item with this ID does not already exist.", false)
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
+    class func deleteItem(_ item: InventoryItem, store: String, completion: @escaping FirebaseWrapperResult) {
+        #warning("check if store exists")
+        FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
+            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
+                FirebaseWrapper.reference(item.id, store: store).delete { (err) in
+                    if let err = err {
+                        print(err)
+                        completion("Item could not be deleted due to an error with our database service.", false)
+                    }
+                }
+            } else {
+                completion("Item could not be delete because an item with this ID does not exist.", false)
+            }
+        }
+        
     }
     
 }

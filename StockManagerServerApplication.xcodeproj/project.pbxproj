@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		123F83EF24E336890084D5B8 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F83EE24E336890084D5B8 /* UUID.swift */; };
 		12B4F87024E1E47B0073DB58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */; };
 		12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88424E1E6960073DB58 /* LogEntryType.swift */; };
 		12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88524E1E6970073DB58 /* LoggingManager.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		123F83EE24E336890084D5B8 /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12B4F88424E1E6960073DB58 /* LogEntryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntryType.swift; sourceTree = "<group>"; };
 		12B4F88524E1E6970073DB58 /* LoggingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		123F83ED24E3367E0084D5B8 /* UUID */ = {
+			isa = PBXGroup;
+			children = (
+				123F83EE24E336890084D5B8 /* UUID.swift */,
+			);
+			path = UUID;
+			sourceTree = "<group>";
+		};
 		12B4F87124E1E5660073DB58 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 		12B4F88024E1E5B60073DB58 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				123F83ED24E3367E0084D5B8 /* UUID */,
 				12B4F88124E1E5B60073DB58 /* Date */,
 				733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */,
 			);
@@ -481,6 +492,7 @@
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
 				12B4F8BD24E2077F0073DB58 /* Packaging+Extensions.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
+				123F83EF24E336890084D5B8 /* UUID.swift in Sources */,
 				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
 				12B4F8B924E2077F0073DB58 /* Location.swift in Sources */,
