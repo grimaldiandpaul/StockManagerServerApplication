@@ -10,7 +10,7 @@ import Telegraph
 
 extension TelegraphServer {
     
-    private func serverHandleHelloDrRamirez(request: HTTPRequest) -> HTTPResponse {
+    func serverHandleHelloDrRamirez(request: HTTPRequest) throws -> HTTPResponse {
         return HTTPResponse(content: "Hello, Dr. Ramirez!")
     }
     
