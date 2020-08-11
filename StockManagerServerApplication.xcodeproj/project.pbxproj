@@ -34,7 +34,7 @@
 		733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CC924E1FEBC0034AE08 /* DataValidation.swift */; };
 		733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD024E33FF60034AE08 /* LocationExtensions.swift */; };
 		733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD224E341BE0034AE08 /* TelegraphServer.swift */; };
-		733B1CD624E342020034AE08 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* SwiftPackageProductDependency */; };
+		733B1CD624E342020034AE08 /* Telegraph in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* Telegraph */; };
 		73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */; };
 		73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */; };
 		B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */; };
@@ -83,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				733B1CD624E342020034AE08 /* BuildFile in Frameworks */,
+				733B1CD624E342020034AE08 /* Telegraph in Frameworks */,
 				B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1234105E24E362A10062F92E /* Encodable */ = {
+			isa = PBXGroup;
+			children = (
+				733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */,
+			);
+			path = Encodable;
+			sourceTree = "<group>";
+		};
 		123F83ED24E3367E0084D5B8 /* UUID */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +112,6 @@
 			children = (
 				12B4F8AA24E2076C0073DB58 /* Models */,
 				12B4F87F24E1E5B60073DB58 /* Extensions */,
-				12B4F87E24E1E5B50073DB58 /* Resources */,
 				12B4F87324E1E5B40073DB58 /* Services */,
 				12B4F87224E1E5B30073DB58 /* Views */,
 			);
@@ -114,6 +121,7 @@
 		12B4F87224E1E5B30073DB58 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				12CE34BA24E1E3B3008234FF /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,30 +130,11 @@
 			isa = PBXGroup;
 			children = (
 				733B1CC224E1F28A0034AE08 /* Database */,
-				12B4F87424E1E5B40073DB58 /* TextMessaging */,
-				12B4F87524E1E5B40073DB58 /* WebApp */,
 				12B4F87624E1E5B40073DB58 /* Routing */,
-				12B4F87724E1E5B40073DB58 /* Authentication */,
 				12B4F87A24E1E5B40073DB58 /* Logging */,
-				12B4F87B24E1E5B40073DB58 /* StripeBilling */,
-				12B4F87C24E1E5B40073DB58 /* Limitations */,
 				12B4F87D24E1E5B40073DB58 /* DataValidation */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		12B4F87424E1E5B40073DB58 /* TextMessaging */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TextMessaging;
-			sourceTree = "<group>";
-		};
-		12B4F87524E1E5B40073DB58 /* WebApp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WebApp;
 			sourceTree = "<group>";
 		};
 		12B4F87624E1E5B40073DB58 /* Routing */ = {
@@ -156,29 +145,6 @@
 				73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */,
 			);
 			path = Routing;
-			sourceTree = "<group>";
-		};
-		12B4F87724E1E5B40073DB58 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				12B4F87824E1E5B40073DB58 /* IPAddressDenyList */,
-				12B4F87924E1E5B40073DB58 /* APIKeys */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		12B4F87824E1E5B40073DB58 /* IPAddressDenyList */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = IPAddressDenyList;
-			sourceTree = "<group>";
-		};
-		12B4F87924E1E5B40073DB58 /* APIKeys */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = APIKeys;
 			sourceTree = "<group>";
 		};
 		12B4F87A24E1E5B40073DB58 /* Logging */ = {
@@ -193,20 +159,6 @@
 			path = Logging;
 			sourceTree = "<group>";
 		};
-		12B4F87B24E1E5B40073DB58 /* StripeBilling */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StripeBilling;
-			sourceTree = "<group>";
-		};
-		12B4F87C24E1E5B40073DB58 /* Limitations */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Limitations;
-			sourceTree = "<group>";
-		};
 		12B4F87D24E1E5B40073DB58 /* DataValidation */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,19 +167,10 @@
 			path = DataValidation;
 			sourceTree = "<group>";
 		};
-		12B4F87E24E1E5B50073DB58 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		12B4F87F24E1E5B60073DB58 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				12B4F88024E1E5B60073DB58 /* Foundation */,
-				12B4F88224E1E5B60073DB58 /* Telegraph */,
-				12B4F88324E1E5B60073DB58 /* SwiftUI */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -235,9 +178,9 @@
 		12B4F88024E1E5B60073DB58 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				1234105E24E362A10062F92E /* Encodable */,
 				123F83ED24E3367E0084D5B8 /* UUID */,
 				12B4F88124E1E5B60073DB58 /* Date */,
-				733B1CC324E1F2B80034AE08 /* EncodableExtensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -248,20 +191,6 @@
 				12B4F89124E1EE270073DB58 /* DateExtensions.swift */,
 			);
 			path = Date;
-			sourceTree = "<group>";
-		};
-		12B4F88224E1E5B60073DB58 /* Telegraph */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Telegraph;
-			sourceTree = "<group>";
-		};
-		12B4F88324E1E5B60073DB58 /* SwiftUI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		12B4F8AA24E2076C0073DB58 /* Models */ = {
@@ -336,7 +265,6 @@
 			children = (
 				12B4F87124E1E5660073DB58 /* App */,
 				12CE34B824E1E3B3008234FF /* AppDelegate.swift */,
-				12CE34BA24E1E3B3008234FF /* ContentView.swift */,
 				12CE34BC24E1E3B5008234FF /* Assets.xcassets */,
 				12CE34C124E1E3B5008234FF /* Main.storyboard */,
 				12CE34C424E1E3B5008234FF /* Info.plist */,
@@ -399,7 +327,7 @@
 			);
 			name = StockManagerServerApplication;
 			packageProductDependencies = (
-				733B1CD524E342020034AE08 /* SwiftPackageProductDependency */,
+				733B1CD524E342020034AE08 /* Telegraph */,
 			);
 			productName = StockManagerServerApplication;
 			productReference = 12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */;
@@ -429,8 +357,8 @@
 			);
 			mainGroup = 12CE34AC24E1E3B3008234FF;
 			packageReferences = (
-				733B1CCB24E201330034AE08 /* RemoteSwiftPackageReference */,
-				733B1CD424E342020034AE08 /* RemoteSwiftPackageReference */,
+				733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */,
+				733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */,
 			);
 			productRefGroup = 12CE34B624E1E3B3008234FF /* Products */;
 			projectDirPath = "";
@@ -733,7 +661,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		733B1CCB24E201330034AE08 /* RemoteSwiftPackageReference */ = {
+		733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/grimaldiandpaul/StockManagerDotTechModels";
 			requirement = {
@@ -741,7 +669,7 @@
 				kind = branch;
 			};
 		};
-		733B1CD424E342020034AE08 /* RemoteSwiftPackageReference */ = {
+		733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Building42/Telegraph";
 			requirement = {
@@ -752,9 +680,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		733B1CD524E342020034AE08 /* SwiftPackageProductDependency */ = {
+		733B1CD524E342020034AE08 /* Telegraph */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 733B1CD424E342020034AE08 /* RemoteSwiftPackageReference */;
+			package = 733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */;
 			productName = Telegraph;
 		};
 /* End XCSwiftPackageProductDependency section */
