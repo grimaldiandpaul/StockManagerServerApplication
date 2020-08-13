@@ -16,7 +16,7 @@ struct Log {
     var type: LogEntryType
     
     var output: String {
-        var result = ""
+        var result = "🚩"
         result += self.time.dateValue().viewOutputString
         result += "     "
         result += self.source.rawValue

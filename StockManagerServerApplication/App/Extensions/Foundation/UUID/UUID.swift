@@ -11,7 +11,7 @@ extension UUID {
     
     static var uuidStringTwentyCharsNoDashes: String {
         return String( (UUID().uuidString + UUID().uuidString)
-                        .trimmingCharacters(in: .symbols)
+                        .filter({$0 != "-"})
                         .prefix(20)
         )
     }

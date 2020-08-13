@@ -12,13 +12,18 @@ import Alamofire
 extension ContentView {
     
     func testHelloEndpoint() {
-        let parameters:Parameters = [String : Any]()
-        let headers:HTTPHeaders = HTTPHeaders()
-        if let url = URL(string: "http://localhost:9000/helloDrRamirez"){
-            AF.request(url, method: .get, parameters: parameters , encoding: JSONEncoding.default, headers: headers)
-                .responseString(completionHandler: { (response) in
+        
+        var headers:HTTPHeaders = HTTPHeaders()
+        headers["storeID"] = "Test Store 1"
+        let location = Location(aisle: "1", aisleSection: "A")
+        let testItem = InventoryItem(userDesignatedID: "123456", name: "Test Item", locations: [location], dateLastPurchased: nil, customerAccessibleQuantity: 0, backstockQuantity: 0)
+        let parameters = testItem.json
+        LoggingManager.log(parameters.debugDescription, source: .routing, type: .error)
+        if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
+            AF.request(url, method: .post, parameters: parameters , encoding: URLEncoding.default, headers: headers)
+                .responseString { (response) in
                     LoggingManager.log(response.description, source: .routing, type: .success)
-                })
+            }
         }
     }
 }

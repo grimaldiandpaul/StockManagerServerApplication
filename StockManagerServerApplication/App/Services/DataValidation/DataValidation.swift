@@ -10,14 +10,14 @@ import Foundation
 class DataValidation {
     
     static let main = DataValidation()
-    typealias DataValidationResult = (String?, Bool) -> ()
+    typealias DataValidationResult = (error: String?, valid: Bool)
     
-    class func validateFields(item: InventoryItem, completion: @escaping DataValidationResult) {
+    class func validateFields(item: InventoryItem) -> DataValidationResult {
         
         if item.id == "" {
-            completion("ID field cannot be empty", false)
+            return ("ID field cannot be empty", false)
         } else {
-            completion(nil, true)
+            return (nil, true)
         }
     }
 }

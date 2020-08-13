@@ -17,7 +17,8 @@ class TelegraphServer {
         TelegraphServer.main.server.delegate = TelegraphServer.main
         
         TelegraphServer.main.server.route(.GET, "helloDrRamirez", serverHandleHelloDrRamirez(TelegraphServer.main))
-//        server.route(.GET, "hello(/)", serverHandleHello)
+        TelegraphServer.main.server.route(.GET, "/", serverHandleRefPage(TelegraphServer.main))
+        TelegraphServer.main.server.route(.POST, "create", serverHandleCreateItem(TelegraphServer.main))
 //        server.route(.GET, "redirect", serverHandleRedirect)
 //        server.route(.GET, "secret/*") { .forbidden }
 //        server.route(.GET, "status") { (.ok, "Server is running") }
