@@ -20,8 +20,6 @@ extension TelegraphServer {
     
     func serverHandleCreateItem(request: HTTPRequest) -> HTTPResponse {
         
-        print(request.params)
-        print(String(data: request.body, encoding: .utf8))
         if let storeID = request.headers["storeID"] {
             do {
                 let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)

@@ -22,7 +22,7 @@ extension ContentView {
         let parameters = testItem.json
         LoggingManager.log(parameters.debugDescription, source: .routing, type: .error)
         if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
-            AF.request(url, method: .post, parameters: parameters, headers: headers)
+            AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
                 .responseString { (response) in
                     LoggingManager.log(response.description, source: .routing, type: .success)
             }
