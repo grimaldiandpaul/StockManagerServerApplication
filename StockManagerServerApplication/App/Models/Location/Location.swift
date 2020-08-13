@@ -34,4 +34,13 @@ struct Location: Codable {
         self.accessibility = .unprocessed
     }
     
+    public init(){
+        self.aisle = ""
+        self.aisleSection = ""
+        self.spot = ""
+        self.description = ""
+        self.type = .unknown
+        self.accessibility = .unprocessed
+    }
+    
 }

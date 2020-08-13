@@ -19,6 +19,7 @@ extension InventoryItem {
     }
     
     static func from(_ object: [String:Any]) -> InventoryItem {
+        print(object.debugDescription)
         
         var item = InventoryItem()
         
@@ -36,8 +37,11 @@ extension InventoryItem {
             item.name = name
         }
         
-        if let locations = object["locations"] as? [Location] {
-            item.locations = locations
+        if let locations = object["locations"] as? [[String:Any]] {
+            for location in locations {
+                let fromLocation = Location.from(location)
+                item.locations.append(fromLocation)
+            }
         }
         
         if let dateLastPurchased = object["dateLastPurchased"] as? Timestamp? {
@@ -55,7 +59,7 @@ extension InventoryItem {
         return item
     }
     
-    var json: [String:Any]? {
+    var json: [String:Any] {
         var result = [String:Any]()
         
         if self.id != "" {

@@ -33,20 +33,16 @@ class FirebaseWrapper {
             var result = false
             FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
                 if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
-                    if let json = item.json {
-                        FirebaseWrapper.reference(item.id, store: store).setData(json) { (err) in
-                            if let err = err {
-                                print(err)
-                                error = "Item could not be created due to an error with our database service."
-                                //return (error,result)
-                            } else {
-                                result = true
-                                //return (error, result)
-                            }
+                    let json = item.json
+                    FirebaseWrapper.reference(item.id, store: store).setData(json) { (err) in
+                        if let err = err {
+                            print(err)
+                            error = "Item could not be created due to an error with our database service."
+                            //return (error,result)
+                        } else {
+                            result = true
+                            //return (error, result)
                         }
-                    } else {
-                        error = "Item could not be created because of an error in serialization for database storage."
-                        //return (error, result)
                     }
                 } else {
                     error = "Item could not be created because an item with this ID already exists."
