@@ -33,7 +33,7 @@ class FirebaseWrapper {
             var result = false
             FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
                 if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
-                    let json = item.json
+                    let json = item.firebasejson
                     FirebaseWrapper.reference(item.id, store: store).setData(json) { (err) in
                         if let err = err {
                             print(err)

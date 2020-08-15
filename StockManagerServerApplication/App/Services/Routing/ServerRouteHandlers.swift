@@ -21,36 +21,99 @@ extension TelegraphServer {
     func serverHandleCreateItem(request: HTTPRequest) -> HTTPResponse {
         
         if let storeID = request.headers["storeID"] {
-            do {
-                let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
-                if let body = body as? [String:Any] {
-                    let newItem = InventoryItem.from(body)
-                    let createOperationResult = FirebaseWrapper.createItem(newItem, store: storeID)
-                    if let err = createOperationResult.error {
-                        LoggingManager.log("Item could not be created: \(err)", source: .routing, type: .error)
-                        return HTTPResponse(.notAcceptable, headers: HTTPHeaders(), content: err)
+            
+            print("Params: \(request.params)")
+            print(request.body.base64EncodedData())
+            var newItem: InventoryItem? = nil
+            if let parameters = request.uri.queryItems?.parameters, parameters.count > 0 {
+                newItem = InventoryItem.from(parameters)
+                
+            } else if request.body.count > 0 {
+                
+                do {
+                    let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
+                    if let body = body as? [String:Any] {
+                        newItem = InventoryItem.from(body)
+                        
                     } else {
-                        let json = newItem.json
-                        if let data = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed) {
-                            return HTTPResponse(body: data)
-                        } else {
-                            LoggingManager.log("Json object could not be serialized", source: .routing, type: .error)
-                            return HTTPResponse(content: "Json object could not be serialized")
-                        }
+                        return HTTPResponse(content: "Json object could not be serialized")
                     }
-                } else {
-                    return HTTPResponse(content: "Json object could not be serialized2")
+                } catch {
+                    print(error)
+                    LoggingManager.log(error.localizedDescription, source: .routing, type: .error)
+                    return HTTPResponse(content: "Json object could not be serialized")
                 }
-            } catch {
-                print(error)
-                LoggingManager.log(error.localizedDescription, source: .routing, type: .error)
-                return HTTPResponse(content: "Json object could not be serialized3")
+            }
+            
+            if let newItem = newItem {
+                let createOperationResult = FirebaseWrapper.createItem(newItem, store: storeID)
+                if let err = createOperationResult.error {
+                    LoggingManager.log("Item could not be created: \(err)", source: .routing, type: .error)
+                    return HTTPResponse(.notAcceptable, headers: HTTPHeaders(), content: err)
+                } else {
+                    let json = newItem.json
+                    if let data = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed) {
+                        return HTTPResponse(body: data)
+                    } else {
+                        LoggingManager.log("Json object could not be serialized", source: .routing, type: .error)
+                        return HTTPResponse(content: "Json object could not be serialized")
+                    }
+                }
+            } else {
+                return HTTPResponse(content: "Please include item details inside of parameters or body")
             }
             
         } else {
             LoggingManager.log("Store ID was not included in headers", source: .routing, type: .error)
-            return HTTPResponse(content: "Store ID was not included in headers")
+            return HTTPResponse(content: "Store ID needs to be included in headers")
         }
-        //return HTTPResponse(content: "Unable to complete request")
+    }
+}
+
+extension Array where Element == URLQueryItem {
+    var parameters: [String:Any] {
+        var result = [String:Any]()
+        for item in self {
+            if item.name.contains("[][") {
+                let key = String(item.name.prefix(while: {$0 != "["}))
+                var innerKey = item.name
+                while innerKey.contains("["){
+                    innerKey = String(innerKey.dropFirst())
+                }
+                innerKey = String(innerKey.dropLast())
+                
+                if result.keys.contains(key) {
+                    if var arrayOfDictionaries = result[key] as? [[String:Any]]{
+                        var found = false
+                        for i in 0..<arrayOfDictionaries.count {
+                            let dictionary = arrayOfDictionaries[i]
+                            if !dictionary.keys.contains(innerKey) {
+                                found = true
+                                arrayOfDictionaries[i][innerKey] = item.value
+                                result[key] = arrayOfDictionaries
+                            }
+                        }
+                        if !found {
+                            if let value = item.value {
+                                let newDictionary: [String:Any] = [innerKey: value]
+                                arrayOfDictionaries.append(newDictionary)
+                                result[key] = arrayOfDictionaries
+                            }
+                        }
+                    }
+                } else {
+                    if let value = item.value {
+                        let newDictionary: [String:Any] = [innerKey: value]
+                        result[key] = [newDictionary]
+                    }
+                }
+                
+            } else if item.name.contains("[") && item.name.contains("]"){
+                
+            } else {
+                result[item.name] = item.value
+            }
+        }
+        return result
     }
 }
