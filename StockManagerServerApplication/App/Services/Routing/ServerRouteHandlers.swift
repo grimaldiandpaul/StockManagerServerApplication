@@ -18,7 +18,45 @@ extension TelegraphServer {
         return HTTPResponse(content: "Here is the API reference:")
     }
     
+    func serverHandleAuthenticate(request: HTTPRequest) throws -> HTTPResponse {
+
+        if request.body.count > 0 {
+            let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
+            if let body = body as? [String:Any] {
+                if let username = body["username"] as? String {
+                    if let password = body["password"] as? String {
+                        let authenticationResult = FirebaseWrapper.authenticateUser(username: username, password: password)
+                        if let error = authenticationResult.error {
+                            return HTTPResponse(content: error)
+                        } else {
+                            if let authenticated = authenticationResult.successful {
+                                if authenticated {
+                                    if let user = authenticationResult.user {
+                                        return HTTPResponse(body: user)
+                                    } else {
+                                        return HTTPResponse(content: "User data could not be parsed")
+                                    }
+                                }
+                            } else {
+                                return HTTPResponse(content: "Error authenticating user")
+                            }
+                        }
+                    } else {
+                        return HTTPResponse(content: "Password not provided")
+                    }
+                } else {
+                    return HTTPResponse(content: "Username not provided")
+                }
+            }
+        } else {
+            return HTTPResponse(content: "Credentials must be posted in the body of the request")
+        }
+        return HTTPResponse(content: "THIS NEEDS TO BE DELETED")
+    }
+    
     func serverHandleCreateItem(request: HTTPRequest) -> HTTPResponse {
+        
+        print(request.headers)
         
         if let storeID = request.headers["storeID"] {
             

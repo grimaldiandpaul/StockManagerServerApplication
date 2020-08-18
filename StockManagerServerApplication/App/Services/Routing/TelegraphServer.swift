@@ -16,17 +16,15 @@ class TelegraphServer {
 
         TelegraphServer.main.server.delegate = TelegraphServer.main
         
-        TelegraphServer.main.server.route(.GET, "helloDrRamirez", serverHandleHelloDrRamirez(TelegraphServer.main))
+        TelegraphServer.main.server.route(.GET, "ramirez", serverHandleHelloDrRamirez(TelegraphServer.main))
         TelegraphServer.main.server.route(.GET, "/", serverHandleRefPage(TelegraphServer.main))
         TelegraphServer.main.server.route(.POST, "create", serverHandleCreateItem(TelegraphServer.main))
-//        server.route(.GET, "redirect", serverHandleRedirect)
+//        TelegraphServer.main.server.route(.POST, "authenticate", serverHandleAuthenticate(TelegraphServer.main))
 //        server.route(.GET, "secret/*") { .forbidden }
 //        server.route(.GET, "status") { (.ok, "Server is running") }
 //        server.route(.POST, "data", serverHandleData)
-
-        TelegraphServer.main.server.serveBundle(.main, "/")
         
-        TelegraphServer.main.server.concurrency = 4
+        TelegraphServer.main.server.concurrency = 4000
 
         if let _ = try? TelegraphServer.main.server.start(port: 9000, interface: "localhost") {
             LoggingManager.log("Server is running @: \(TelegraphServer.serverURL())", source: .routing, type: .success)

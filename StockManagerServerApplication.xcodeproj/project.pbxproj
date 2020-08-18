@@ -38,6 +38,8 @@
 		7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46024E363A300A153EB /* ContentViewExtensions.swift */; };
 		7368C46424E3660700A153EB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7368C46324E3660700A153EB /* Alamofire */; };
 		7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */; };
+		7368C46924EA156F00A153EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46824EA156F00A153EB /* User.swift */; };
+		737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F0F3324EB477200F97043 /* UserExtensions.swift */; };
 		73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */; };
 		73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */; };
 		B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */; };
@@ -78,6 +80,8 @@
 		733B1CD224E341BE0034AE08 /* TelegraphServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelegraphServer.swift; path = StockManagerServerApplication/App/Services/Routing/TelegraphServer.swift; sourceTree = SOURCE_ROOT; };
 		7368C46024E363A300A153EB /* ContentViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewExtensions.swift; sourceTree = "<group>"; };
 		7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseExtensions.swift; sourceTree = "<group>"; };
+		7368C46824EA156F00A153EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		737F0F3324EB477200F97043 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
 		73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRouteHandlers.swift; sourceTree = "<group>"; };
 		8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StockManagerServerApplication.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,6 +208,7 @@
 		12B4F8AA24E2076C0073DB58 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7368C46A24EA157600A153EB /* User */,
 				12B4F8B624E2077F0073DB58 /* Accessibility */,
 				12B4F8AB24E2077E0073DB58 /* Errors.swift */,
 				12B4F8B324E2077E0073DB58 /* InventoryItem */,
@@ -314,6 +319,15 @@
 				7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		7368C46A24EA157600A153EB /* User */ = {
+			isa = PBXGroup;
+			children = (
+				7368C46824EA156F00A153EB /* User.swift */,
+				737F0F3324EB477200F97043 /* UserExtensions.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		7A904DEB6761DDD933B6321F /* Frameworks */ = {
@@ -455,6 +469,7 @@
 				12B4F8BD24E2077F0073DB58 /* Packaging+Extensions.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
 				733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */,
+				737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */,
 				123F83EF24E336890084D5B8 /* UUID.swift in Sources */,
 				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
@@ -468,6 +483,7 @@
 				12B4F8BC24E2077F0073DB58 /* Packaging.swift in Sources */,
 				12B4F8B824E2077F0073DB58 /* Errors.swift in Sources */,
 				12B4F88A24E1E6970073DB58 /* Log.swift in Sources */,
+				7368C46924EA156F00A153EB /* User.swift in Sources */,
 				12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */,
 				12B4F8BF24E2077F0073DB58 /* InventoryItem.swift in Sources */,
 				7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */,
