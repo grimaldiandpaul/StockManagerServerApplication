@@ -1,12 +1,11 @@
 //
-//  File.swift
+//  Location.swift
 //  
 //
-//  Created by Joe Paul on 5/23/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
-import Foundation
-
+/// A struct describing one location an `InventoryItem` is stored at.
 struct Location: Codable {
     
     var aisle : String
@@ -16,31 +15,14 @@ struct Location: Codable {
     var type : LocationType
     var accessibility : Accessibility
     
-    public init(_ description: String){
-        self.aisle = ""
-        self.aisleSection = ""
-        self.spot = ""
-        self.description = description
-        self.type = .unknown
-        self.accessibility = .unprocessed
-    }
-    
-    public init(aisle: String, aisleSection: String, spot: String = "", description: String = ""){
+    public init(aisle: String = "", aisleSection: String = "", spot: String = "", description: String = "",
+                type: LocationType = .unknown, accessibility: Accessibility = .unprocessed) {
         self.aisle = aisle
         self.aisleSection = aisleSection
         self.spot = spot
         self.description = description
-        self.type = .unknown
-        self.accessibility = .unprocessed
-    }
-    
-    public init(){
-        self.aisle = ""
-        self.aisleSection = ""
-        self.spot = ""
-        self.description = ""
-        self.type = .unknown
-        self.accessibility = .unprocessed
+        self.type = type
+        self.accessibility = accessibility
     }
     
 }

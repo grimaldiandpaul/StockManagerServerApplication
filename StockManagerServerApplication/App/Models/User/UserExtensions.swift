@@ -2,7 +2,7 @@
 //  UserExtensions.swift
 //  StockManagerServerApplication
 //
-//  Created by Joe Paul on 8/17/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 8/17/20.
 //
 
 import Foundation

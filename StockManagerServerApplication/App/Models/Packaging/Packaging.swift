@@ -1,14 +1,11 @@
 //
-//  File.swift
+//  Packaging.swift
 //  
 //
-//  Created by Joe Paul on 5/23/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
-import Foundation
-
-
-enum Packaging{
+enum Packaging {
     case loose
     case boxed
     case pallet

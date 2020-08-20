@@ -2,7 +2,7 @@
 //  FirebaseWrapper.swift
 //  StockManagerServerApplication
 //
-//  Created by Zachary Grimaldi on 8/10/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 8/10/20.
 //
 
 import Foundation
@@ -11,157 +11,40 @@ import Telegraph
 
 class FirebaseWrapper {
     
+    /// the root folder of the database service provided by Google Firebase Cloud Firestore
     static let root = Firestore.firestore()
-    private static let auth = Auth.auth()
+    
+    /// the authentication service provided by Google Firebase Authentication
+    static let auth = Auth.auth()
+    
+    /// a type-alias for the return object of a FirebaseWrapper void function
     typealias FirebaseWrapperVoidResult = (error: String?, successful: Bool)
+    
+    /// a type-alias for the return object of a FirebaseWrapper Authentication function
     typealias FirebaseWrapperAuthenticationResult = (error: String?, successful: Bool?, user: Data?)
     
-    class func itemReference(_ itemUUIDString: String, store: String) -> DocumentReference {
+    /// This function a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
+    /// - Parameter itemUUIDString: the unique identifier for the item
+    /// - Parameter storeID: the unique identifier for the store
+    /// - Returns: A `DocumentReference` to the `InventoryItem`.
+    ///
+    class func itemReference(_ itemUUIDString: String, storeID: String) -> DocumentReference {
         return FirebaseWrapper.root
             .collection("Clients")
-            .document(store)
+            .document(storeID)
             .collection("ItemList")
             .document(itemUUIDString)
     }
     
-    class func userReference(_ userUIDString: String) -> DocumentReference {
+    /// a re-usable function for the singleton that returns the database reference for an item given a store
+    /// This function a re-usable function for the singleton that returns the `DocumentReference` for a `User` given the user's unique identifier.
+    /// - Parameter userUUIDString: the unique identifier for the user
+    /// - Returns: A `DocumentReference` to the `User`.
+    ///
+    class func userReference(_ userUUIDString: String) -> DocumentReference {
         return FirebaseWrapper.root
             .collection("UserList")
-            .document(userUIDString)
+            .document(userUUIDString)
             
     }
-    
-    class func createItem(_ item: InventoryItem, store: String) -> FirebaseWrapperVoidResult {
-        #warning("check if store exists")
-        let validationResult = DataValidation.validateFields(item: item)
-        if let err = validationResult.error {
-            print(err)
-            return ("Item could not be created", false)
-        } else {
-            var error: String? = nil
-            var result = false
-            FirebaseWrapper.itemReference(item.id, store: store).getDocument { (documentSnapshot, err) in
-                if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
-                    let json = item.firebasejson
-                    FirebaseWrapper.itemReference(item.id, store: store).setData(json) { (err) in
-                        if let err = err {
-                            print(err)
-                            error = "Item could not be created due to an error with our database service."
-                            //return (error,result)
-                        } else {
-                            result = true
-                            //return (error, result)
-                        }
-                    }
-                } else {
-                    error = "Item could not be created because an item with this ID already exists."
-                    //return (error, result)
-                }
-            }
-            
-            while ( error == nil && !result ) {
-                sleep(1)
-            }
-            
-            return (error,result)
-            
-        }
-        
-    }
-    
-    
-//    class func updateItem(_ item: InventoryItem, store: String) -> FirebaseWrapperResult {
-//        #warning("check if store exists")
-//        DataValidation.validateFields(item: item) { (err, result) in
-//            if let err = err {
-//                print(err)
-//                return ("Item could not be updated", false)
-//            } else {
-//                FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
-//                    if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
-//                        if let json = item.json {
-//                            FirebaseWrapper.reference(item.id, store: store).updateData(json) { (err) in
-//                                if let err = err {
-//                                    print(err)
-//                                    return ("Item could not be updated due to an error with our database service.", false)
-//                                } else {
-//                                    return (nil, true)
-//                                }
-//                            }
-//                        } else {
-//                            return ("Item could not be updated because of an error in serialization for database storage.", false)
-//                        }
-//                    } else {
-//                        return ("Item could not be updated because an item with this ID does not already exist.", false)
-//                    }
-//                }
-//
-//            }
-//        }
-//    }
-//
-//
-//    class func deleteItem(_ item: InventoryItem, store: String) -> FirebaseWrapperResult {
-//        #warning("check if store exists")
-//        FirebaseWrapper.reference(item.id, store: store).getDocument { (documentSnapshot, err) in
-//            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
-//                FirebaseWrapper.reference(item.id, store: store).delete { (err) in
-//                    if let err = err {
-//                        print(err)
-//                        return ("Item could not be deleted due to an error with our database service.", false)
-//                    }
-//                }
-//            } else {
-//                return ("Item could not be delete because an item with this ID does not exist.", false)
-//            }
-//        }
-//
-//    }
-    
-    class func authenticateUser(username: String, password: String) -> FirebaseWrapperAuthenticationResult {
-        var error: String? = nil
-        var result: Bool? = nil
-        var user: Data? = nil
-        auth.signIn(withEmail: username, password: password) { (resultFromFirebaseAuth, err) in
-            if let _ = err {
-                error = "User authentication could not be processed"
-                result = false
-            } else {
-                if let resultFromFirebaseAuth = resultFromFirebaseAuth {
-                    result = !resultFromFirebaseAuth.user.uid.isEmpty
-                    if var result = result, result {
-
-                        FirebaseWrapper.userReference(resultFromFirebaseAuth.user.uid).getDocument { (documentSnapshot, err) in
-                            if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
-                                if let data = documentSnapshot.data() {
-                                    let userFromFirebase = User.from(data)
-                                    if let userData = try? JSONSerialization.data(withJSONObject: userFromFirebase, options: .fragmentsAllowed) {
-                                        user = userData
-                                        result = true
-                                    }
-                                } else {
-                                    error = "User could not be found"
-                                    result = false
-                                }
-                            } else {
-                                result = false
-                                error = "Item could not be created because an item with this ID already exists."
-                            }
-                        }
-                    }
-                } else {
-                    result = false
-                    error = "User authentication could not be processed"
-                }
-            }
-        }
-        
-        while (error == nil && result == nil ||
-                ((result ?? false) && user == nil)) {
-                    sleep(1)
-        }
-        
-        return (error, result, user)
-    }
-    
 }

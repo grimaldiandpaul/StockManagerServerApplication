@@ -1,12 +1,12 @@
 //
-//  File.swift
+//  LocationType.swift
 //  
 //
-//  Created by Joe Paul on 5/23/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
-import Foundation
 
+/// A string enumeration describing the type of location an `InventoryItem` is stored at.
 enum LocationType: String, Codable {
     case jHook = "J-Hook"
     case sideStack = "Side Stack"

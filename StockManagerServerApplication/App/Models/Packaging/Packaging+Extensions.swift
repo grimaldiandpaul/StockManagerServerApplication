@@ -1,13 +1,13 @@
 //
-//  File.swift
+//  Packaging+Extensions.swift
 //  
 //
-//  Created by Joe Paul on 5/23/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
 import Foundation
 
-extension Packaging{
+extension Packaging {
     
     var value: String {
         switch self {
@@ -43,7 +43,7 @@ extension Packaging{
         case "Pallet", "Palleted Items":
             return .pallet
         default:
-            throw ModelErrors.illegalPackaging
+            throw StockManagerError.ModelErrors.illegalPackaging
         }
     }
     

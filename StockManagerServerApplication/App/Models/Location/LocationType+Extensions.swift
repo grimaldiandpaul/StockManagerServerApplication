@@ -1,13 +1,11 @@
 //
-//  File.swift
+//  LocationType+Extensions.swift
 //  
 //
-//  Created by Joe Paul on 5/23/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
-import Foundation
-
-extension LocationType{
+extension LocationType {
     
     var value: String {
         switch self {
@@ -75,15 +73,15 @@ extension LocationType{
         switch string {
         case "JHook", "JHooks":
             return .jHook
-        case "Side Stack", "Side Stacks":
+        case "Side Stack", "Side Stacks", "SideStack":
             return .sideStack
-        case "Shelf Space", "Shelf Spaces":
+        case "Shelf Space", "Shelf Spaces", "ShelfSpace":
             return .shelfSpace
         case "Pod", "Pods":
             return .pod
-        case "Floor Model", "Floor Models":
+        case "Floor Model", "Floor Models", "FloorModel":
             return .floorModel
-        case "Top Stock", "Top Stock Items":
+        case "Top Stock", "Top Stock Items", "TopStock":
             return .topStock
         case "Backroom Stock", "Backroom Stock Items":
             return .backroomStock
@@ -98,7 +96,7 @@ extension LocationType{
         case "Unknown", "Unknown Location":
             return .unknown
         default:
-            throw ModelErrors.illegalLocationType
+            throw StockManagerError.ModelErrors.illegalLocationType
             
         }
     }

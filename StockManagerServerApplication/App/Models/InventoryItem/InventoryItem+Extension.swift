@@ -1,11 +1,10 @@
 //
-//  File.swift
+//  InventoryItem+Extensions.swift
 //  
 //
-//  Created by Joe Paul on 5/23/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
-import Foundation
 import Firebase
 
 extension InventoryItem {

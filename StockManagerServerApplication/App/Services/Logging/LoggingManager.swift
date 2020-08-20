@@ -2,7 +2,7 @@
 //  LoggingManager.swift
 //  StockManagerWebServer
 //
-//  Created by Joe Paul on 8/9/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 8/9/20.
 //  Copyright © 2020 Zachary Grimaldi. All rights reserved.
 //
 

@@ -7,7 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12283B5D24EEDD30003C642B /* ErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B5C24EEDD30003C642B /* ErrorProtocol.swift */; };
+		12283B5F24EEDF18003C642B /* ModelErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B5E24EEDF18003C642B /* ModelErrors.swift */; };
+		12283B6124EEDF34003C642B /* DatabaseErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6024EEDF34003C642B /* DatabaseErrors.swift */; };
+		12283B6324EEDF40003C642B /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6224EEDF40003C642B /* AuthenticationErrors.swift */; };
+		12283B6524EEDF50003C642B /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6424EEDF50003C642B /* APIErrors.swift */; };
+		12283B6724EEDF5A003C642B /* IOErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6624EEDF5A003C642B /* IOErrors.swift */; };
+		12283B6924EEDFC5003C642B /* JSONErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6824EEDFC5003C642B /* JSONErrors.swift */; };
 		123F83EF24E336890084D5B8 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F83EE24E336890084D5B8 /* UUID.swift */; };
+		124E812324ECA2FC006ABA37 /* FirebaseCreateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */; };
+		124E812524ECA341006ABA37 /* FirebaseAuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */; };
 		12B4F87024E1E47B0073DB58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */; };
 		12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88424E1E6960073DB58 /* LogEntryType.swift */; };
 		12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88524E1E6970073DB58 /* LoggingManager.swift */; };
@@ -15,7 +24,6 @@
 		12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88724E1E6970073DB58 /* LogEntrySource.swift */; };
 		12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */; };
 		12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F89124E1EE270073DB58 /* DateExtensions.swift */; };
-		12B4F8B824E2077F0073DB58 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F8AB24E2077E0073DB58 /* Errors.swift */; };
 		12B4F8B924E2077F0073DB58 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F8AD24E2077E0073DB58 /* Location.swift */; };
 		12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F8AE24E2077E0073DB58 /* LocationType+Extensions.swift */; };
 		12B4F8BB24E2077F0073DB58 /* LocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F8AF24E2077E0073DB58 /* LocationType.swift */; };
@@ -46,7 +54,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12283B5C24EEDD30003C642B /* ErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorProtocol.swift; sourceTree = "<group>"; };
+		12283B5E24EEDF18003C642B /* ModelErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelErrors.swift; sourceTree = "<group>"; };
+		12283B6024EEDF34003C642B /* DatabaseErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseErrors.swift; sourceTree = "<group>"; };
+		12283B6224EEDF40003C642B /* AuthenticationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationErrors.swift; sourceTree = "<group>"; };
+		12283B6424EEDF50003C642B /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
+		12283B6624EEDF5A003C642B /* IOErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOErrors.swift; sourceTree = "<group>"; };
+		12283B6824EEDFC5003C642B /* JSONErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONErrors.swift; sourceTree = "<group>"; };
 		123F83EE24E336890084D5B8 /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
+		124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateItem.swift; sourceTree = "<group>"; };
+		124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticateUser.swift; sourceTree = "<group>"; };
 		12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12B4F88424E1E6960073DB58 /* LogEntryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntryType.swift; sourceTree = "<group>"; };
 		12B4F88524E1E6970073DB58 /* LoggingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
@@ -54,7 +71,6 @@
 		12B4F88724E1E6970073DB58 /* LogEntrySource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntrySource.swift; sourceTree = "<group>"; };
 		12B4F88C24E1E6B90073DB58 /* LoggingSweeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingSweeper.swift; sourceTree = "<group>"; };
 		12B4F89124E1EE270073DB58 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		12B4F8AB24E2077E0073DB58 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		12B4F8AD24E2077E0073DB58 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		12B4F8AE24E2077E0073DB58 /* LocationType+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationType+Extensions.swift"; sourceTree = "<group>"; };
 		12B4F8AF24E2077E0073DB58 /* LocationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationType.swift; sourceTree = "<group>"; };
@@ -101,6 +117,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12283B5B24EEDD21003C642B /* ErrorHandling */ = {
+			isa = PBXGroup;
+			children = (
+				12283B5C24EEDD30003C642B /* ErrorProtocol.swift */,
+				12283B5E24EEDF18003C642B /* ModelErrors.swift */,
+				12283B6024EEDF34003C642B /* DatabaseErrors.swift */,
+				12283B6224EEDF40003C642B /* AuthenticationErrors.swift */,
+				12283B6424EEDF50003C642B /* APIErrors.swift */,
+				12283B6624EEDF5A003C642B /* IOErrors.swift */,
+				12283B6824EEDFC5003C642B /* JSONErrors.swift */,
+			);
+			path = ErrorHandling;
+			sourceTree = "<group>";
+		};
 		1234105E24E362A10062F92E /* Encodable */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +170,7 @@
 		12B4F87324E1E5B40073DB58 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				12283B5B24EEDD21003C642B /* ErrorHandling */,
 				733B1CC224E1F28A0034AE08 /* Database */,
 				12B4F87624E1E5B40073DB58 /* Routing */,
 				12B4F87A24E1E5B40073DB58 /* Logging */,
@@ -210,7 +241,6 @@
 			children = (
 				7368C46A24EA157600A153EB /* User */,
 				12B4F8B624E2077F0073DB58 /* Accessibility */,
-				12B4F8AB24E2077E0073DB58 /* Errors.swift */,
 				12B4F8B324E2077E0073DB58 /* InventoryItem */,
 				12B4F8AC24E2077E0073DB58 /* Location */,
 				12B4F8B024E2077E0073DB58 /* Packaging */,
@@ -309,6 +339,8 @@
 			isa = PBXGroup;
 			children = (
 				733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */,
+				124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */,
+				124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -465,6 +497,7 @@
 				733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */,
 				12B4F8C024E2077F0073DB58 /* Accessibility.swift in Sources */,
 				12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */,
+				12283B6124EEDF34003C642B /* DatabaseErrors.swift in Sources */,
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
 				12B4F8BD24E2077F0073DB58 /* Packaging+Extensions.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
@@ -472,17 +505,22 @@
 				737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */,
 				123F83EF24E336890084D5B8 /* UUID.swift in Sources */,
 				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
+				12283B5D24EEDD30003C642B /* ErrorProtocol.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,
 				12B4F8B924E2077F0073DB58 /* Location.swift in Sources */,
 				12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */,
 				73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */,
 				12B4F8BE24E2077F0073DB58 /* InventoryItem+Extension.swift in Sources */,
+				12283B6724EEDF5A003C642B /* IOErrors.swift in Sources */,
+				12283B6524EEDF50003C642B /* APIErrors.swift in Sources */,
 				7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */,
 				73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */,
+				12283B5F24EEDF18003C642B /* ModelErrors.swift in Sources */,
 				12B4F8BB24E2077F0073DB58 /* LocationType.swift in Sources */,
 				12B4F8BC24E2077F0073DB58 /* Packaging.swift in Sources */,
-				12B4F8B824E2077F0073DB58 /* Errors.swift in Sources */,
 				12B4F88A24E1E6970073DB58 /* Log.swift in Sources */,
+				12283B6324EEDF40003C642B /* AuthenticationErrors.swift in Sources */,
+				124E812324ECA2FC006ABA37 /* FirebaseCreateItem.swift in Sources */,
 				7368C46924EA156F00A153EB /* User.swift in Sources */,
 				12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */,
 				12B4F8BF24E2077F0073DB58 /* InventoryItem.swift in Sources */,
@@ -490,7 +528,9 @@
 				12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
 				733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */,
+				12283B6924EEDFC5003C642B /* JSONErrors.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
+				124E812524ECA341006ABA37 /* FirebaseAuthenticateUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

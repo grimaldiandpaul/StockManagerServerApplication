@@ -2,7 +2,7 @@
 //  UUID.swift
 //  StockManagerServerApplication
 //
-//  Created by Zachary Grimaldi on 8/11/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 8/11/20.
 //
 
 import Foundation

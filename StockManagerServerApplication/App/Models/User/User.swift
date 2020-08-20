@@ -2,7 +2,7 @@
 //  User.swift
 //  StockManagerServerApplication
 //
-//  Created by Joe Paul on 8/16/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 8/16/20.
 //
 
 import Foundation

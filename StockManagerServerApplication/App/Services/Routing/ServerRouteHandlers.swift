@@ -2,7 +2,7 @@
 //  ServerRouteHandlers.swift
 //  StockManagerServerApplication
 //
-//  Created by Joe Paul on 8/11/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 8/11/20.
 //
 
 import Foundation
@@ -34,22 +34,22 @@ extension TelegraphServer {
                                     if let user = authenticationResult.user {
                                         return HTTPResponse(body: user)
                                     } else {
-                                        return HTTPResponse(content: "User data could not be parsed")
+                                        return HTTPResponse(content: "User data could not be parsed.")
                                     }
                                 }
                             } else {
-                                return HTTPResponse(content: "Error authenticating user")
+                                return HTTPResponse(content: "Error authenticating user.")
                             }
                         }
                     } else {
-                        return HTTPResponse(content: "Password not provided")
+                        return HTTPResponse(content: "Password not provided.")
                     }
                 } else {
-                    return HTTPResponse(content: "Username not provided")
+                    return HTTPResponse(content: "Username not provided.")
                 }
             }
         } else {
-            return HTTPResponse(content: "Credentials must be posted in the body of the request")
+            return HTTPResponse(content: "Credentials must be posted in the body of the request.")
         }
         return HTTPResponse(content: "THIS NEEDS TO BE DELETED")
     }

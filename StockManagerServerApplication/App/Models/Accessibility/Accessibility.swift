@@ -1,11 +1,9 @@
 //
-//  File.swift
+//  Accessibility.swift
 //  
 //
-//  Created by Zachary Grimaldi on 5/24/20.
+//  Created By Zachary Grimaldi and Joseph Paul on 5/24/20.
 //
-
-import Foundation
 
 enum Accessibility: String, Codable {
     case processed = "Processed"
