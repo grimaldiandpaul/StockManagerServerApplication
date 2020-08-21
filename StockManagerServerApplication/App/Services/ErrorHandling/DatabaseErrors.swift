@@ -17,6 +17,13 @@ extension StockManagerError {
     /// errors relating to Database operations within the application.
     class DatabaseErrors {
         
+        static let connectionError = StockManagerError(title: "Unable to process",
+        message: "An internal error occurred connecting to cloud database service. Please try again later",
+        code: 1101)
+        
+        static let nonUniqueIdentifier = StockManagerError(title: "ID In Use",
+        message: "An item already exists with this ID. Please use a unique ID.",
+        code: 1102)
         
         
     }

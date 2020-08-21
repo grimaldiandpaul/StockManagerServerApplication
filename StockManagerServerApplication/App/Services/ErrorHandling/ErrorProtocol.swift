@@ -48,4 +48,6 @@ struct StockManagerError: ErrorProtocol {
         }
         return result
     }
+    
+    static let unreachableError = StockManagerError(title: "Unreachable Error", message: "If you see this error, please contact the StockManager team", code: 999)
 }

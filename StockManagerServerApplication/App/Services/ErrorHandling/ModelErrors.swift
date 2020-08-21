@@ -27,6 +27,18 @@ extension StockManagerError {
         static let illegalPackaging = StockManagerError(title: "Illegal Packaging value in InventoryItem",
                                                      message: "Please retry with the defined format.\(StockManagerError.itemReference)",
                                                      code: 1002)
+        
+        static let missingIdentifier = StockManagerError(title: "Illegal format of data",
+        message: "Please include the itemID field.\(StockManagerError.itemReference)",
+        code: 1003)
+        
+        
+        
+        
+        
+        
+        
+        static let all: [StockManagerError] = [illegalLocationType, illegalPackaging]
     }
     
     

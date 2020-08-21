@@ -11,50 +11,50 @@ import Firebase
 extension FirebaseWrapper {
     
     
-    class func authenticateUser(username: String, password: String) -> FirebaseWrapperAuthenticationResult {
-        var error: String? = nil
-        var result: Bool? = nil
+    class func authenticateUser(email: String, password: String) -> FirebaseWrapperAuthenticationResult {
+        var error: StockManagerError? = nil
+        var authenticationResult: Bool? = nil
         var user: Data? = nil
-        FirebaseWrapper.auth.signIn(withEmail: username, password: password) { (resultFromFirebaseAuth, err) in
+        FirebaseWrapper.auth.signIn(withEmail: email, password: password) { (responseFromFirebaseAuth, err) in
             if let _ = err {
-                error = "User authentication could not be processed"
-                result = false
+                error = StockManagerError.AuthenticationErrors.connectionError
+                authenticationResult = false
             } else {
-                if let resultFromFirebaseAuth = resultFromFirebaseAuth {
-                    result = !resultFromFirebaseAuth.user.uid.isEmpty
-                    if var result = result, result {
+                if let resultFromFirebaseAuth = responseFromFirebaseAuth {
+                    authenticationResult = !resultFromFirebaseAuth.user.uid.isEmpty
+                    if var authenticationResult = authenticationResult, authenticationResult {
 
                         FirebaseWrapper.userReference(resultFromFirebaseAuth.user.uid).getDocument { (documentSnapshot, err) in
-                            if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
+                            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
                                 if let data = documentSnapshot.data() {
                                     let userFromFirebase = User.from(data)
                                     if let userData = try? JSONSerialization.data(withJSONObject: userFromFirebase, options: .fragmentsAllowed) {
                                         user = userData
-                                        result = true
+                                        authenticationResult = true
                                     }
                                 } else {
-                                    error = "User could not be found"
-                                    result = false
+                                    error = StockManagerError.AuthenticationErrors.userNotFound
+                                    authenticationResult = false
                                 }
                             } else {
-                                result = false
-                                error = "Item could not be created because an item with this ID already exists."
+                                authenticationResult = false
+                                error = StockManagerError.AuthenticationErrors.userNotFound
                             }
                         }
                     }
                 } else {
-                    result = false
-                    error = "User authentication could not be processed"
+                    authenticationResult = false
+                    error = StockManagerError.AuthenticationErrors.connectionError
                 }
             }
         }
         
-        while (error == nil && result == nil ||
-                ((result ?? false) && user == nil)) {
+        while (error == nil && authenticationResult == nil ||
+                ((authenticationResult ?? false) && user == nil)) {
                     sleep(1)
         }
         
-        return (error, result, user)
+        return (error, authenticationResult, user)
     }
     
     

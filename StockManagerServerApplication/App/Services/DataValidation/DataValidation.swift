@@ -10,12 +10,12 @@ import Foundation
 class DataValidation {
     
     static let main = DataValidation()
-    typealias DataValidationResult = (error: String?, valid: Bool)
+    typealias DataValidationResult = (error: StockManagerError?, valid: Bool)
     
     class func validateFields(item: InventoryItem) -> DataValidationResult {
         
         if item.id == "" {
-            return ("ID field cannot be empty", false)
+            return (StockManagerError.ModelErrors.missingIdentifier, false)
         } else {
             return (nil, true)
         }

@@ -19,10 +19,10 @@ class FirebaseWrapper {
     static let auth = Auth.auth()
     
     /// a type-alias for the return object of a FirebaseWrapper void function
-    typealias FirebaseWrapperVoidResult = (error: String?, successful: Bool)
+    typealias FirebaseWrapperVoidResult = (error: StockManagerError?, successful: Bool)
     
     /// a type-alias for the return object of a FirebaseWrapper Authentication function
-    typealias FirebaseWrapperAuthenticationResult = (error: String?, successful: Bool?, user: Data?)
+    typealias FirebaseWrapperAuthenticationResult = (error: StockManagerError?, successful: Bool?, user: Data?)
     
     /// This function a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter itemUUIDString: the unique identifier for the item

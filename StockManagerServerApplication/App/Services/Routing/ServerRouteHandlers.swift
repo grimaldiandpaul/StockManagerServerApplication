@@ -23,35 +23,42 @@ extension TelegraphServer {
         if request.body.count > 0 {
             let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
             if let body = body as? [String:Any] {
-                if let username = body["username"] as? String {
+                if let email = body["email"] as? String {
                     if let password = body["password"] as? String {
-                        let authenticationResult = FirebaseWrapper.authenticateUser(username: username, password: password)
+                        let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: password)
                         if let error = authenticationResult.error {
-                            return HTTPResponse(content: error)
+                            return HTTPResponse(content: error.output)
                         } else {
                             if let authenticated = authenticationResult.successful {
                                 if authenticated {
                                     if let user = authenticationResult.user {
                                         return HTTPResponse(body: user)
                                     } else {
-                                        return HTTPResponse(content: "User data could not be parsed.")
+                                        if let authenticationResultError = authenticationResult.error {
+                                            return HTTPResponse(content: authenticationResultError.output)
+                                        } else {
+                                            return HTTPResponse(content: StockManagerError.unreachableError.output)
+                                        }
                                     }
+                                } else {
+                                    return HTTPResponse(content: StockManagerError.AuthenticationErrors.invalidCredentials.output)
                                 }
                             } else {
-                                return HTTPResponse(content: "Error authenticating user.")
+                                return HTTPResponse(content: StockManagerError.unreachableError.output)
                             }
                         }
                     } else {
-                        return HTTPResponse(content: "Password not provided.")
+                        return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyPassword.output)
                     }
                 } else {
-                    return HTTPResponse(content: "Username not provided.")
+                    return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyEmail.output)
                 }
+            } else {
+                return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output)
             }
         } else {
-            return HTTPResponse(content: "Credentials must be posted in the body of the request.")
+            return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output)
         }
-        return HTTPResponse(content: "THIS NEEDS TO BE DELETED")
     }
     
     func serverHandleCreateItem(request: HTTPRequest) -> HTTPResponse {
@@ -74,36 +81,36 @@ extension TelegraphServer {
                         newItem = InventoryItem.from(body)
                         
                     } else {
-                        return HTTPResponse(content: "Json object could not be serialized")
+                        return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output)
                     }
                 } catch {
                     print(error)
                     LoggingManager.log(error.localizedDescription, source: .routing, type: .error)
-                    return HTTPResponse(content: "Json object could not be serialized")
+                    return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output)
                 }
             }
             
             if let newItem = newItem {
                 let createOperationResult = FirebaseWrapper.createItem(newItem, storeID: storeID)
                 if let err = createOperationResult.error {
-                    LoggingManager.log("Item could not be created: \(err)", source: .routing, type: .error)
-                    return HTTPResponse(.notAcceptable, headers: HTTPHeaders(), content: err)
+                    LoggingManager.log(err.output, source: .routing, type: .error)
+                    return HTTPResponse(content: err.output)
                 } else {
                     let json = newItem.json
                     if let data = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed) {
                         return HTTPResponse(body: data)
                     } else {
-                        LoggingManager.log("Json object could not be serialized", source: .routing, type: .error)
-                        return HTTPResponse(content: "Json object could not be serialized")
+                        LoggingManager.log(StockManagerError.JSONErrors.serializationError.output, source: .routing, type: .error)
+                        return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output)
                     }
                 }
             } else {
-                return HTTPResponse(content: "Please include item details inside of parameters or body")
+                return HTTPResponse(content: StockManagerError.APIErrors.missingData.output)
             }
             
         } else {
-            LoggingManager.log("Store ID was not included in headers", source: .routing, type: .error)
-            return HTTPResponse(content: "Store ID needs to be included in headers")
+            LoggingManager.log(StockManagerError.APIErrors.missingStoreID.output, source: .routing, type: .error)
+            return HTTPResponse(content: StockManagerError.APIErrors.missingStoreID.output)
         }
     }
 }

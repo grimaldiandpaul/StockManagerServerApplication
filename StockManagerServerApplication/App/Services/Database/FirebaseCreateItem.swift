@@ -20,9 +20,9 @@ extension FirebaseWrapper {
         let validationResult = DataValidation.validateFields(item: item)
         if let err = validationResult.error {
             print(err)
-            return ("Item could not be created", false)
+            return (err, false)
         } else {
-            var error: String? = nil
+            var error: StockManagerError? = nil
             var result = false
             FirebaseWrapper.itemReference(item.id, storeID: storeID).getDocument { (documentSnapshot, err) in
                 if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
@@ -30,7 +30,7 @@ extension FirebaseWrapper {
                     FirebaseWrapper.itemReference(item.id, storeID: storeID).setData(json) { (err) in
                         if let err = err {
                             print(err)
-                            error = "Item could not be created due to an error with our database service."
+                            error = StockManagerError.DatabaseErrors.connectionError
                             //return (error,result)
                         } else {
                             result = true
@@ -38,7 +38,7 @@ extension FirebaseWrapper {
                         }
                     }
                 } else {
-                    error = "Item could not be created because an item with this ID already exists."
+                    error = StockManagerError.DatabaseErrors.nonUniqueIdentifier
                     //return (error, result)
                 }
             }

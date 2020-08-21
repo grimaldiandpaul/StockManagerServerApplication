@@ -17,6 +17,13 @@ extension StockManagerError {
     /// errors relating to API/Handler/HTTP operations within the application.
     class APIErrors {
         
+        static let missingData = StockManagerError(title: "Missing Data",
+        message: "Please include item details inside of parameters or body",
+        code: 1301)
+        
+        static let missingStoreID = StockManagerError(title: "Missing Store ID",
+        message: "Please include storeID field in headers",
+        code: 1302)
         
         
     }
