@@ -84,7 +84,7 @@ extension TelegraphServer {
             }
             
             if let newItem = newItem {
-                let createOperationResult = FirebaseWrapper.createItem(newItem, store: storeID)
+                let createOperationResult = FirebaseWrapper.createItem(newItem, storeID: storeID)
                 if let err = createOperationResult.error {
                     LoggingManager.log("Item could not be created: \(err)", source: .routing, type: .error)
                     return HTTPResponse(.notAcceptable, headers: HTTPHeaders(), content: err)

@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import Telegraph
 
+/// A static class, acting as a singleton without mutable data members
 class FirebaseWrapper {
     
     /// the root folder of the database service provided by Google Firebase Cloud Firestore

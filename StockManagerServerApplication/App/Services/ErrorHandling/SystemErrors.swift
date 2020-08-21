@@ -1,8 +1,8 @@
 //
-//  DatabaseErrors.swift
+//  SystemErrors.swift
 //  StockManagerServerApplication
 //
-//  Created By Zachary Grimaldi and Joseph Paul on 8/20/20.
+//  Created by Zachary Grimaldi on 8/21/20.
 //
 
 import Foundation
@@ -11,11 +11,12 @@ import Foundation
 /// An extension for our custom StockManagerError object
 extension StockManagerError {
     
-    /// Database Error codes exist in the range **1100-1199**
+    /// System Error codes exist in the range **1600-1699**
     
     /// An inner-class of StockManagerError for statically available
-    /// errors relating to Database operations within the application.
-    class DatabaseErrors {
+    /// errors relating to the application as a lifecycle and content
+    /// window provider.
+    class SystemErrors {
         
         
         

@@ -8,10 +8,14 @@
 import Foundation
 import Firebase
 
+/// An extension for our FirebaseWrapper class that contains the static function for creating an `InventoryItem`
 extension FirebaseWrapper {
     
-    
-    class func createItem(_ item: InventoryItem, store: String) -> FirebaseWrapperVoidResult {
+    /// static function for CREATING an `InventoryItem`
+    /// - Parameter item: the `InventoryItem` object to create
+    /// - Parameter storeID: the unique identifier of the store to add the item to
+    /// - Returns: A FirebaseWrapperVoidResult (type-aliased from the tuple:  (error: String?, successful: Bool) )
+    class func createItem(_ item: InventoryItem, storeID: String) -> FirebaseWrapperVoidResult {
         #warning("check if store exists")
         let validationResult = DataValidation.validateFields(item: item)
         if let err = validationResult.error {
@@ -20,10 +24,10 @@ extension FirebaseWrapper {
         } else {
             var error: String? = nil
             var result = false
-            FirebaseWrapper.itemReference(item.id, storeID: store).getDocument { (documentSnapshot, err) in
+            FirebaseWrapper.itemReference(item.id, storeID: storeID).getDocument { (documentSnapshot, err) in
                 if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
                     let json = item.firebasejson
-                    FirebaseWrapper.itemReference(item.id, storeID: store).setData(json) { (err) in
+                    FirebaseWrapper.itemReference(item.id, storeID: storeID).setData(json) { (err) in
                         if let err = err {
                             print(err)
                             error = "Item could not be created due to an error with our database service."

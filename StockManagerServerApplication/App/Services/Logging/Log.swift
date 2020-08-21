@@ -6,8 +6,8 @@
 //  Copyright © 2020 Zachary Grimaldi. All rights reserved.
 //
 
-import Foundation
 import Firebase
+
 
 struct Log {
     var message: String

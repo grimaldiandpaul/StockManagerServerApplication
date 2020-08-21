@@ -7,5 +7,20 @@
 
 import Foundation
 
-/// JSON Errors exist in the range **1500-1599**
 
+/// An extension for our custom StockManagerError object
+extension StockManagerError {
+    
+    /// JSON Error codes exist in the range **1500-1599**
+    
+    /// An inner-class of StockManagerError for statically available
+    /// errors relating to JSON serialization/encoding/decoding operations
+    /// within the application.
+    class JSONErrors {
+        
+        
+        
+    }
+    
+    
+}

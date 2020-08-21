@@ -7,14 +7,17 @@
 
 import Foundation
 
-/// Model Errors exist in the range **1000-1099**
 
+/// An extension for our custom StockManagerError object
 extension StockManagerError {
     
     static let itemReferenceURL = ""
     static let itemReference = " Visit \(StockManagerError.itemReferenceURL) for more information."
     
+    /// Model Error codes exist in the range **1000-1099**
     
+    /// An inner-class of StockManagerError for statically available
+    /// errors relating to Model values within the application.
     class ModelErrors {
         
         static let illegalLocationType = StockManagerError(title: "Illegal LocationType value in InventoryItem",

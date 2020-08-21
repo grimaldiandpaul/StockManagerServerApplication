@@ -7,8 +7,12 @@
 
 import Foundation
 
+/// An extension for objects that conform to Encodable or Codable
 extension Encodable {
     
+    /// An extension containing a computed variable for an Encodable object
+    /// to handle to conversion of objects with only primitive data members
+    /// to a dictionary object (aka how Swift handles a JSON).
     var json : [String:Any]? {
         if let data = try? JSONEncoder().encode(self) {
             if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {

@@ -14,6 +14,7 @@
 		12283B6524EEDF50003C642B /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6424EEDF50003C642B /* APIErrors.swift */; };
 		12283B6724EEDF5A003C642B /* IOErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6624EEDF5A003C642B /* IOErrors.swift */; };
 		12283B6924EEDFC5003C642B /* JSONErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6824EEDFC5003C642B /* JSONErrors.swift */; };
+		12283B6B24F053C3003C642B /* SystemErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12283B6A24F053C3003C642B /* SystemErrors.swift */; };
 		123F83EF24E336890084D5B8 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F83EE24E336890084D5B8 /* UUID.swift */; };
 		124E812324ECA2FC006ABA37 /* FirebaseCreateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */; };
 		124E812524ECA341006ABA37 /* FirebaseAuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */; };
@@ -61,6 +62,7 @@
 		12283B6424EEDF50003C642B /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		12283B6624EEDF5A003C642B /* IOErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOErrors.swift; sourceTree = "<group>"; };
 		12283B6824EEDFC5003C642B /* JSONErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONErrors.swift; sourceTree = "<group>"; };
+		12283B6A24F053C3003C642B /* SystemErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemErrors.swift; sourceTree = "<group>"; };
 		123F83EE24E336890084D5B8 /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateItem.swift; sourceTree = "<group>"; };
 		124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticateUser.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				12283B6424EEDF50003C642B /* APIErrors.swift */,
 				12283B6624EEDF5A003C642B /* IOErrors.swift */,
 				12283B6824EEDFC5003C642B /* JSONErrors.swift */,
+				12283B6A24F053C3003C642B /* SystemErrors.swift */,
 			);
 			path = ErrorHandling;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
 				12B4F8BD24E2077F0073DB58 /* Packaging+Extensions.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
+				12283B6B24F053C3003C642B /* SystemErrors.swift in Sources */,
 				733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */,
 				737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */,
 				123F83EF24E336890084D5B8 /* UUID.swift in Sources */,

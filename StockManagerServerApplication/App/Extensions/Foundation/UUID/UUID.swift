@@ -7,8 +7,12 @@
 
 import Foundation
 
+/// An extension for objects of type UUID
 extension UUID {
     
+    /// A static variable to quickly create unique identifiers
+    /// of length 20 that do not contain spaces or dashes,
+    /// only uppercase letters and numbers.
     static var uuidStringTwentyCharsNoDashes: String {
         return String( (UUID().uuidString + UUID().uuidString)
                         .filter({$0 != "-"})
