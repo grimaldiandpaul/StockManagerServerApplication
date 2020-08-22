@@ -29,8 +29,8 @@ extension StockManagerError {
                                                      code: 1002)
         
         static let missingIdentifier = StockManagerError(title: "Illegal format of data",
-        message: "Please include the itemID field.\(StockManagerError.itemReference)",
-        code: 1003)
+                                                      message: "Please include the itemID field.\(StockManagerError.itemReference)",
+                                                      code: 1003)
         
         
         

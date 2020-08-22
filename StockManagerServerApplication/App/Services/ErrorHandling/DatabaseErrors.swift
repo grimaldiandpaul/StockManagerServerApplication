@@ -22,8 +22,8 @@ extension StockManagerError {
         code: 1101)
         
         static let nonUniqueIdentifier = StockManagerError(title: "ID In Use",
-        message: "An item already exists with this ID. Please use a unique ID.",
-        code: 1102)
+                                                        message: "An item already exists with this ID. Please use a unique ID.",
+                                                        code: 1102)
         
         
     }
