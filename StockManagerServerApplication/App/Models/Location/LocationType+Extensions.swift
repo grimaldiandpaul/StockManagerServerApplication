@@ -7,6 +7,7 @@
 
 extension LocationType {
     
+    /// string (singular) version of the enumeration
     var value: String {
         switch self {
         case .jHook:
@@ -38,6 +39,7 @@ extension LocationType {
         }
     }
     
+    /// string (plural) version of the enumeration
     var plural: String {
         switch self {
         case .jHook:
@@ -69,6 +71,7 @@ extension LocationType {
         }
     }
     
+    /// a forgiving decoder for values that are similar to LocationType raw values
     static func from(_ string: String) throws -> LocationType {
         switch string {
         case "JHook", "JHooks":
@@ -101,6 +104,7 @@ extension LocationType {
         }
     }
     
+    /// all `LocationTypes`, for purposes of iterating
     static func all() -> [LocationType] {
         return [.jHook, .sideStack, .shelfSpace, .pod, .floorModel, .topStock, .backroomStock, .incoming, .outgoing, .unprocessed, .bottomStock, .unknown]
     }

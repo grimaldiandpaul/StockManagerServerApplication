@@ -274,8 +274,8 @@
 		12B4F8B324E2077E0073DB58 /* InventoryItem */ = {
 			isa = PBXGroup;
 			children = (
-				12B4F8B424E2077E0073DB58 /* InventoryItem+Extension.swift */,
 				12B4F8B524E2077E0073DB58 /* InventoryItem.swift */,
+				12B4F8B424E2077E0073DB58 /* InventoryItem+Extension.swift */,
 			);
 			path = InventoryItem;
 			sourceTree = "<group>";

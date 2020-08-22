@@ -5,10 +5,10 @@
 //  Created By Zachary Grimaldi and Joseph Paul on 8/11/20.
 //
 
-
+/// An extension for our  custom Location object that focuses
 extension Location {
 
-    
+
     var json : [String:Any] {
         var result = [String:Any]()
         

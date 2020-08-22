@@ -22,57 +22,30 @@ This is the base class for an inventory-managed product in the StockManagerAPI.
 */
 struct InventoryItem: Identifiable {
     
-    /**
-     
-    Description: The internal identifier, specific to our system.
-    Type: String
-    */
+    /// the unique internal identifier, specific to our system
     var id : String
     
-    /**
-     
-    Description: Identifier optional if client has their own system identifier
-    Type: String
-    */
+    /// Identifier optional if client has their own system identifier
     var userDesignatedID: String
     
-    /**
-     
-    Description: The name of the item
-    Type: String
-    */
+    /// the name of the item
     var name: String
     
-    /**
-     
-    Description: An array of `Location` objects
-    Type: [Location]
-    */
+    /// An array of `Location` objects pertaining to this item
     var locations: [Location]
     
-    /**
-     
-    Description: The quantity of this item available for purchase by customers
-    Type: Int? (Int Optional)
-    */
+    /// the quantity of this item available for purchase by customers
     var customerAccessibleQuantity: Int?
     
-    /**
-     
-    Description: The quantity of this item NOT available for purchase by customers. This may be because the item is unprocessed, on hold, etc.
-    Type: Int? (Int Optional)
-    */
+    /// the quantity of this item NOT available for purchase by customers. This may be because the item is unprocessed, on hold, etc.
     var backstockQuantity: Int?
     
-    /**
-     
-    Description: The date that this item was last purchased from a register at this location. (Independent of any store returns)
-    Type: [`Timestamp`](https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Timestamp.html?is-external=true)
-    */
+    /// The date that this item was last purchased from a register at this location. (Independent of any store returns)
+    /// Type: [`Timestamp`](https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Timestamp.html?is-external=true)
     var dateLastPurchased: Timestamp?
     
     
-    
+    /// a constructor in which all parameters default to optional, and thus, none are required to initialize an InventoryItem object
     init(userDesignatedID: String = "", name: String = "", locations: [Location] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int? = nil, backstockQuantity: Int? = nil) {
         self.id = UUID.uuidStringTwentyCharsNoDashes
         self.userDesignatedID = userDesignatedID
