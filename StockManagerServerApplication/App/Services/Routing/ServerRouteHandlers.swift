@@ -10,41 +10,52 @@ import Telegraph
 
 extension TelegraphServer {
     
+    /// handler function for the "hellodrramirez" slug
+    /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
+    /// - Returns: The HTTPResponse for this request
     func serverHandleHelloDrRamirez(request: HTTPRequest) throws -> HTTPResponse {
         return HTTPResponse(content: "Hello, Dr. Ramirez!")
     }
     
+    /// default handler for the default endpoint
+    /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
+    /// - Returns: The HTTPResponse for this request
     func serverHandleRefPage(request: HTTPRequest) throws -> HTTPResponse {
         return HTTPResponse(content: "Here is the API reference:")
     }
     
+    /// handler function for the "authenticate" slug
+    /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
+    /// - Returns: The HTTPResponse for this request
     func serverHandleAuthenticate(request: HTTPRequest) throws -> HTTPResponse {
 
+        // if there is data in the body of the request
         if request.body.count > 0 {
+            
+            // try to serialize the body
             let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
+            
+            // if the body can be serialized to a [String:Any] object
             if let body = body as? [String:Any] {
+                
+                // if the body contains the "email" field
                 if let email = body["email"] as? String {
+                    
+                    // if the body contains the "password" field
                     if let password = body["password"] as? String {
                         let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: password)
+                        
+                        // if the authentication process returned an error
                         if let error = authenticationResult.error {
                             return HTTPResponse(content: error.output)
                         } else {
-                            if let authenticated = authenticationResult.successful {
-                                if authenticated {
-                                    if let user = authenticationResult.user {
-                                        return HTTPResponse(body: user)
-                                    } else {
-                                        if let authenticationResultError = authenticationResult.error {
-                                            return HTTPResponse(content: authenticationResultError.output)
-                                        } else {
-                                            return HTTPResponse(content: StockManagerError.unreachableError.output)
-                                        }
-                                    }
-                                } else {
-                                    return HTTPResponse(content: StockManagerError.AuthenticationErrors.invalidCredentials.output)
-                                }
+                            
+                            // if the user is successfully authenticated
+                            if let authenticated = authenticationResult.successful,
+                                authenticated, let user = authenticationResult.user {
+                                    return HTTPResponse(body: user)
                             } else {
-                                return HTTPResponse(content: StockManagerError.unreachableError.output)
+                                return HTTPResponse(content: StockManagerError.AuthenticationErrors.invalidCredentials.output)
                             }
                         }
                     } else {
@@ -61,23 +72,52 @@ extension TelegraphServer {
         }
     }
     
+    
+    /// handler function for the "create" slug
+    /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
+    /// - Returns: The HTTPResponse for this request
     func serverHandleCreateItem(request: HTTPRequest) -> HTTPResponse {
-        
-        print(request.headers)
-        
-        if let storeID = request.headers["storeID"] {
-            
-            print("Params: \(request.params)")
-            print(request.body.base64EncodedData())
+  
+            var storeID = ""
+            var storeIDs = [String]()
             var newItem: InventoryItem? = nil
+        
+            // if user is adding item through the URL
             if let parameters = request.uri.queryItems?.parameters, parameters.count > 0 {
+                if let storeIdentifier = parameters["storeID"] as? String {
+                    storeID = storeIdentifier
+                } else if let storeIdentifiers = parameters["storeIDs"] as? [String] {
+                    storeIDs = storeIdentifiers
+                } else {
+                    return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output)
+                }
                 newItem = InventoryItem.from(parameters)
                 
+            // if user is adding item through body
             } else if request.body.count > 0 {
                 
                 do {
+                    // try to serialize the body into [String:Any] map
                     let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
+                    
+                    // if the body was serialized
                     if let body = body as? [String:Any] {
+                        newItem = InventoryItem.from(body)
+                        
+                        // if the user included the storeID field
+                        if let storeIdentifier = body["storeID"] as? String {
+                            storeID = storeIdentifier
+                        }
+                            
+                        // if the user included the storeIDs field
+                        else if let storeIdentifiers = body["storeIDs"] as? [String] {
+                            storeIDs = storeIdentifiers
+                        }
+                        
+                        // else return missingField error
+                        else {
+                            return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output)
+                        }
                         newItem = InventoryItem.from(body)
                         
                     } else {
@@ -90,13 +130,22 @@ extension TelegraphServer {
                 }
             }
             
+        
+        // if the storeID field is included in the request
+        if storeID.count > 0 {
+            
+            // if newItem is not null
             if let newItem = newItem {
                 let createOperationResult = FirebaseWrapper.createItem(newItem, storeID: storeID)
+                
+                // if there was an error creating the object in Firebase Cloud Database
                 if let err = createOperationResult.error {
                     LoggingManager.log(err.output, source: .routing, type: .error)
                     return HTTPResponse(content: err.output)
                 } else {
                     let json = newItem.json
+                    
+                    // if data serialization is successful
                     if let data = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed) {
                         return HTTPResponse(body: data)
                     } else {
@@ -107,15 +156,59 @@ extension TelegraphServer {
             } else {
                 return HTTPResponse(content: StockManagerError.APIErrors.missingData.output)
             }
+        }
+        
+        // if the storeIDs field is included in the request
+        else {
+            var finalString = ""
+            var finishedAddingItems = false
+            var unsuccessfulStoreIDs = [String]()
             
-        } else {
-            LoggingManager.log(StockManagerError.APIErrors.missingStoreID.output, source: .routing, type: .error)
-            return HTTPResponse(content: StockManagerError.APIErrors.missingStoreID.output)
+            // if newItem is not null
+            if let newItem = newItem {
+                for store in storeIDs {
+                    let createOperationResult = FirebaseWrapper.createItem(newItem, storeID: store)
+                    
+                    // if there was an error adding to one store, add the storeID to the array. This will be used later
+                    if let err = createOperationResult.error {
+                        LoggingManager.log(err.output, source: .routing, type: .error)
+                        unsuccessfulStoreIDs.append(storeID)
+                    }
+                }
+                
+                // if adding to any stores was unsuccessful, append their ID to the finalString so user knows which stores' ItemList does not contain the item
+                if unsuccessfulStoreIDs.count > 0 {
+                    finalString = "Could not add item to store(s): "
+                    for id in unsuccessfulStoreIDs{
+                        finalString = finalString + "\(id), "
+                    }
+                    finalString = String(finalString.dropLast())
+                    finalString = String(finalString.dropLast())
+                    finishedAddingItems = true
+                } else {
+                    finalString = "Successfully added item to all stores"
+                    finishedAddingItems = true
+                }
+                   
+            } else {
+                finalString = StockManagerError.APIErrors.missingData.output
+                finishedAddingItems = true
+            }
+            
+            // wait for all Firebase operations to finish
+            while (!finishedAddingItems) {
+                sleep(1)
+            }
+            
+            return HTTPResponse(content: finalString)
         }
     }
 }
 
+/// An extension for the `Array` object
 extension Array where Element == URLQueryItem {
+    
+    // computed variable that serializes URLQueryItems to JSON objects
     var parameters: [String:Any] {
         var result = [String:Any]()
         for item in self {

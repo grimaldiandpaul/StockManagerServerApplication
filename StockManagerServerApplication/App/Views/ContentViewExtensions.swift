@@ -12,6 +12,7 @@ import Firebase
 
 extension ContentView {
     
+    /// A unction to test all server endpoints
     func testHelloEndpoint() {
         
         var headers:HTTPHeaders = HTTPHeaders()

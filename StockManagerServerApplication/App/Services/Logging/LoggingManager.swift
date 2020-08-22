@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 
+/// Custom class to create logs of data in server.
 class LoggingManager {
     
     static let main = LoggingManager()

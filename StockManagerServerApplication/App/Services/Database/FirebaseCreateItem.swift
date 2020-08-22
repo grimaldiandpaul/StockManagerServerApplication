@@ -18,31 +18,37 @@ extension FirebaseWrapper {
     class func createItem(_ item: InventoryItem, storeID: String) -> FirebaseWrapperVoidResult {
         #warning("check if store exists")
         let validationResult = DataValidation.validateFields(item: item)
+        
+        // if there is an error, return
         if let err = validationResult.error {
             print(err)
             return (err, false)
         } else {
             var error: StockManagerError? = nil
             var result = false
+            
+            // retrieve the item document from Firebase Cloud Firestore
             FirebaseWrapper.itemReference(item.id, storeID: storeID).getDocument { (documentSnapshot, err) in
+                
+                // if the document doesn't exist, create it below
                 if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
                     let json = item.firebasejson
+                    
+                    // set the data in the Firebase Cloud Firestore document
                     FirebaseWrapper.itemReference(item.id, storeID: storeID).setData(json) { (err) in
                         if let err = err {
                             print(err)
                             error = StockManagerError.DatabaseErrors.connectionError
-                            //return (error,result)
                         } else {
                             result = true
-                            //return (error, result)
                         }
                     }
                 } else {
                     error = StockManagerError.DatabaseErrors.nonUniqueIdentifier
-                    //return (error, result)
                 }
             }
             
+            // wait for the asynchronous Firebase retrieval and creation
             while ( error == nil && !result ) {
                 sleep(1)
             }

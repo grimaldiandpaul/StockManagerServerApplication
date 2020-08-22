@@ -19,7 +19,7 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
-    /// A computed string for a Date in the format `"yyyy-MM-dd HH:mm:ss:Z"
+    /// A computed string for a Date in the format `"yyyy-MM-dd HH:mm:ss:Z"`
     /// This is perfect for printing to screen.
     var viewOutputString: String {
         let dateFormatter = DateFormatter()

@@ -8,6 +8,7 @@
 import Foundation
 import Telegraph
 
+/// An extension for Telegraph's TelegraphServer object
 extension TelegraphServer: ServerDelegate {
   // Raised when the server gets disconnected.
   public func serverDidStop(_ server: Server, error: Error?) {

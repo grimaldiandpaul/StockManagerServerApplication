@@ -25,6 +25,10 @@ extension StockManagerError {
                                                         message: "An item already exists with this ID. Please use a unique ID.",
                                                         code: 1102)
         
+        static let missingField = StockManagerError(title: "Missing required field",
+                                                           message: "Please include either the storeID or storeIDs field",
+                                                           code: 1103)
+        
         
     }
     

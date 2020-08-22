@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Enum for sources of logs
 enum LogEntrySource: String, Codable {
     case general = "General"
     case webApp = "Web App"

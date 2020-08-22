@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Custom class that will write logs to file.
 class LoggingSweeper {
     
     static let main = LoggingSweeper()

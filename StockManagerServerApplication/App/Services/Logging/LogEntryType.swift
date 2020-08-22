@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Enum for types of logs
 enum LogEntryType: String, Codable {
     case general = "General"
     case warning = "Warning"

@@ -8,7 +8,7 @@
 
 import Firebase
 
-
+/// Custom Log struct for use in LoggingManager
 struct Log {
     var message: String
     var time: Timestamp
