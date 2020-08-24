@@ -14,20 +14,21 @@ extension TelegraphServer {
     /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
     /// - Returns: The HTTPResponse for this request
     func serverHandleHelloDrRamirez(request: HTTPRequest) throws -> HTTPResponse {
-        return HTTPResponse(content: "Hello, Dr. Ramirez!")
+        return HTTPResponse(content: "Hello, Dr. Ramirez!").addHeaders()
     }
     
     /// default handler for the default endpoint
     /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
     /// - Returns: The HTTPResponse for this request
     func serverHandleRefPage(request: HTTPRequest) throws -> HTTPResponse {
-        return HTTPResponse(content: "Here is the API reference:")
+        return HTTPResponse(content: "Here is the API reference:").addHeaders()
     }
     
     /// handler function for the "authenticate" slug
     /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
     /// - Returns: The HTTPResponse for this request
     func serverHandleAuthenticate(request: HTTPRequest) throws -> HTTPResponse {
+        print(request)
 
         // if there is data in the body of the request
         if request.body.count > 0 {
@@ -47,28 +48,28 @@ extension TelegraphServer {
                         
                         // if the authentication process returned an error
                         if let error = authenticationResult.error {
-                            return HTTPResponse(content: error.output)
+                            return HTTPResponse(content: error.output).addHeaders()
                         } else {
                             
                             // if the user is successfully authenticated
                             if let authenticated = authenticationResult.successful,
                                 authenticated, let user = authenticationResult.user {
-                                    return HTTPResponse(body: user)
+                                    return HTTPResponse(body: user).addHeaders()
                             } else {
-                                return HTTPResponse(content: StockManagerError.AuthenticationErrors.invalidCredentials.output)
+                                return HTTPResponse(content: StockManagerError.AuthenticationErrors.invalidCredentials.output).addHeaders()
                             }
                         }
                     } else {
-                        return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyPassword.output)
+                        return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyPassword.output).addHeaders()
                     }
                 } else {
-                    return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyEmail.output)
+                    return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyEmail.output).addHeaders()
                 }
             } else {
-                return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output)
+                return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output).addHeaders()
             }
         } else {
-            return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output)
+            return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output).addHeaders()
         }
     }
     
@@ -89,7 +90,7 @@ extension TelegraphServer {
                 } else if let storeIdentifiers = parameters["storeIDs"] as? [String] {
                     storeIDs = storeIdentifiers
                 } else {
-                    return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output)
+                    return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output).addHeaders()
                 }
                 newItem = InventoryItem.from(parameters)
                 
@@ -116,17 +117,17 @@ extension TelegraphServer {
                         
                         // else return missingField error
                         else {
-                            return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output)
+                            return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output).addHeaders()
                         }
                         newItem = InventoryItem.from(body)
                         
                     } else {
-                        return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output)
+                        return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output).addHeaders()
                     }
                 } catch {
                     print(error)
                     LoggingManager.log(error.localizedDescription, source: .routing, type: .error)
-                    return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output)
+                    return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output).addHeaders()
                 }
             }
             
@@ -141,20 +142,20 @@ extension TelegraphServer {
                 // if there was an error creating the object in Firebase Cloud Database
                 if let err = createOperationResult.error {
                     LoggingManager.log(err.output, source: .routing, type: .error)
-                    return HTTPResponse(content: err.output)
+                    return HTTPResponse(content: err.output).addHeaders()
                 } else {
                     let json = newItem.json
                     
                     // if data serialization is successful
                     if let data = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed) {
-                        return HTTPResponse(body: data)
+                        return HTTPResponse(body: data).addHeaders()
                     } else {
                         LoggingManager.log(StockManagerError.JSONErrors.serializationError.output, source: .routing, type: .error)
-                        return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output)
+                        return HTTPResponse(content: StockManagerError.JSONErrors.serializationError.output).addHeaders()
                     }
                 }
             } else {
-                return HTTPResponse(content: StockManagerError.APIErrors.missingData.output)
+                return HTTPResponse(content: StockManagerError.APIErrors.missingData.output).addHeaders()
             }
         }
         
@@ -200,7 +201,7 @@ extension TelegraphServer {
                 sleep(1)
             }
             
-            return HTTPResponse(content: finalString)
+            return HTTPResponse(content: finalString).addHeaders()
         }
     }
 }

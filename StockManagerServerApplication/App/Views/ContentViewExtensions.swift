@@ -32,12 +32,13 @@ extension ContentView {
 //            }
 //        }
         
-        if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
-            AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: headers)
-                .responseString { (response) in
-                    LoggingManager.log(response.description, source: .routing, type: .success)
-            }
-        }
+//        if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
+//            AF.request(url, method: .post, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: headers)
+//                .responseString { (response) in
+//                    LoggingManager.log(response.description, source: .routing, type: .success)
+//            }
+//        }
         
     }
+    
 }
