@@ -45,4 +45,13 @@ extension Timestamp {
         
     }
     
+    
+    static func <(lhs: Timestamp, rhs: Timestamp) -> Bool {
+        return lhs.dateValue() < rhs.dateValue()
+    }
+    
+    static func >(lhs: Timestamp, rhs: Timestamp) -> Bool {
+        return lhs.dateValue() > rhs.dateValue()
+    }
+    
 }

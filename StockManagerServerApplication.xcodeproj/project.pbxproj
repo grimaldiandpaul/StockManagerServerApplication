@@ -18,6 +18,7 @@
 		123F83EF24E336890084D5B8 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123F83EE24E336890084D5B8 /* UUID.swift */; };
 		124E812324ECA2FC006ABA37 /* FirebaseCreateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */; };
 		124E812524ECA341006ABA37 /* FirebaseAuthenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */; };
+		129D740224F47422001E8E41 /* Notification+Name+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129D740124F47422001E8E41 /* Notification+Name+Extensions.swift */; };
 		12B4F87024E1E47B0073DB58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */; };
 		12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88424E1E6960073DB58 /* LogEntryType.swift */; };
 		12B4F88924E1E6970073DB58 /* LoggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B4F88524E1E6970073DB58 /* LoggingManager.swift */; };
@@ -67,6 +68,7 @@
 		123F83EE24E336890084D5B8 /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateItem.swift; sourceTree = "<group>"; };
 		124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticateUser.swift; sourceTree = "<group>"; };
+		129D740124F47422001E8E41 /* Notification+Name+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name+Extensions.swift"; sourceTree = "<group>"; };
 		12B4F86F24E1E47B0073DB58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12B4F88424E1E6960073DB58 /* LogEntryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEntryType.swift; sourceTree = "<group>"; };
 		12B4F88524E1E6970073DB58 /* LoggingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingManager.swift; sourceTree = "<group>"; };
@@ -152,6 +154,14 @@
 			path = UUID;
 			sourceTree = "<group>";
 		};
+		129D740024F47404001E8E41 /* NotificationName */ = {
+			isa = PBXGroup;
+			children = (
+				129D740124F47422001E8E41 /* Notification+Name+Extensions.swift */,
+			);
+			path = NotificationName;
+			sourceTree = "<group>";
+		};
 		12B4F87124E1E5660073DB58 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +237,7 @@
 		12B4F88024E1E5B60073DB58 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				129D740024F47404001E8E41 /* NotificationName */,
 				1234105E24E362A10062F92E /* Encodable */,
 				123F83ED24E3367E0084D5B8 /* UUID */,
 				12B4F88124E1E5B60073DB58 /* Date */,
@@ -515,6 +526,7 @@
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,
 				12B4F8BD24E2077F0073DB58 /* Packaging+Extensions.swift in Sources */,
 				733B1CC424E1F2B80034AE08 /* EncodableExtensions.swift in Sources */,
+				129D740224F47422001E8E41 /* Notification+Name+Extensions.swift in Sources */,
 				12283B6B24F053C3003C642B /* SystemErrors.swift in Sources */,
 				733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */,
 				7324995524F1D62800E5CCE7 /* HTTPResponseExtensions.swift in Sources */,

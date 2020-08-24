@@ -16,18 +16,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
+        
+        // Start required services
         FirebaseApp.configure()
         TelegraphServer.startup()
 
-        // Create the window and set the content view.
+        // Create the window
         window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            contentRect: NSRect(x: 0, y: 0, width: 700, height: 600),
+            styleMask: [.titled, .closable],
             backing: .buffered, defer: false)
         window.isReleasedWhenClosed = false
         window.center()
+        window.title = "StockManagerServerApplication"
         window.setFrameAutosaveName("Main Window")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
