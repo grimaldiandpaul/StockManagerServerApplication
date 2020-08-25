@@ -22,7 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Start required services
         FirebaseApp.configure()
-        TelegraphServer.startup()
+        GCDServer.startup()
+        //TelegraphServer.startup()
 
         // Create the window
         window = NSWindow(

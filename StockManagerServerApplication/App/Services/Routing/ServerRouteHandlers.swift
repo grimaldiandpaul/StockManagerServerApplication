@@ -17,6 +17,11 @@ extension TelegraphServer {
         return HTTPResponse(content: "Hello, Dr. Ramirez!").addHeaders()
     }
     
+    func serverHandleTest(request: HTTPRequest) throws -> HTTPResponse {
+        let test = HTTPResponse(HTTPStatus.ok, headers: [:], content: "Hello World!")
+        return test
+    }
+    
     /// default handler for the default endpoint
     /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
     /// - Returns: The HTTPResponse for this request

@@ -9,5 +9,6 @@ target 'StockManagerServerApplication' do
   pod 'Firebase/Firestore',:modular_headers => true
   pod 'Firebase/Auth',:modular_headers => true
   pod 'Firebase/Storage',:modular_headers => true
+  pod 'GCDWebServer',:modular_headers => true
 
 end
