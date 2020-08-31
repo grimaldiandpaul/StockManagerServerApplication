@@ -15,7 +15,6 @@ class GCDServer {
     
     class func startup() {
         GCDServer.main.server.addDefaultHandler(forMethod: "GET", request: GCDWebServerRequest.self, processBlock: {request in
-            print(request)
             let response = GCDWebServerDataResponse(html:"<html><body><p>Hello World</p></body></html>")
             if let response = response?.addHeaders() {
                 return response
@@ -25,7 +24,6 @@ class GCDServer {
             })
         
         GCDServer.main.server.addHandler(forMethod: "GET", path: "/ramirez", request: GCDWebServerRequest.self) { (request) -> GCDWebServerResponse? in
-            print(request)
             let response = GCDWebServerDataResponse(jsonObject: ["Hello":"Dr. Ramirez"])
             if let response = response?.addHeaders() {
                 return response
