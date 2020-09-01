@@ -23,6 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Start required services
         FirebaseApp.configure()
         GCDServer.startup()
+        do {
+            try FirebaseWrapper.auth.signOut()
+        } catch {
+            print(error)
+        }
+        FirebaseWrapper.auth.signIn(withEmail: "josephpaul3820@gmail.com", password: "Testpassword1!")
         //TelegraphServer.startup()
 
         // Create the window

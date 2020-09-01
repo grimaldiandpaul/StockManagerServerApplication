@@ -1,0 +1,6 @@
+module GCDWebServer {
+  umbrella header "GCDWebServer-umbrella.h"
+
+  export *
+  module * { export * }
+}
