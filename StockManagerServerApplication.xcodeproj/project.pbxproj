@@ -58,6 +58,8 @@
 		7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */; };
 		7368C46924EA156F00A153EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46824EA156F00A153EB /* User.swift */; };
 		737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F0F3324EB477200F97043 /* UserExtensions.swift */; };
+		73BD304C24FEE4940079622E /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 73BD304B24FEE4940079622E /* CryptoSwift */; };
+		73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD304E24FEFEB10079622E /* StringExtensions.swift */; };
 		73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */; };
 		73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */; };
 		B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */; };
@@ -118,6 +120,7 @@
 		7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseExtensions.swift; sourceTree = "<group>"; };
 		7368C46824EA156F00A153EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		737F0F3324EB477200F97043 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
+		73BD304E24FEFEB10079622E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
 		73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRouteHandlers.swift; sourceTree = "<group>"; };
 		8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StockManagerServerApplication.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7368C46424E3660700A153EB /* Alamofire in Frameworks */,
+				73BD304C24FEE4940079622E /* CryptoSwift in Frameworks */,
 				733B1CD624E342020034AE08 /* Telegraph in Frameworks */,
 				B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */,
 			);
@@ -252,6 +256,7 @@
 		12B4F88024E1E5B60073DB58 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				73BD304D24FEFEA20079622E /* String */,
 				129D740024F47404001E8E41 /* NotificationName */,
 				1234105E24E362A10062F92E /* Encodable */,
 				123F83ED24E3367E0084D5B8 /* UUID */,
@@ -424,6 +429,14 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		73BD304D24FEFEA20079622E /* String */ = {
+			isa = PBXGroup;
+			children = (
+				73BD304E24FEFEB10079622E /* StringExtensions.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
 		7A904DEB6761DDD933B6321F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +466,7 @@
 			packageProductDependencies = (
 				733B1CD524E342020034AE08 /* Telegraph */,
 				7368C46324E3660700A153EB /* Alamofire */,
+				73BD304B24FEE4940079622E /* CryptoSwift */,
 			);
 			productName = StockManagerServerApplication;
 			productReference = 12CE34B524E1E3B3008234FF /* StockManagerServerApplication.app */;
@@ -485,6 +499,7 @@
 				733B1CCB24E201330034AE08 /* XCRemoteSwiftPackageReference "StockManagerDotTechModels" */,
 				733B1CD424E342020034AE08 /* XCRemoteSwiftPackageReference "Telegraph" */,
 				7368C46224E3660700A153EB /* XCRemoteSwiftPackageReference "Alamofire" */,
+				73BD304A24FEE4940079622E /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 12CE34B624E1E3B3008234FF /* Products */;
 			projectDirPath = "";
@@ -586,6 +601,7 @@
 				12283B6524EEDF50003C642B /* APIErrors.swift in Sources */,
 				7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */,
 				73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */,
+				73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */,
 				12283B5F24EEDF18003C642B /* ModelErrors.swift in Sources */,
 				12B4F8BB24E2077F0073DB58 /* LocationType.swift in Sources */,
 				7324996724F4A59700E5CCE7 /* GCDServer.swift in Sources */,
@@ -833,6 +849,14 @@
 				minimumVersion = 5.2.2;
 			};
 		};
+		73BD304A24FEE4940079622E /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -845,6 +869,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7368C46224E3660700A153EB /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		73BD304B24FEE4940079622E /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73BD304A24FEE4940079622E /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

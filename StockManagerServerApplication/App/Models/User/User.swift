@@ -38,8 +38,11 @@ struct User {
     /// all IP addresses that are used to access this user account (ever)
     var ipAddresses: [String]
     
+    /// the role which defines the user's access to the applications
+    var userRole: UserRole
+    
     /// a constructor in which all parameters default to optional, and thus, none are required to initialize a User object
-    init(userID: String = "", firstName: String = "", lastName: String = "", email: String = "", storeID: String = "", companyID: String = "", lastLoginDate: Timestamp? = nil, ipAddresses: [String] = []){
+    init(userID: String = "", firstName: String = "", lastName: String = "", email: String = "", storeID: String = "", companyID: String = "", lastLoginDate: Timestamp? = nil, ipAddresses: [String] = [], userRole: UserRole = .user){
         self.userID = userID
         self.firstName = firstName
         self.lastName = lastName
@@ -48,5 +51,6 @@ struct User {
         self.companyID = companyID
         self.lastLoginDate = lastLoginDate
         self.ipAddresses = ipAddresses
+        self.userRole = userRole
     }
 }

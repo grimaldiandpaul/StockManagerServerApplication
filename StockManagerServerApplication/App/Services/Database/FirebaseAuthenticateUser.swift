@@ -21,68 +21,23 @@ extension FirebaseWrapper {
         var authenticationResult: Bool? = nil
         var user: Data? = nil
         
-        // utilize Firebase Authentication to ensure this is a correct email & password combination
-        FirebaseWrapper.auth.signIn(withEmail: email, password: password) { (responseFromFirebaseAuth, err) in
-            // if there was an error reaching the Firebase Auth endpoint
-            if let _ = err {
-                error = StockManagerError.AuthenticationErrors.connectionError
-                authenticationResult = false
-            } else {
-                // if we can confirm we retrieve a response from Firebase Auth
-                if let resultFromFirebaseAuth = responseFromFirebaseAuth {
-                    
-                    // find out if we retrieved the user document from Firebase Auth
-                    authenticationResult = !resultFromFirebaseAuth.user.uid.isEmpty
-                    if var authenticationResult = authenticationResult, authenticationResult {
-
-                        // retrieve the user document from Firebase Cloud Firestore
-                        FirebaseWrapper.userReference(resultFromFirebaseAuth.user.uid).getDocument { (documentSnapshot, err) in
-                            
-                            // if the document exists in our cloud database
-                            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
-                                
-                                // if we can retrieve the JSON object from the document snapshot
-                                if let data = documentSnapshot.data() {
-                                    
-                                    // decode the JSON data into a User object
-                                    let userFromFirebase = User.from(data)
-                                    
-                                    // try to serialize the data to JSON
-                                    if let userData = try? JSONSerialization.data(withJSONObject: userFromFirebase, options: .fragmentsAllowed) {
-                                        user = userData
-                                        authenticationResult = true
-                                    } else {
-                                        error = StockManagerError.JSONErrors.serializationError
-                                        authenticationResult = false
-                                    }
-                                } else {
-                                    error = StockManagerError.AuthenticationErrors.userNotFound
-                                    authenticationResult = false
-                                }
-                            } else {
-                                error = StockManagerError.AuthenticationErrors.userNotFound
-                                authenticationResult = false
-                            }
-                        }
-                        
-                    } else {
-                        error = StockManagerError.AuthenticationErrors.invalidCredentials
-                        authenticationResult = false
-                    }
-                } else {
-                    error = StockManagerError.AuthenticationErrors.connectionError
-                    authenticationResult = false
-                }
+        #warning("this will need fixed on mac mini")
+        let file = "/Users/joepauljoe/Downloads/keyandiv.txt"
+        let path = URL(fileURLWithPath: file)
+        if var iv = try? String(contentsOf: path){
+            var key = String(iv.prefix(while: {$0 != "\n"}))
+            while iv.contains("\n"){
+                iv = String(iv.dropFirst())
             }
+            print(key)
+            print(iv)
+            let encrypted = try! password.encrypt(key: key, iv: iv)
+            print(encrypted)
+            let decrypted = try! encrypted.decrypt(key: key, iv: iv)
+            
+            print(decrypted)
         }
         
-        /// thread sleeps while we wait for the asynchronous operations to return
-        while (error == nil && authenticationResult == nil ||
-                ((authenticationResult ?? false) && user == nil)) {
-                    sleep(1)
-        }
-        
-        /// return the result, available as soon as an error is thrown or the User object is ready to return
         return (error, authenticationResult, user)
     }
     

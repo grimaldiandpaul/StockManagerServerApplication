@@ -7,6 +7,7 @@
 
 import Foundation
 import GCDWebServer
+import Firebase
 
 class GCDServer {
     
@@ -47,6 +48,30 @@ class GCDServer {
                 print("Error adding headers")
             }
             return response
+        }
+        
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/test-authenticate", request: GCDWebServerDataRequest.self) { request -> GCDWebServerDataResponse? in
+            let response = GCDWebServerDataResponse(jsonObject: [:])
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+            
+        }
+        
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/test-authenticate", request: GCDWebServerDataRequest.self) { request -> GCDWebServerDataResponse? in
+            let user = User(userID: "26aIVUDhylb1Ht01vXWC", firstName: "Joseph", lastName: "Paul", email: "josephpaul3820@gmail.com", storeID: "Test Store 1", companyID: "TestCom3", lastLoginDate: Timestamp(date: Date()), ipAddresses: ["192.168.0.253"], userRole: .admin)
+            let json = user.json
+            let response = GCDWebServerDataResponse(jsonObject: json)
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+            
         }
         
         GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
@@ -114,6 +139,7 @@ extension GCDWebServerDataResponse {
         response.setValue("*", forAdditionalHeader: "Access-Control-Allow-Origin")
         response.setValue("GET, POST, PUT, HEAD, OPTIONS", forAdditionalHeader: "Access-Control-Allow-Methods")
         response.setValue("Content-Type", forAdditionalHeader: "Access-Control-Allow-Headers")
+        response.setValue("true", forAdditionalHeader: "Access-Control-Allow-Credentials")
         return response
     }
 }

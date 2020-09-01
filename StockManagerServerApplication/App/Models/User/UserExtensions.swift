@@ -71,6 +71,13 @@ extension User {
             }
         }
         
+        // if the dictionary contains a `userRole` value, add it to the User object
+        if let userRole = object["userRole"] as? UserRole {
+            user.userRole = userRole
+        } else if let userRole = object["userRole"] as? String {
+            user.userRole = User.UserRole(rawValue: userRole) ?? .user
+        }
+        
         // return the filled User object
         return user
     }
@@ -117,6 +124,9 @@ extension User {
         if let lastLoginDate = self.lastLoginDate {
             result["lastLoginDate"] = lastLoginDate
         }
+        
+        // add userRole of this User
+        result["userRole"] = self.userRole
         
         // return filled dictionary
         return result
@@ -165,8 +175,17 @@ extension User {
             result["lastLoginDate"] = "<FIRTimestamp: seconds=\(lastLoginDate.seconds) nanoseconds=\(lastLoginDate.nanoseconds)>"
         }
         
+        // add userRole of this User
+        result["userRole"] = self.userRole.rawValue
+        
         // return filled dictionary
         return result
+    }
+    
+    enum UserRole: String, Codable {
+        case user = "User"
+        case admin = "Admin"
+        case developer = "Developer"
     }
 }
 
