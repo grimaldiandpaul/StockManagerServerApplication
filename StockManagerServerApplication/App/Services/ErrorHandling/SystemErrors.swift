@@ -19,7 +19,7 @@ extension StockManagerError {
     class SystemErrors {
         
         
-        
+        static let all: [StockManagerError] = []
     }
     
     

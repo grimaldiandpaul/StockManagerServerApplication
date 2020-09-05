@@ -154,7 +154,7 @@ extension TelegraphServer {
             
             // wait for all Firebase operations to finish
             while (!finishedAddingItems) {
-                sleep(1)
+                usleep(1000)
             }
             
             return HTTPResponse(content: finalString).addHeaders()

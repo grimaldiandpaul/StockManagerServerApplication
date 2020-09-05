@@ -18,18 +18,18 @@ extension StockManagerError {
     class APIErrors {
         
         static let missingData = StockManagerError(title: "Missing Data",
-        message: "Please include item details inside of parameters or body.",
-        code: 1301)
+                                                   message: "Please include all details inside of parameters or body.",
+                                                   code: 1301)
         
         static let missingStoreID = StockManagerError(title: "Missing Store ID",
-        message: "Please include storeID field in headers.",
-        code: 1302)
+                                                      message: "Please include storeID field in headers.",
+                                                      code: 1302)
         
         static let castingError = StockManagerError(title: "Internal Error",
-        message: "Error casting your HTTPRequest to a readable format.",
-        code: 1303)
+                                                    message: "Error casting your HTTPRequest to a readable format.",
+                                                    code: 1303)
         
-        
+        static let all: [StockManagerError] = [missingData, missingStoreID, castingError]
     }
     
     

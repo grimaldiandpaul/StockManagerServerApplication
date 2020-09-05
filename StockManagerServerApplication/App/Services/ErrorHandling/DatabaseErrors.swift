@@ -37,12 +37,15 @@ extension StockManagerError {
                                                           message: "No item could be found with this search.",
                                                           code: 1105)
         
-        static let internalDatabaseSyncError = StockManagerError(title: "Internal Database Error",
-                                                          message: "Please try again later.",
+        static let noInvitationCodeResultsFound = StockManagerError(title: "No results found",
+                                                          message: "This invitation code could not be found.",
                                                           code: 1106)
         
+        static let internalDatabaseSyncError = StockManagerError(title: "Internal Database Error",
+                                                          message: "Please try again later.",
+                                                          code: 1107)
         
+        static let all: [StockManagerError] = [nonUniqueIdentifier, missingField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError]
     }
-    
     
 }

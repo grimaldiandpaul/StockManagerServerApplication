@@ -50,7 +50,7 @@ extension FirebaseWrapper {
             
             // wait for the asynchronous Firebase retrieval and creation
             while ( error == nil && !result ) {
-                sleep(1)
+                usleep(1000)
             }
             
             return (error,result)

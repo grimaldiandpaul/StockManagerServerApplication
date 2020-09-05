@@ -37,8 +37,16 @@ extension StockManagerError {
         
         static let missingCredentials = StockManagerError(title: "Missing Credentials",
                                                        message: "Please include credentials in the body of the request.",
-                                                       code: 1301)
+                                                       code: 1206)
+        
+        static let incompleteInvitationCode = StockManagerError(title: "Incomplete Invitation Code",
+                                                                message: "Please contact a company administrator.",
+                                                                code: 1207)
+        
+        static let accountAlreadyExists = StockManagerError(title: "Account already exists",
+                                                                message: "Please try logging in.",
+                                                                code: 1208)
 
-        static let all: [StockManagerError] = [connectionError, userNotFound]
+        static let all: [StockManagerError] = [connectionError, userNotFound, invalidCredentials, emptyEmail, emptyPassword, missingCredentials, incompleteInvitationCode, accountAlreadyExists]
     }
 }

@@ -38,7 +38,7 @@ extension StockManagerError {
         
         
         
-        static let all: [StockManagerError] = [illegalLocationType, illegalPackaging]
+        static let all: [StockManagerError] = [illegalLocationType, illegalPackaging, missingIdentifier]
     }
     
     

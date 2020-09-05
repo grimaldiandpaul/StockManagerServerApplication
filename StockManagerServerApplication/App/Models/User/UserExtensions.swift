@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Firebase
 
 /// An extension for our custom User object that handles encoding to and decoding from JSON
 extension User {
@@ -59,16 +58,9 @@ extension User {
             user.companyID = companyID
         }
         
-        // if the dictionary contains a `lastLoginDate` value in the form of a Timestamp, add it to the User object
-        if let lastLoginDate = object["lastLoginDate"] as? Timestamp? {
-            user.lastLoginDate = lastLoginDate?.seconds
-        }
-        // otherwise, if the dictionary contains a `lastLoginDate` value in the dataString format, convert and add it to the User object
-        else if let lastLoginDate = object["lastLoginDate"] as? String, lastLoginDate.contains("FIRTimestamp") {
-            let lastLoginDateFromString = Timestamp(dataString: lastLoginDate)
-            if lastLoginDateFromString.seconds != 0 {
-                user.lastLoginDate = lastLoginDateFromString.seconds
-            }
+        // if the dictionary contains a `lastLoginDate` value add it to the User object
+        if let lastLoginDate = object["lastLoginDate"] as? Int64? {
+            user.lastLoginDate = lastLoginDate
         }
         
         // if the dictionary contains a `userRole` value, add it to the User object
@@ -83,8 +75,6 @@ extension User {
     }
     
     /// a computed variable that returns the JSON object of a user
-    /// this version uses the Timestamp object as a string to be used
-    /// outside of Firebase services
     var json: [String:Any] {
         
         // initialize empty dictionary
@@ -98,6 +88,11 @@ extension User {
         // add firstName of this User if un-empty
         if self.firstName != "" {
             result["firstName"] = self.firstName
+        }
+        
+        // add email of this User if un-empty
+        if self.email != "" {
+            result["email"] = self.email
         }
         
         // add lastName of this User if un-empty

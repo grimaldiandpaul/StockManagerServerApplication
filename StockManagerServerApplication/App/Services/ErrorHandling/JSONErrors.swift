@@ -19,12 +19,12 @@ extension StockManagerError {
     class JSONErrors {
         
         static let serializationError = StockManagerError(title: "Unable to serialize JSON.",
-        code: 1501)
+                                                          code: 1501)
         
         static let castingError = StockManagerError(title: "Unable to cast object to JSON.",
-        code: 1501)
+                                                    code: 1502)
         
-        
+        static let all: [StockManagerError] = [serializationError, castingError]
         
     }
     

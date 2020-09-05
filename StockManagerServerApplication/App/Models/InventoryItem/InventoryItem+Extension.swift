@@ -5,6 +5,7 @@
 //  Created By Zachary Grimaldi and Joseph Paul on 5/23/20.
 //
 
+import Foundation
 import Firebase
 
 /// An extension for our custom InventoryItem object

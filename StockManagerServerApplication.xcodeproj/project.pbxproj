@@ -60,6 +60,7 @@
 		737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F0F3324EB477200F97043 /* UserExtensions.swift */; };
 		73BD304C24FEE4940079622E /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 73BD304B24FEE4940079622E /* CryptoSwift */; };
 		73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD304E24FEFEB10079622E /* StringExtensions.swift */; };
+		73BD3051250422370079622E /* FirebaseCreateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD3050250422370079622E /* FirebaseCreateUser.swift */; };
 		73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */; };
 		73D9648E24E34A9500B62A94 /* ServerRouteHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */; };
 		B010182862E7152300646DC0 /* libPods-StockManagerServerApplication.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */; };
@@ -121,6 +122,7 @@
 		7368C46824EA156F00A153EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		737F0F3324EB477200F97043 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		73BD304E24FEFEB10079622E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		73BD3050250422370079622E /* FirebaseCreateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateUser.swift; sourceTree = "<group>"; };
 		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
 		73D9648D24E34A9500B62A94 /* ServerRouteHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRouteHandlers.swift; sourceTree = "<group>"; };
 		8F12CD9C6E1439D0F8F326EA /* libPods-StockManagerServerApplication.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StockManagerServerApplication.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +410,7 @@
 				733B1CC724E1F4060034AE08 /* FirebaseWrapper.swift */,
 				124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */,
 				124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */,
+				73BD3050250422370079622E /* FirebaseCreateUser.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 			files = (
 				733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */,
 				12B4F8C024E2077F0073DB58 /* Accessibility.swift in Sources */,
+				73BD3051250422370079622E /* FirebaseCreateUser.swift in Sources */,
 				12B4F88D24E1E6B90073DB58 /* LoggingSweeper.swift in Sources */,
 				12283B6124EEDF34003C642B /* DatabaseErrors.swift in Sources */,
 				733B1CC824E1F4060034AE08 /* FirebaseWrapper.swift in Sources */,

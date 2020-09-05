@@ -63,22 +63,29 @@ class GCDServer {
         
         GCDServer.main.server.addHandler(forMethod: "POST", path: "/user/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
             
+            var ipAddress: String? = nil
+            if let ip = request.headers["X-Real-IP"] {
+                ipAddress = ip
+            } else if let ip = request.headers["X-Forwarded-For"] {
+                ipAddress = ip
+            }
+            
             if let temp = request as? GCDWebServerDataRequest {
                 let data = temp.data
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
                     if let dict = json as? [String:Any] {
                         if let email = dict["email"] as? String {
                             if let pass = dict["password"] as? String, pass.count > 0 {
-                                let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: pass)
+                                let userAuthenticationResult = FirebaseWrapper.authenticateUser(email: email, password: pass, ipAddress: ipAddress)
                                 
                                 // if the authentication process returned an error
-                                if let error = authenticationResult.error {
+                                if let error = userAuthenticationResult.error {
                                     return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
                                 } else {
                                     
                                     // if the user is successfully authenticated
-                                    if let authenticated = authenticationResult.successful,
-                                        authenticated, let user = authenticationResult.user {
+                                    if let authenticated = userAuthenticationResult.successful,
+                                        authenticated, let user = userAuthenticationResult.user {
                                         return GCDWebServerDataResponse(jsonObject: user)?.addHeaders()
                                     } else {
                                         return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.invalidCredentials.output)?.addHeaders()
@@ -111,7 +118,7 @@ class GCDServer {
         
         
         
-        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/user/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
             let response = GCDWebServerDataResponse(jsonObject: [:])
             if let response = response?.addHeaders() {
                 return response
@@ -122,62 +129,31 @@ class GCDServer {
 
         }
         
-        GCDServer.main.server.addHandler(forMethod: "POST", path: "/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/user/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            print(request)
+            
+            var ipAddress: String? = nil
+            if let ip = request.headers["X-Real-IP"] {
+                ipAddress = ip
+            } else if let ip = request.headers["X-Forwarded-For"] {
+                ipAddress = ip
+            }
             
             if let temp = request as? GCDWebServerDataRequest {
                 let data = temp.data
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
                     if let dict = json as? [String:Any] {
-                        if let email = dict["email"] as? String {
-                            if let pass = dict["password"] as? String, pass.count > 0 {
-                                if let fname = dict["firstName"] as? String {
-                                    if let lname = dict["LastName"] as? String {
-                                        if let invitationCode = dict["invitationCode"] as? String {
-                                            
-                                    
-                                    
-                                    
-                                    
-                                        } else {
-                                            
-                                        }
-                                    } else {
-                                        
-                                    }
-                                } else {
-                                    
-                                }
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: pass)
-                                
-                                // if the authentication process returned an error
-                                if let error = authenticationResult.error {
-                                    return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
-                                } else {
-                                    
-                                    // if the user is successfully authenticated
-                                    if let authenticated = authenticationResult.successful,
-                                        authenticated, let user = authenticationResult.user {
-                                        return GCDWebServerDataResponse(jsonObject: user)?.addHeaders()
-                                    } else {
-                                        return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.invalidCredentials.output)?.addHeaders()
-                                    }
-                                }
-                            } else {
-                                return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.missingCredentials.output)?.addHeaders()
-                            }
+                        let userCreationResult = FirebaseWrapper.CreateUser(userInformation: dict, ipAddress: ipAddress)
+                        if let error = userCreationResult.error {
+                            return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
                         } else {
-                            return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.missingCredentials.output)?.addHeaders()
+                            // if the user is successfully created
+                            if let created = userCreationResult.successful,
+                                created, let user = userCreationResult.user {
+                                return GCDWebServerDataResponse(jsonObject: user)?.addHeaders()
+                            } else {
+                                return GCDWebServerErrorResponse(text: StockManagerError.unreachableError.output)?.addHeaders()
+                            }
                         }
                     } else {
                         return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
@@ -189,6 +165,17 @@ class GCDServer {
                 return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
             }
         }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
         
         
         
@@ -219,6 +206,7 @@ extension GCDWebServerDataResponse {
         response.setValue("GET, POST, PUT, HEAD, OPTIONS", forAdditionalHeader: "Access-Control-Allow-Methods")
         response.setValue("Content-Type", forAdditionalHeader: "Access-Control-Allow-Headers")
         response.setValue("true", forAdditionalHeader: "Access-Control-Allow-Credentials")
+        print("📣 \(response)")
         return response
     }
 }

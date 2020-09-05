@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if let err = err {
                 LoggingManager.log(err.localizedDescription)
             }
+            print("🟣 \(Auth.auth().currentUser?.email)")
         }
 
         // Create the window
