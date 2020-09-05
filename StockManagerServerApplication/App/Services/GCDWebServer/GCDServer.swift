@@ -50,31 +50,7 @@ class GCDServer {
             return response
         }
         
-        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/test-authenticate", request: GCDWebServerDataRequest.self) { request -> GCDWebServerDataResponse? in
-            let response = GCDWebServerDataResponse(jsonObject: [:])
-            if let response = response?.addHeaders() {
-                return response
-            } else {
-                print("Error adding headers")
-            }
-            return response
-            
-        }
-        
-        GCDServer.main.server.addHandler(forMethod: "POST", path: "/test-authenticate", request: GCDWebServerDataRequest.self) { request -> GCDWebServerDataResponse? in
-            let user = User(userID: "26aIVUDhylb1Ht01vXWC", firstName: "Joseph", lastName: "Paul", email: "josephpaul3820@gmail.com", storeID: "Test Store 1", companyID: "TestCom3", lastLoginDate: Timestamp(date: Date()).seconds, ipAddresses: ["192.168.0.253"], userRole: .admin)
-            let json = user.json
-            let response = GCDWebServerDataResponse(jsonObject: json)
-            if let response = response?.addHeaders() {
-                return response
-            } else {
-                print("Error adding headers")
-            }
-            return response
-            
-        }
-        
-        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/user/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
             let response = GCDWebServerDataResponse(jsonObject: [:])
             if let response = response?.addHeaders() {
                 return response
@@ -85,7 +61,7 @@ class GCDServer {
 
         }
         
-        GCDServer.main.server.addHandler(forMethod: "POST", path: "/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/user/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
             
             if let temp = request as? GCDWebServerDataRequest {
                 let data = temp.data
@@ -157,13 +133,19 @@ class GCDServer {
                                 if let fname = dict["firstName"] as? String {
                                     if let lname = dict["LastName"] as? String {
                                         if let invitationCode = dict["invitationCode"] as? String {
-                                        
+                                            
                                     
                                     
                                     
                                     
+                                        } else {
+                                            
                                         }
+                                    } else {
+                                        
                                     }
+                                } else {
+                                    
                                 }
                                 
                                 

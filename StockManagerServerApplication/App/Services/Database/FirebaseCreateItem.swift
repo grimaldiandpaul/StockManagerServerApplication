@@ -32,7 +32,7 @@ extension FirebaseWrapper {
                 
                 // if the document doesn't exist, create it below
                 if let documentSnapshot = documentSnapshot, !documentSnapshot.exists {
-                    let json = item.firebasejson
+                    let json = item.json
                     
                     // set the data in the Firebase Cloud Firestore document
                     FirebaseWrapper.itemReference(item.id, storeID: storeID).setData(json) { (err) in

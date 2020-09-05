@@ -37,7 +37,7 @@ class FirebaseWrapper {
             .document(itemUUIDString)
     }
     
-    /// a re-usable function for the singleton that returns the database reference for an item given a store
+    /// a re-usable function for the singleton that returns the database reference for a user given a `userID`
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for a `User` given the user's unique identifier.
     /// - Parameter userUUIDString: the unique identifier for the user
     /// - Returns: A `DocumentReference` to the `User`.
@@ -49,9 +49,25 @@ class FirebaseWrapper {
             
     }
     
+    /// a re-usable function for the singleton that returns the query for a user given an email
+    /// This function is a re-usable function for the singleton that returns the `Query` for `User`s given the user's email.
+    /// - Parameter email: the email for the user
+    /// - Returns: A `Query` to the `User` documents.
+    ///
     class func authenticateUserReference(_ email: String) -> Query {
         return FirebaseWrapper.root
         .collection("UserList")
         .whereField("email", isEqualTo: email)
+    }
+    
+    /// a re-usable function for the singleton that returns the query for an Invitation Code
+    /// This function is a re-usable function for the singleton that returns the `Query` for an invitation code specified by the end user.
+    /// - Parameter invitationCode: the user's invitation code
+    /// - Returns: A `Query` to the invitation code documents.
+    ///
+    class func invitationCodeReference(_ invitationCode: String) -> Query {
+        return FirebaseWrapper.root
+        .collection("InvitationCodes")
+        .whereField("code", isEqualTo: invitationCode)
     }
 }

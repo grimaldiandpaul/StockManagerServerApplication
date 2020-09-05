@@ -105,4 +105,57 @@ extension InventoryItem {
         return item
     }
     
+    /// a computed variable that returns the JSON object of an item
+    /// this version uses the Timestamp object as a string to be used
+    /// outside of Firebase services
+    var json: [String:Any] {
+        // initialize an empty dictionary object to fill out
+        var result = [String:Any]()
+        
+        // if the InventoryItem object contains an un-empty `id` field,
+        // add it to the dictionary object being returned
+        if self.id != "" {
+            result["id"] = self.id
+        }
+        
+        // if the InventoryItem object contains an un-empty `userDesignatedID` field,
+        // add it to the dictionary object being returned
+        if self.userDesignatedID != "" {
+            result["userDesignatedID"] = self.userDesignatedID
+        }
+        
+        // if the InventoryItem object contains an un-empty `name` field,
+        // add it to the dictionary object being returned
+        if self.name != "" {
+            result["name"] = self.name
+        }
+        
+        // if the InventoryItem object contains an un-empty `locations` field,
+        // add it to the dictionary object being returned
+        if !self.locations.isEmpty {
+            result["locations"] = self.locations.map({$0.json})
+        }
+        
+        // if the InventoryItem object contains an un-empty `dateLastPurchased` field,
+        // add it to the dictionary object being returned
+        if let dateLastPurchased = self.dateLastPurchased {
+            result["dateLastPurchased"] = dateLastPurchased
+        }
+        
+        // if the InventoryItem object contains an un-empty `customerAccessibleQuantity` field,
+        // add it to the dictionary object being returned
+        if let customerAccessibleQuantity = self.customerAccessibleQuantity {
+            result["customerAccessibleQuantity"] = customerAccessibleQuantity
+        }
+        
+        // if the InventoryItem object contains an un-empty `backstockQuantity` field,
+        // add it to the dictionary object being returned
+        if let backstockQuantity = self.backstockQuantity {
+            result["backstockQuantity"] = backstockQuantity
+        }
+        
+        // return the filled dictionary object
+        return result
+    }
+    
 }

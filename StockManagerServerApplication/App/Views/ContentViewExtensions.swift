@@ -22,7 +22,7 @@ extension ContentView {
         let location = Location(aisle: "1", aisleSection: "A")
         let location2 = Location(aisle: "2", aisleSection: "B")
         let location3 = Location(aisle: "8", aisleSection: "C", spot: "21", description: "This is in a spot")
-        let testItem = InventoryItem(userDesignatedID: "123456", name: "Test Item", locations: [location, location2, location3], dateLastPurchased: Timestamp(date: Date()), customerAccessibleQuantity: 0, backstockQuantity: 0)
+        let testItem = InventoryItem(userDesignatedID: "123456", name: "Test Item", locations: [location, location2, location3], dateLastPurchased: Timestamp(date: Date()).seconds, customerAccessibleQuantity: 0, backstockQuantity: 0)
         let parameters = testItem.json
         LoggingManager.log(parameters.debugDescription, source: .routing, type: .error)
 //        if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
