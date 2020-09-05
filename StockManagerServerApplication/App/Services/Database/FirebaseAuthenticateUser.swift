@@ -19,23 +19,64 @@ extension FirebaseWrapper {
         
         var error: StockManagerError? = nil
         var authenticationResult: Bool? = nil
-        var user: Data? = nil
+        var user: [String:Any]? = nil
         
         #warning("this will need fixed on mac mini")
         let file = "/Users/joepauljoe/Downloads/keyandiv.txt"
         let path = URL(fileURLWithPath: file)
         if var iv = try? String(contentsOf: path){
-            var key = String(iv.prefix(while: {$0 != "\n"}))
+            let key = String(iv.prefix(while: {$0 != "\n"}))
             while iv.contains("\n"){
                 iv = String(iv.dropFirst())
             }
             print(key)
             print(iv)
-            let encrypted = try! password.encrypt(key: key, iv: iv)
-            print(encrypted)
-            let decrypted = try! encrypted.decrypt(key: key, iv: iv)
+            if let encrypted = try? password.encrypt(key: key, iv: iv){
             
-            print(decrypted)
+                FirebaseWrapper.authenticateUserReference(email).getDocuments { (snapshot, snapshotErr) in
+                    if let _ = snapshotErr {
+                        authenticationResult = false
+                        error = StockManagerError.DatabaseErrors.connectionError
+                    } else if let docs = snapshot?.documents {
+                        
+                        if docs.count == 1, let doc = docs.first {
+                            let data = doc.data()
+                            if let pk = data["pk"] as? String {
+                                if pk == encrypted {
+                                    user = User.from(data).json
+                                    authenticationResult = true
+                                } else {
+                                    authenticationResult = false
+                                    error = StockManagerError.AuthenticationErrors.invalidCredentials
+                                }
+                            } else {
+                                authenticationResult = false
+                                error = StockManagerError.AuthenticationErrors.missingCredentials
+                            }
+                            
+                        } else if docs.count == 0 {
+                            authenticationResult = false
+                            error = StockManagerError.DatabaseErrors.noUserResultsFound
+                        } else if docs.count != 1 {
+                            authenticationResult = false
+                            error = StockManagerError.DatabaseErrors.internalDatabaseSyncError
+                        } else {
+                            authenticationResult = false
+                            error = StockManagerError.unreachableError
+                        }
+                    } else {
+                        authenticationResult = false
+                        error = StockManagerError.DatabaseErrors.connectionError
+                    }
+                }
+            } else {
+                authenticationResult = false
+                error = StockManagerError.IOErrors.encryptionError
+            }
+        
+        } else {
+            authenticationResult = false
+            error = StockManagerError.IOErrors.retrievalError
         }
         
         return (error, authenticationResult, user)

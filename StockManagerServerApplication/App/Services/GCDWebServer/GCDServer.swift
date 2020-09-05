@@ -62,7 +62,7 @@ class GCDServer {
         }
         
         GCDServer.main.server.addHandler(forMethod: "POST", path: "/test-authenticate", request: GCDWebServerDataRequest.self) { request -> GCDWebServerDataResponse? in
-            let user = User(userID: "26aIVUDhylb1Ht01vXWC", firstName: "Joseph", lastName: "Paul", email: "josephpaul3820@gmail.com", storeID: "Test Store 1", companyID: "TestCom3", lastLoginDate: Timestamp(date: Date()), ipAddresses: ["192.168.0.253"], userRole: .admin)
+            let user = User(userID: "26aIVUDhylb1Ht01vXWC", firstName: "Joseph", lastName: "Paul", email: "josephpaul3820@gmail.com", storeID: "Test Store 1", companyID: "TestCom3", lastLoginDate: Timestamp(date: Date()).seconds, ipAddresses: ["192.168.0.253"], userRole: .admin)
             let json = user.json
             let response = GCDWebServerDataResponse(jsonObject: json)
             if let response = response?.addHeaders() {

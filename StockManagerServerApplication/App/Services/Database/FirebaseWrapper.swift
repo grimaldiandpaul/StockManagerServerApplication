@@ -22,7 +22,7 @@ class FirebaseWrapper {
     typealias FirebaseWrapperVoidResult = (error: StockManagerError?, successful: Bool)
     
     /// a type-alias for the return object of a FirebaseWrapper Authentication function
-    typealias FirebaseWrapperAuthenticationResult = (error: StockManagerError?, successful: Bool?, user: Data?)
+    typealias FirebaseWrapperAuthenticationResult = (error: StockManagerError?, successful: Bool?, user: [String:Any]?)
     
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter itemUUIDString: the unique identifier for the item
@@ -47,5 +47,11 @@ class FirebaseWrapper {
             .collection("UserList")
             .document(userUUIDString)
             
+    }
+    
+    class func authenticateUserReference(_ email: String) -> Query {
+        return FirebaseWrapper.root
+        .collection("UserList")
+        .whereField("email", isEqualTo: email)
     }
 }

@@ -61,13 +61,13 @@ extension User {
         
         // if the dictionary contains a `lastLoginDate` value in the form of a Timestamp, add it to the User object
         if let lastLoginDate = object["lastLoginDate"] as? Timestamp? {
-            user.lastLoginDate = lastLoginDate
+            user.lastLoginDate = lastLoginDate?.seconds
         }
         // otherwise, if the dictionary contains a `lastLoginDate` value in the dataString format, convert and add it to the User object
         else if let lastLoginDate = object["lastLoginDate"] as? String, lastLoginDate.contains("FIRTimestamp") {
             let lastLoginDateFromString = Timestamp(dataString: lastLoginDate)
             if lastLoginDateFromString.seconds != 0 {
-                user.lastLoginDate = lastLoginDateFromString
+                user.lastLoginDate = lastLoginDateFromString.seconds
             }
         }
         
@@ -80,56 +80,6 @@ extension User {
         
         // return the filled User object
         return user
-    }
-    
-    /// a computed variable that returns the JSON object for a User
-    /// this version uses the Timestamp object to be compatible
-    /// with Firebase services
-    var firebasejson: [String:Any] {
-        
-        // initialize empty dictionary
-        var result = [String:Any]()
-        
-        // add userID of this User if un-empty
-        if self.userID != "" {
-            result["userID"] = self.userID
-        }
-        
-        // add firstName of this User if un-empty
-        if self.firstName != "" {
-            result["firstName"] = self.firstName
-        }
-        
-        // add lastName of this User if un-empty
-        if self.lastName != "" {
-            result["lastName"] = self.lastName
-        }
-        
-        // add storeID of this User if un-empty
-        if self.storeID != "" {
-            result["storeID"] = self.storeID
-        }
-        
-        // add companyID of this User if un-empty
-        if self.companyID != "" {
-            result["companyID"] = self.companyID
-        }
-        
-        // add ipAddresses of this User if un-empty
-        if !self.ipAddresses.isEmpty {
-            result["ipAddresses"] = self.ipAddresses
-        }
-        
-        // add lastLoginDate of this User if un-empty
-        if let lastLoginDate = self.lastLoginDate {
-            result["lastLoginDate"] = lastLoginDate
-        }
-        
-        // add userRole of this User
-        result["userRole"] = self.userRole
-        
-        // return filled dictionary
-        return result
     }
     
     /// a computed variable that returns the JSON object of a user
@@ -171,8 +121,8 @@ extension User {
         }
         
         // add userID of this User if un-empty
-        if let lastLoginDate = self.lastLoginDate {
-            result["lastLoginDate"] = "<FIRTimestamp: seconds=\(lastLoginDate.seconds) nanoseconds=\(lastLoginDate.nanoseconds)>"
+        if self.lastLoginDate != nil {
+            result["lastLoginDate"] = self.lastLoginDate
         }
         
         // add userRole of this User

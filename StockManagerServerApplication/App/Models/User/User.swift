@@ -33,7 +33,7 @@ struct User {
     var companyID: String
     
     /// the date of the last login to any Stock Manager service
-    var lastLoginDate: Timestamp?
+    var lastLoginDate: Int64?
     
     /// all IP addresses that are used to access this user account (ever)
     var ipAddresses: [String]
@@ -42,7 +42,7 @@ struct User {
     var userRole: UserRole
     
     /// a constructor in which all parameters default to optional, and thus, none are required to initialize a User object
-    init(userID: String = "", firstName: String = "", lastName: String = "", email: String = "", storeID: String = "", companyID: String = "", lastLoginDate: Timestamp? = nil, ipAddresses: [String] = [], userRole: UserRole = .user){
+    init(userID: String = "", firstName: String = "", lastName: String = "", email: String = "", storeID: String = "", companyID: String = "", lastLoginDate: Int64? = nil, ipAddresses: [String] = [], userRole: UserRole = .user){
         self.userID = userID
         self.firstName = firstName
         self.lastName = lastName
