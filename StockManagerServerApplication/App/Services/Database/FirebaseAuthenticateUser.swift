@@ -35,50 +35,68 @@ extension FirebaseWrapper {
             
                 FirebaseWrapper.authenticateUserReference(email).getDocuments { (snapshot, snapshotErr) in
                     if let _ = snapshotErr {
+                        print("Got here 1")
                         authenticationResult = false
                         error = StockManagerError.DatabaseErrors.connectionError
                     } else if let docs = snapshot?.documents {
                         
+                        print("Got here 2")
                         if docs.count == 1, let doc = docs.first {
+                            print("Got here 3")
                             let data = doc.data()
                             if let pk = data["pk"] as? String {
+                                print("Got here 4")
                                 if pk == encrypted {
+                                    print("Got here 5")
                                     user = User.from(data).json
                                     authenticationResult = true
                                 } else {
+                                    print("Got here 6")
+                                    print(pk)
+                                    print(encrypted)
                                     authenticationResult = false
                                     error = StockManagerError.AuthenticationErrors.invalidCredentials
                                 }
                             } else {
+                                print("Got here 7")
                                 authenticationResult = false
                                 error = StockManagerError.AuthenticationErrors.missingCredentials
                             }
                             
                         } else if docs.count == 0 {
+                            print("Got here 8")
                             authenticationResult = false
                             error = StockManagerError.DatabaseErrors.noUserResultsFound
                         } else if docs.count != 1 {
+                            print("Got here 9")
                             authenticationResult = false
                             error = StockManagerError.DatabaseErrors.internalDatabaseSyncError
                         } else {
+                            print("Got here 10")
                             authenticationResult = false
                             error = StockManagerError.unreachableError
                         }
                     } else {
+                        print("Got here 11")
                         authenticationResult = false
                         error = StockManagerError.DatabaseErrors.connectionError
                     }
                 }
             } else {
+                print("Got here 12")
                 authenticationResult = false
                 error = StockManagerError.IOErrors.encryptionError
             }
         
         } else {
+            print("Got here 13")
             authenticationResult = false
             error = StockManagerError.IOErrors.retrievalError
         }
         
+        while( authenticationResult == nil ){
+            sleep(1)
+        }
         return (error, authenticationResult, user)
     }
     

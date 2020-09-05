@@ -26,19 +26,19 @@ extension StockManagerError {
                                                         code: 1102)
         
         static let missingField = StockManagerError(title: "Missing required field",
-                                                           message: "Please include either the storeID or storeIDs field",
+                                                           message: "Please include either the storeID or storeIDs field.",
                                                            code: 1103)
         
         static let noUserResultsFound = StockManagerError(title: "No results found",
-                                                          message: "No user could be found with this email",
+                                                          message: "No user could be found with this email.",
                                                           code: 1104)
         
         static let noItemResultsFound = StockManagerError(title: "No results found",
-                                                          message: "No item could be found with this search",
+                                                          message: "No item could be found with this search.",
                                                           code: 1105)
         
         static let internalDatabaseSyncError = StockManagerError(title: "Internal Database Error",
-                                                          message: "Please try again later",
+                                                          message: "Please try again later.",
                                                           code: 1106)
         
         

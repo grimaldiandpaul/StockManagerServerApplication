@@ -29,55 +29,6 @@ extension TelegraphServer {
         return HTTPResponse(content: "Here is the API reference:").addHeaders()
     }
     
-    /// handler function for the "authenticate" slug
-    /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint
-    /// - Returns: The HTTPResponse for this request
-    func serverHandleAuthenticate(request: HTTPRequest) throws -> HTTPResponse {
-        print(request)
-
-        // if there is data in the body of the request
-        if request.body.count > 0 {
-            
-            // try to serialize the body
-            let body = try JSONSerialization.jsonObject(with: request.body, options: .allowFragments)
-            
-            // if the body can be serialized to a [String:Any] object
-            if let body = body as? [String:Any] {
-                
-                // if the body contains the "email" field
-                if let email = body["email"] as? String {
-                    
-                    // if the body contains the "password" field
-                    if let password = body["password"] as? String {
-                        let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: password)
-                        
-                        // if the authentication process returned an error
-                        if let error = authenticationResult.error {
-                            return HTTPResponse(content: error.output).addHeaders()
-                        } else {
-                            
-                            // if the user is successfully authenticated
-                            if let authenticated = authenticationResult.successful,
-                                authenticated, let user = authenticationResult.user {
-                                    return HTTPResponse(body: user).addHeaders()
-                            } else {
-                                return HTTPResponse(content: StockManagerError.AuthenticationErrors.invalidCredentials.output).addHeaders()
-                            }
-                        }
-                    } else {
-                        return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyPassword.output).addHeaders()
-                    }
-                } else {
-                    return HTTPResponse(content: StockManagerError.AuthenticationErrors.emptyEmail.output).addHeaders()
-                }
-            } else {
-                return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output).addHeaders()
-            }
-        } else {
-            return HTTPResponse(content: StockManagerError.AuthenticationErrors.missingCredentials.output).addHeaders()
-        }
-    }
-    
     
     /// handler function for the "create" slug
     /// - Parameter HTTPRequest: the request that is hitting this handler's endpoint

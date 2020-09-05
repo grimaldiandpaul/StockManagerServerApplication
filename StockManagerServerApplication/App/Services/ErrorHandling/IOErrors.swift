@@ -18,11 +18,11 @@ extension StockManagerError {
     class IOErrors {
         
         static let encryptionError = StockManagerError(title: "Encryption Error",
-        message: "Error encrypting password for storage",
+        message: "Error encrypting password for storage.",
         code: 1401)
         
         static let retrievalError = StockManagerError(title: "Retrieval Error",
-        message: "Error retrieving file",
+        message: "Error retrieving file.",
         code: 1402)
         
     }

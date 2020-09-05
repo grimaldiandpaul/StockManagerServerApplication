@@ -27,7 +27,6 @@ class TelegraphServer {
         TelegraphServer.main.server.route(.GET, "test", serverHandleTest(TelegraphServer.main))
         TelegraphServer.main.server.route(.GET, "/", serverHandleRefPage(TelegraphServer.main))
         TelegraphServer.main.server.route(.POST, "create", serverHandleCreateItem(TelegraphServer.main))
-        TelegraphServer.main.server.route(.POST, "authenticate", serverHandleAuthenticate(TelegraphServer.main))
 //        server.route(.GET, "secret/*") { .forbidden }
 //        server.route(.GET, "status") { (.ok, "Server is running") }
 //        server.route(.POST, "data", serverHandleData)

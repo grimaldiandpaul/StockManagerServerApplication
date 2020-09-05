@@ -92,7 +92,7 @@ class GCDServer {
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
                     if let dict = json as? [String:Any] {
                         if let email = dict["email"] as? String {
-                            if let pass = dict["password"] as? String {
+                            if let pass = dict["password"] as? String, pass.count > 0 {
                                 let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: pass)
                                 
                                 // if the authentication process returned an error
@@ -102,34 +102,131 @@ class GCDServer {
                                     
                                     // if the user is successfully authenticated
                                     if let authenticated = authenticationResult.successful,
-                                        authenticated, let user = authenticationResult.user, let json = user.json {
-                                        return GCDWebServerDataResponse(jsonObject: json)?.addHeaders()
+                                        authenticated, let user = authenticationResult.user {
+                                        return GCDWebServerDataResponse(jsonObject: user)?.addHeaders()
                                     } else {
                                         return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.invalidCredentials.output)?.addHeaders()
                                     }
                                 }
                             } else {
-                                
+                                return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.missingCredentials.output)?.addHeaders()
                             }
                         } else {
-                            
+                            return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.missingCredentials.output)?.addHeaders()
                         }
                     } else {
-                        
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
                     }
                 } else {
-                    
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
                 }
             } else {
-                
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
             }
-            return GCDWebServerErrorResponse(text: "Hopefully we don't see this")?.addHeaders()
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            let response = GCDWebServerDataResponse(jsonObject: [:])
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+
+        }
+        
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            
+            if let temp = request as? GCDWebServerDataRequest {
+                let data = temp.data
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
+                    if let dict = json as? [String:Any] {
+                        if let email = dict["email"] as? String {
+                            if let pass = dict["password"] as? String, pass.count > 0 {
+                                if let fname = dict["firstName"] as? String {
+                                    if let lname = dict["LastName"] as? String {
+                                        if let invitationCode = dict["invitationCode"] as? String {
+                                        
+                                    
+                                    
+                                    
+                                    
+                                        }
+                                    }
+                                }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                let authenticationResult = FirebaseWrapper.authenticateUser(email: email, password: pass)
+                                
+                                // if the authentication process returned an error
+                                if let error = authenticationResult.error {
+                                    return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
+                                } else {
+                                    
+                                    // if the user is successfully authenticated
+                                    if let authenticated = authenticationResult.successful,
+                                        authenticated, let user = authenticationResult.user {
+                                        return GCDWebServerDataResponse(jsonObject: user)?.addHeaders()
+                                    } else {
+                                        return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.invalidCredentials.output)?.addHeaders()
+                                    }
+                                }
+                            } else {
+                                return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.missingCredentials.output)?.addHeaders()
+                            }
+                        } else {
+                            return GCDWebServerErrorResponse(text: StockManagerError.AuthenticationErrors.missingCredentials.output)?.addHeaders()
+                        }
+                    } else {
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
+                    }
+                } else {
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
+                }
+            } else {
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
             
         GCDServer.main.server.start(withPort: 9000, bonjourName: "GCD Web Server")
         
-        LoggingManager.log("Visit \(GCDServer.main.server.serverURL) in your web browser")
+        if let serverURL = GCDServer.main.server.serverURL {
+            LoggingManager.log("Visit \(serverURL) in your web browser")
+        }
     }
 }
 

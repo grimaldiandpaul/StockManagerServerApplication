@@ -23,6 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Start required services
         FirebaseApp.configure()
         GCDServer.startup()
+        let _ = try? Auth.auth().signOut()
+        Auth.auth().signIn(withEmail: "josephpaul3820@gmail.com", password: "Testpassword1!") { (result, err) in
+            if let err = err {
+                LoggingManager.log(err.localizedDescription)
+            }
+        }
 
         // Create the window
         window = NSWindow(

@@ -22,17 +22,17 @@ extension StockManagerError {
                                                     message: "An internal error occurred connecting to authentication service. Please try again later.",
                                                     code: 1201)
         
-        static let userNotFound = StockManagerError(title: "User could not be found",
+        static let userNotFound = StockManagerError(title: "User could not be found.",
                                                  code: 1202)
         
         static let invalidCredentials = StockManagerError(title: "Invalid Credentials",
                                                        message: "Email and password do not match our records.",
                                                        code: 1203)
         
-        static let emptyEmail = StockManagerError(title: "No email provided",
+        static let emptyEmail = StockManagerError(title: "No email provided.",
                                                code: 1204)
         
-        static let emptyPassword = StockManagerError(title: "No password provided",
+        static let emptyPassword = StockManagerError(title: "No password provided.",
                                                   code: 1205)
         
         static let missingCredentials = StockManagerError(title: "Missing Credentials",

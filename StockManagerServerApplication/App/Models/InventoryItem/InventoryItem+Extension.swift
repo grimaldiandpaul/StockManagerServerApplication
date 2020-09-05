@@ -74,11 +74,11 @@ extension InventoryItem {
         
         // if the object contains a `dateLastPurchased` field, add it to the InventoryItem
         // it may be a Timestamp object or a Timestamp dataString depending on the source of the JSON object
-        if let dateLastPurchased = object["dateLastPurchased"] as? Timestamp? {
+        if let dateLastPurchased = object["dateLastPurchased"] as? Int64? {
             item.dateLastPurchased = dateLastPurchased
         } else if let dateLastPurchased = object["dateLastPurchased"] as? String, dateLastPurchased.contains("FIRTimestamp") {
-            let dateLastPurchasedFromString = Timestamp(dataString: dateLastPurchased)
-            if dateLastPurchasedFromString.seconds != 0 {
+            let dateLastPurchasedFromString = Timestamp(dataString: dateLastPurchased).seconds
+            if dateLastPurchasedFromString != 0 {
                 item.dateLastPurchased = dateLastPurchasedFromString
             }
         }
@@ -105,110 +105,4 @@ extension InventoryItem {
         return item
     }
     
-    /// a computed variable that returns the JSON object for an item
-    /// this version uses the Timestamp object to be compatible
-    /// with Firebase services
-    var firebasejson: [String:Any] {
-        
-        // initialize an empty dictionary object to fill out
-        var result = [String:Any]()
-        
-        // if the InventoryItem object contains an un-empty `id` field,
-        // add it to the dictionary object being returned
-        if self.id != "" {
-            result["id"] = self.id
-        }
-        
-        // if the InventoryItem object contains an un-empty `userDesignatedID` field,
-        // add it to the dictionary object being returned
-        if self.userDesignatedID != "" {
-            result["userDesignatedID"] = self.userDesignatedID
-        }
-        
-        // if the InventoryItem object contains an un-empty `name` field,
-        // add it to the dictionary object being returned
-        if self.name != "" {
-            result["name"] = self.name
-        }
-        
-        // if the InventoryItem object contains an un-empty `locations` field,
-        // add it to the dictionary object being returned
-        if !self.locations.isEmpty {
-            result["locations"] = self.locations.map({$0.json})
-        }
-        
-        // if the InventoryItem object contains an un-empty `dateLastPurchased` field,
-        // add it to the dictionary object being returned
-        if let dateLastPurchased = self.dateLastPurchased {
-            result["dateLastPurchased"] = dateLastPurchased
-        }
-        
-        // if the InventoryItem object contains an un-empty `customerAccessibleQuantity` field,
-        // add it to the dictionary object being returned
-        if let customerAccessibleQuantity = self.customerAccessibleQuantity {
-            result["customerAccessibleQuantity"] = customerAccessibleQuantity
-        }
-        
-        // if the InventoryItem object contains an un-empty `backstockQuantity` field,
-        // add it to the dictionary object being returned
-        if let backstockQuantity = self.backstockQuantity {
-            result["backstockQuantity"] = backstockQuantity
-        }
-        
-        // return the filled dictionary object
-        return result
-    }
-    
-    /// a computed variable that returns the JSON object of an item
-    /// this version uses the Timestamp object as a string to be used
-    /// outside of Firebase services
-    var json: [String:Any] {
-        // initialize an empty dictionary object to fill out
-        var result = [String:Any]()
-        
-        // if the InventoryItem object contains an un-empty `id` field,
-        // add it to the dictionary object being returned
-        if self.id != "" {
-            result["id"] = self.id
-        }
-        
-        // if the InventoryItem object contains an un-empty `userDesignatedID` field,
-        // add it to the dictionary object being returned
-        if self.userDesignatedID != "" {
-            result["userDesignatedID"] = self.userDesignatedID
-        }
-        
-        // if the InventoryItem object contains an un-empty `name` field,
-        // add it to the dictionary object being returned
-        if self.name != "" {
-            result["name"] = self.name
-        }
-        
-        // if the InventoryItem object contains an un-empty `locations` field,
-        // add it to the dictionary object being returned
-        if !self.locations.isEmpty {
-            result["locations"] = self.locations.map({$0.json})
-        }
-        
-        // if the InventoryItem object contains an un-empty `dateLastPurchased` field,
-        // add it to the dictionary object being returned in the Timestamp dataString format
-        if let dateLastPurchased = self.dateLastPurchased {
-            result["dateLastPurchased"] = "<FIRTimestamp: seconds=\(dateLastPurchased.seconds) nanoseconds=\(dateLastPurchased.nanoseconds)>"
-        }
-        
-        // if the InventoryItem object contains an un-empty `customerAccessibleQuantity` field,
-        // add it to the dictionary object being returned
-        if let customerAccessibleQuantity = self.customerAccessibleQuantity {
-            result["customerAccessibleQuantity"] = customerAccessibleQuantity
-        }
-        
-        // if the InventoryItem object contains an un-empty `backstockQuantity` field,
-        // add it to the dictionary object being returned
-        if let backstockQuantity = self.backstockQuantity {
-            result["backstockQuantity"] = backstockQuantity
-        }
-        
-        // return the filled dictionary object
-        return result
-    }
 }

@@ -42,11 +42,11 @@ struct InventoryItem: Identifiable {
     
     /// The date that this item was last purchased from a register at this location. (Independent of any store returns)
     /// Type: [`Timestamp`](https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/Timestamp.html?is-external=true)
-    var dateLastPurchased: Timestamp?
+    var dateLastPurchased: Int64?
     
     
     /// a constructor in which all parameters default to optional, and thus, none are required to initialize an InventoryItem object
-    init(userDesignatedID: String = "", name: String = "", locations: [Location] = [], dateLastPurchased: Timestamp? = nil, customerAccessibleQuantity: Int? = nil, backstockQuantity: Int? = nil) {
+    init(userDesignatedID: String = "", name: String = "", locations: [Location] = [], dateLastPurchased: Int64? = nil, customerAccessibleQuantity: Int? = nil, backstockQuantity: Int? = nil) {
         self.id = UUID.uuidStringTwentyCharsNoDashes
         self.userDesignatedID = userDesignatedID
         self.name = name
