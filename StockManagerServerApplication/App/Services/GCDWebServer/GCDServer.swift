@@ -212,6 +212,53 @@ class GCDServer {
             }
             
         }
+        
+        
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/item/image", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            let response = GCDWebServerDataResponse(jsonObject: [:])
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+
+        }
+        
+        
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/item/image", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerResponse? in
+            
+            print(request)
+            if let requestData = request as? GCDWebServerDataRequest {
+                let data = requestData.data
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
+                    if let dict = json as? [String:Any] {
+                        if let id = dict["id"] as? String {
+                            let fetchResult = FirebaseWrapper.retrieveImage(itemUUID: id)
+                            if let error = fetchResult.error {
+                                return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
+                            } else {
+                                if let image = fetchResult.image {
+                                    let json = [id:image]
+                                    return GCDWebServerDataResponse(jsonObject: json)?.addHeaders()
+                                } else {
+                                    return GCDWebServerErrorResponse(text: StockManagerError.unreachableError.output)?.addHeaders()
+                                }
+                            }
+                        } else {
+                            return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingItemIDField.output)?.addHeaders()
+                        }
+                    } else {
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
+                    }
+                } else {
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
+                }
+            } else {
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
+            }
+            
+        }
                                 
                                 
                                 

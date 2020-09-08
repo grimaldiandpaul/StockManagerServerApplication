@@ -25,6 +25,7 @@ extension StockManagerError {
                                                         message: "An item already exists with this ID. Please use a unique ID.",
                                                         code: 1102)
         
+        
         static let missingStoreIDField = StockManagerError(title: "Missing required field",
                                                            message: "Please include either the storeID or storeIDs field.",
                                                            code: 1103)
@@ -49,7 +50,15 @@ extension StockManagerError {
                                                           message: "Please try again later.",
                                                           code: 1108)
         
-        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError]
+        static let noItemImageResultsFound = StockManagerError(title: "No results found",
+                                                          message: "No images could be found with this search.",
+                                                          code: 1109)
+        
+        static let missingItemIDField = StockManagerError(title: "Missing required field",
+                                                           message: "Please include either the id field.",
+                                                           code: 1110)
+        
+        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField]
     }
     
 }
