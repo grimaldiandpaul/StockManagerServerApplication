@@ -30,6 +30,8 @@ class FirebaseWrapper {
     /// a type-alias for the return object of a FirebaseWrapper check number of accounts function
     typealias FirebaseWrapperAccountCheckResult = (error: StockManagerError?, numAccounts: Int?)
     
+    typealias FirebaseWrapperItemRetrieval = (error: StockManagerError?, item: InventoryItem?)
+    
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter itemUUIDString: the unique identifier for the item
     /// - Parameter storeID: the unique identifier for the store

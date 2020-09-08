@@ -141,7 +141,7 @@ class GCDServer {
                 let data = temp.data
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
                     if let dict = json as? [String:Any] {
-                        let userCreationResult = FirebaseWrapper.CreateUser(userInformation: dict, ipAddress: ipAddress)
+                        let userCreationResult = FirebaseWrapper.createUser(userInformation: dict, ipAddress: ipAddress)
                         if let error = userCreationResult.error {
                             return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
                         } else {
@@ -166,7 +166,12 @@ class GCDServer {
                                 
                                 
                                 
-                                
+        GCDServer.main.server.addHandler(forMethod: "GET", path: "/item/query/uid/", request: GCDWebServerURLEncodedFormRequest.self) { (request) -> GCDWebServerResponse? in
+            
+            LoggingManager.log("request = \(request)")
+            
+            
+        }
                                 
                                 
                                 

@@ -39,6 +39,7 @@
 		12CE34BD24E1E3B5008234FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34BC24E1E3B5008234FF /* Assets.xcassets */; };
 		12CE34C024E1E3B5008234FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34BF24E1E3B5008234FF /* Preview Assets.xcassets */; };
 		12CE34C324E1E3B5008234FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CE34C124E1E3B5008234FF /* Main.storyboard */; };
+		12EAFC0225080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAFC0125080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift */; };
 		7324995524F1D62800E5CCE7 /* HTTPResponseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7324995424F1D62800E5CCE7 /* HTTPResponseExtensions.swift */; };
 		7324995F24F487FB00E5CCE7 /* ca.der in Resources */ = {isa = PBXBuildFile; fileRef = 7324995924F487FA00E5CCE7 /* ca.der */; };
 		7324996024F487FB00E5CCE7 /* localhost.der in Resources */ = {isa = PBXBuildFile; fileRef = 7324995A24F487FA00E5CCE7 /* localhost.der */; };
@@ -102,6 +103,7 @@
 		12CE34C224E1E3B5008234FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12CE34C424E1E3B5008234FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12CE34C524E1E3B5008234FF /* StockManagerServerApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StockManagerServerApplication.entitlements; sourceTree = "<group>"; };
+		12EAFC0125080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseItemQuery+ItemNumber.swift"; sourceTree = "<group>"; };
 		1F6D57CAFF99640E3E212AED /* Pods-StockManagerServerApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockManagerServerApplication.debug.xcconfig"; path = "Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		2F3065749B4EC29137993702 /* Pods-StockManagerServerApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockManagerServerApplication.release.xcconfig"; path = "Target Support Files/Pods-StockManagerServerApplication/Pods-StockManagerServerApplication.release.xcconfig"; sourceTree = "<group>"; };
 		7324995424F1D62800E5CCE7 /* HTTPResponseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseExtensions.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				124E812224ECA2FC006ABA37 /* FirebaseCreateItem.swift */,
 				124E812424ECA341006ABA37 /* FirebaseAuthenticateUser.swift */,
 				73BD3050250422370079622E /* FirebaseCreateUser.swift */,
+				12EAFC0125080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				7324995524F1D62800E5CCE7 /* HTTPResponseExtensions.swift in Sources */,
 				737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */,
 				123F83EF24E336890084D5B8 /* UUID.swift in Sources */,
+				12EAFC0225080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift in Sources */,
 				12B4F88B24E1E6970073DB58 /* LogEntrySource.swift in Sources */,
 				12283B5D24EEDD30003C642B /* ErrorProtocol.swift in Sources */,
 				12CE34BB24E1E3B3008234FF /* ContentView.swift in Sources */,

@@ -15,7 +15,7 @@ extension FirebaseWrapper {
     /// - Parameter email: the user's email
     /// - Parameter password: the user's password
     /// - Returns:FirebaseWrapperAuthenticationResult = (error: StockManagerError?, successful: Bool?, user: Data?)
-    class func CreateUser(userInformation: [String:Any], ipAddress: String?) -> FirebaseWrapperCreationResult {
+    class func createUser(userInformation: [String:Any], ipAddress: String?) -> FirebaseWrapperCreationResult {
         
         var error: StockManagerError? = nil
         var creationResult: Bool? = nil
