@@ -7,7 +7,6 @@
 
 import Foundation
 import Firebase
-import Telegraph
 
 /// A static class, acting as a singleton without mutable data members
 class FirebaseWrapper {
@@ -30,19 +29,32 @@ class FirebaseWrapper {
     /// a type-alias for the return object of a FirebaseWrapper check number of accounts function
     typealias FirebaseWrapperAccountCheckResult = (error: StockManagerError?, numAccounts: Int?)
     
-    typealias FirebaseWrapperItemRetrieval = (error: StockManagerError?, item: InventoryItem?)
+    typealias FirebaseWrapperItemRetrieval = (error: StockManagerError?, item: [String:Any]?)
     
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter itemUUIDString: the unique identifier for the item
     /// - Parameter storeID: the unique identifier for the store
     /// - Returns: A `DocumentReference` to the `InventoryItem`.
     ///
-    class func itemReference(_ itemUUIDString: String, storeID: String) -> DocumentReference {
+    class func itemReference(itemUUIDString: String, storeID: String) -> DocumentReference {
         return FirebaseWrapper.root
             .collection("Stores")
             .document(storeID)
             .collection("ItemList")
             .document(itemUUIDString)
+    }
+    
+    /// This function is a re-usable function for the singleton that returns the `Query` for an `InventoryItem` given a store.
+    /// - Parameter id: the customer designated id for the `InventoryItem`
+    /// - Parameter storeID: the unique identifier for the store
+    /// - Returns: A `DocumentReference` to the `InventoryItem`.
+    ///
+    class func itemReference(userDesignatedID: String, storeID: String) -> Query {
+        return FirebaseWrapper.root
+            .collection("Stores")
+            .document(storeID)
+            .collection("ItemList")
+            .whereField("userDesignatedID", isEqualTo: userDesignatedID)
     }
     
     /// a re-usable function for the singleton that returns the database reference for a user given a `userID`

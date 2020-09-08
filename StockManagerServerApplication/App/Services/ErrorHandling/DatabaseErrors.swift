@@ -25,27 +25,31 @@ extension StockManagerError {
                                                         message: "An item already exists with this ID. Please use a unique ID.",
                                                         code: 1102)
         
-        static let missingField = StockManagerError(title: "Missing required field",
+        static let missingStoreIDField = StockManagerError(title: "Missing required field",
                                                            message: "Please include either the storeID or storeIDs field.",
                                                            code: 1103)
         
+        static let missingUserDesignatedIDField = StockManagerError(title: "Missing required field",
+                                                           message: "Please include the userDesignatedID field",
+                                                           code: 1104)
+        
         static let noUserResultsFound = StockManagerError(title: "No results found",
                                                           message: "No user could be found with this email.",
-                                                          code: 1104)
+                                                          code: 1105)
         
         static let noItemResultsFound = StockManagerError(title: "No results found",
                                                           message: "No item could be found with this search.",
-                                                          code: 1105)
+                                                          code: 1106)
         
         static let noInvitationCodeResultsFound = StockManagerError(title: "No results found",
                                                           message: "This invitation code could not be found.",
-                                                          code: 1106)
+                                                          code: 1107)
         
         static let internalDatabaseSyncError = StockManagerError(title: "Internal Database Error",
                                                           message: "Please try again later.",
-                                                          code: 1107)
+                                                          code: 1108)
         
-        static let all: [StockManagerError] = [nonUniqueIdentifier, missingField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError]
+        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError]
     }
     
 }

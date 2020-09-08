@@ -68,8 +68,8 @@ class GCDServer {
                 ipAddress = ip
             }
             
-            if let temp = request as? GCDWebServerDataRequest {
-                let data = temp.data
+            if let requestData = request as? GCDWebServerDataRequest {
+                let data = requestData.data
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
                     if let dict = json as? [String:Any] {
                         if let email = dict["email"] as? String {
@@ -128,7 +128,6 @@ class GCDServer {
         }
         
         GCDServer.main.server.addHandler(forMethod: "POST", path: "/user/create", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
-            print(request)
             
             var ipAddress: String? = nil
             if let ip = request.headers["X-Real-IP"] {
@@ -163,13 +162,54 @@ class GCDServer {
                 return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
             }
         }
+        
+        
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/item/query/udid", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            let response = GCDWebServerDataResponse(jsonObject: [:])
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+
+        }
                                 
                                 
-                                
-        GCDServer.main.server.addHandler(forMethod: "GET", path: "/item/query/uid/", request: GCDWebServerURLEncodedFormRequest.self) { (request) -> GCDWebServerResponse? in
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/item/query/udid", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerResponse? in
             
-            LoggingManager.log("request = \(request)")
-            
+            print(request)
+            if let requestData = request as? GCDWebServerDataRequest {
+                let data = requestData.data
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
+                    if let dict = json as? [String:Any] {
+                        if let storeID = dict["storeID"] as? String {
+                            if let id = dict["userDesignatedID"] as? String {
+                                let fetchResult = FirebaseWrapper.retrieveItem(id, storeID: storeID)
+                                if let error = fetchResult.error {
+                                    return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
+                                } else {
+                                    if let item = fetchResult.item {
+                                        return GCDWebServerDataResponse(jsonObject: item)?.addHeaders()
+                                    } else {
+                                        return GCDWebServerErrorResponse(text: StockManagerError.unreachableError.output)?.addHeaders()
+                                    }
+                                }
+                            } else {
+                                return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingUserDesignatedIDField.output)?.addHeaders()
+                            }
+                        } else {
+                            return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingStoreIDField.output)?.addHeaders()
+                        }
+                    } else {
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
+                    }
+                } else {
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
+                }
+            } else {
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
+            }
             
         }
                                 

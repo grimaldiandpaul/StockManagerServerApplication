@@ -46,7 +46,7 @@ extension TelegraphServer {
                 } else if let storeIdentifiers = parameters["storeIDs"] as? [String] {
                     storeIDs = storeIdentifiers
                 } else {
-                    return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output).addHeaders()
+                    return HTTPResponse(content: StockManagerError.DatabaseErrors.missingStoreIDField.output).addHeaders()
                 }
                 newItem = InventoryItem.from(parameters)
                 
@@ -73,7 +73,7 @@ extension TelegraphServer {
                         
                         // else return missingField error
                         else {
-                            return HTTPResponse(content: StockManagerError.DatabaseErrors.missingField.output).addHeaders()
+                            return HTTPResponse(content: StockManagerError.DatabaseErrors.missingStoreIDField.output).addHeaders()
                         }
                         newItem = InventoryItem.from(body)
                         

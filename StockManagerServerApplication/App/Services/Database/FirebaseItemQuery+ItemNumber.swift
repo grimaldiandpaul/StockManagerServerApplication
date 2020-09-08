@@ -15,13 +15,13 @@ extension FirebaseWrapper {
     /// - Parameter email: the user's email
     /// - Parameter password: the user's password
     /// - Returns:FirebaseWrapperAuthenticationResult = (error: StockManagerError?, successful: Bool?, user: Data?)
-    class func retrieveItem(_ itemUUIDString: String, storeID: String) -> FirebaseWrapperItemRetrieval {
-        
+    class func retrieveItem(_ userDesignatedID: String, storeID: String) -> FirebaseWrapperItemRetrieval {
+       
         var error: StockManagerError? = nil
-        var itemRetrievalResult: InventoryItem? = nil
+        var itemRetrievalResult: [String:Any]? = nil
         
         // Get the user document from Firebase
-        FirebaseWrapper.itemReference(itemUUIDString, storeID: storeID).getDocument { (snapshot, snapshotErr) in
+        FirebaseWrapper.itemReference(userDesignatedID: userDesignatedID, storeID: storeID).getDocuments { (snapshot, snapshotErr) in
             
             // If there was an error, set the variables
             if let _ = snapshotErr {
@@ -29,14 +29,20 @@ extension FirebaseWrapper {
                 error = StockManagerError.DatabaseErrors.connectionError
             }
             // else unwrap the documents from the snapshot
-            else if let data = snapshot?.data() {
-                let item = InventoryItem.from(data)
-                if let validationError = DataValidation.validateFields(item: item).error {
-                    itemRetrievalResult = nil
-                    error = validationError
+            else if let docs = snapshot?.documents {
+                if docs.count == 1, let doc = docs.first {
+                    print("Got here 1")
+                    let item = InventoryItem.from(doc.data())
+                    if let validationError = DataValidation.validateFields(item: item).error {
+                        itemRetrievalResult = nil
+                        error = validationError
+                    } else {
+                        itemRetrievalResult = item.json
+                        error = nil
+                    }
                 } else {
-                    itemRetrievalResult = item
-                    error = nil
+                    itemRetrievalResult = nil
+                    error = StockManagerError.DatabaseErrors.noItemResultsFound
                 }
             } else {
                 itemRetrievalResult = nil
