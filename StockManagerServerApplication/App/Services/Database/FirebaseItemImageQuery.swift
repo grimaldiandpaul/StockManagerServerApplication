@@ -14,7 +14,7 @@ extension FirebaseWrapper {
         var error: StockManagerError? = nil
         var image: Data? = nil
         let imageRef = Storage.storage().reference(withPath: "images/\(itemUUID).png")
-        let _ = imageRef.getData(maxSize: 3000, completion: { (data, err) in
+        let _ = imageRef.getData(maxSize: 3000 * 1000, completion: { (data, err) in
             if let err = err {
                 LoggingManager.log(err.localizedDescription, source: .database, type: .error)
                 error = StockManagerError.DatabaseErrors.noItemImageResultsFound
