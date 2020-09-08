@@ -61,7 +61,6 @@ class FirebaseWrapper {
     /// - Returns: A `Query` to the `User` documents.
     ///
     class func userReference(email: String) -> Query {
-        print("got here in user reference")
         return FirebaseWrapper.root
         .collection("UserList")
         .whereField("email", isEqualTo: email)

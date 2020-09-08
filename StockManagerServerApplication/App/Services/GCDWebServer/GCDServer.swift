@@ -25,7 +25,6 @@ class GCDServer {
             })
         
         GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/ramirez", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
-            print("GOT HERE")
             //let get = request as! GCDWebServerMultiPartFormRequest
             //print(get)
             print(request)
@@ -39,7 +38,6 @@ class GCDServer {
         }
         
         GCDServer.main.server.addHandler(forMethod: "POST", path: "/ramirez", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
-            print("GOT HERE")
             print(request)
             let response = GCDWebServerDataResponse(jsonObject: ["Hello":"Dr. Ramirez"])
             if let response = response?.addHeaders() {
