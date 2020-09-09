@@ -239,8 +239,9 @@ class GCDServer {
                                 return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
                             } else {
                                 if let image = fetchResult.image {
-                                    let json = [id:image]
-                                    return GCDWebServerDataResponse(jsonObject: json)?.addHeaders()
+//                                    let json = [id:image]
+//                                    return GCDWebServerDataResponse(jsonObject: json)?.addHeaders()
+                                    return GCDWebServerDataResponse(data: image, contentType: "utf-8").addHeaders()
                                 } else {
                                     return GCDWebServerErrorResponse(text: StockManagerError.unreachableError.output)?.addHeaders()
                                 }
