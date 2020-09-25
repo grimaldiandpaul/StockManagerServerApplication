@@ -21,10 +21,12 @@ extension ContentView {
         headers["accept"] = "application/json"
         let location = Location(aisle: "1", aisleSection: "A")
         let location2 = Location(aisle: "2", aisleSection: "B")
-        let location3 = Location(aisle: "8", aisleSection: "C", spot: "21", description: "This is in a spot")
-        let testItem = InventoryItem(userDesignatedID: "123456", name: "Test Item", locations: [location, location2, location3], dateLastPurchased: Timestamp(date: Date()).seconds, customerAccessibleQuantity: 0, backstockQuantity: 0)
+        let location3 = Location(aisle: "8", aisleSection: "D", spot: "21", description: "This is in a spot")
+        let testItem = InventoryItem(userDesignatedID: "123457", name: "Test Item", locations: [location, location2, location3], dateLastPurchased: Timestamp(date: Date()).seconds, customerAccessibleQuantity: 0, backstockQuantity: 10)
+        var testItemJson = testItem.json
+        testItemJson["storeID"] = "Test Store 1"
         let parameters: [String:Any] = ["storeID": "Test Store 1", "type": "customerAccessibleQuantity", "value": 999, "userDesignatedID": "123456"]
-        LoggingManager.log(parameters.debugDescription, source: .routing, type: .error)
+        
 //        if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
 //            AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
 //                .responseString { (response) in
@@ -32,7 +34,7 @@ extension ContentView {
 //            }
 //        }
         
-        if let url = URL(string: "https://b2cd31cbbc69.ngrok.io/item/increment"){
+        if let url = URL(string: "https://b2cd31cbbc69.ngrok.io/item/decrement"){
             AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
                 .responseString { (response) in
                                     LoggingManager.log(response.description, source: .routing, type: .success)

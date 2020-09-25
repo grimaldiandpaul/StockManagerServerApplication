@@ -56,6 +56,8 @@
 		733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD224E341BE0034AE08 /* TelegraphServer.swift */; };
 		733B1CD624E342020034AE08 /* Telegraph in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* Telegraph */; };
 		735A50FC251E828E001E1583 /* FirebaseIncrementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735A50FB251E828E001E1583 /* FirebaseIncrementItem.swift */; };
+		735A50FF251E93E8001E1583 /* FirebaseUpdateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735A50FE251E93E8001E1583 /* FirebaseUpdateItem.swift */; };
+		735A5102251E9E01001E1583 /* FirebaseDecrementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735A5101251E9E01001E1583 /* FirebaseDecrementItem.swift */; };
 		7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46024E363A300A153EB /* ContentViewExtensions.swift */; };
 		7368C46424E3660700A153EB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7368C46324E3660700A153EB /* Alamofire */; };
 		7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */; };
@@ -123,6 +125,8 @@
 		733B1CD024E33FF60034AE08 /* LocationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtensions.swift; sourceTree = "<group>"; };
 		733B1CD224E341BE0034AE08 /* TelegraphServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelegraphServer.swift; path = StockManagerServerApplication/App/Services/Routing/TelegraphServer.swift; sourceTree = SOURCE_ROOT; };
 		735A50FB251E828E001E1583 /* FirebaseIncrementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseIncrementItem.swift; sourceTree = "<group>"; };
+		735A50FE251E93E8001E1583 /* FirebaseUpdateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUpdateItem.swift; sourceTree = "<group>"; };
+		735A5101251E9E01001E1583 /* FirebaseDecrementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDecrementItem.swift; sourceTree = "<group>"; };
 		7368C46024E363A300A153EB /* ContentViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewExtensions.swift; sourceTree = "<group>"; };
 		7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseExtensions.swift; sourceTree = "<group>"; };
 		7368C46824EA156F00A153EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -420,6 +424,8 @@
 				12EAFC0125080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift */,
 				12EAFC07250841D300BD7780 /* FirebaseItemImageQuery.swift */,
 				735A50FB251E828E001E1583 /* FirebaseIncrementItem.swift */,
+				735A50FE251E93E8001E1583 /* FirebaseUpdateItem.swift */,
+				735A5101251E9E01001E1583 /* FirebaseDecrementItem.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -589,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				735A50FF251E93E8001E1583 /* FirebaseUpdateItem.swift in Sources */,
 				733B1CCA24E1FEBC0034AE08 /* DataValidation.swift in Sources */,
 				12B4F8C024E2077F0073DB58 /* Accessibility.swift in Sources */,
 				73BD3051250422370079622E /* FirebaseCreateUser.swift in Sources */,
@@ -617,6 +624,7 @@
 				7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */,
 				73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */,
 				73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */,
+				735A5102251E9E01001E1583 /* FirebaseDecrementItem.swift in Sources */,
 				12283B5F24EEDF18003C642B /* ModelErrors.swift in Sources */,
 				12B4F8BB24E2077F0073DB58 /* LocationType.swift in Sources */,
 				7324996724F4A59700E5CCE7 /* GCDServer.swift in Sources */,

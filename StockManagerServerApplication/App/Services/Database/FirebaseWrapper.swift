@@ -24,7 +24,7 @@ class FirebaseWrapper {
     typealias FirebaseWrapperAuthenticationResult = (error: StockManagerError?, successful: Bool?, user: [String:Any]?)
     
     /// a type-alias for the return object of a FirebaseWrapper Creation function
-    typealias FirebaseWrapperCreationResult = (error: StockManagerError?, successful: Bool?, user: [String:Any]?)
+    typealias FirebaseWrapperUserCreationResult = (error: StockManagerError?, successful: Bool?, user: [String:Any]?)
     
     /// a type-alias for the return object of a FirebaseWrapper check number of accounts function
     typealias FirebaseWrapperAccountCheckResult = (error: StockManagerError?, numAccounts: Int?)

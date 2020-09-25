@@ -15,19 +15,18 @@ extension FirebaseWrapper {
     /// - Parameter item: the `InventoryItem` object to create
     /// - Parameter storeID: the unique identifier of the store to add the item to
     /// - Returns: A FirebaseWrapperVoidResult (type-aliased from the tuple:  (error: String?, successful: Bool) )
-    class func createItem(_ item: InventoryItem, storeID: String) -> FirebaseWrapperVoidResult {
+    class func createItem(_ item: InventoryItem, storeID: String) -> FirebaseWrapperItemRetrieval {
         #warning("check if store exists")
         let validationResult = DataValidation.validateFields(item: item)
         let semaphore = DispatchSemaphore(value: 0)
+        var returnedItem : [String:Any] = [:]
         
         // if there is an error, return
         if let err = validationResult.error {
-            print(err)
             semaphore.signal()
-            return (err, false)
+            return (err, nil)
         } else {
             var error: StockManagerError? = nil
-            var result = false
             
             // retrieve the item document from Firebase Cloud Firestore
             FirebaseWrapper.itemReference(itemUUIDString: item.id, storeID: storeID).getDocument { (documentSnapshot, err) in
@@ -43,7 +42,7 @@ extension FirebaseWrapper {
                             error = StockManagerError.DatabaseErrors.connectionError
                             semaphore.signal()
                         } else {
-                            result = true
+                            returnedItem = item.json
                             semaphore.signal()
                         }
                     }
@@ -56,7 +55,7 @@ extension FirebaseWrapper {
             // wait for the asynchronous Firebase retrieval and creation
             let _ = semaphore.wait(wallTimeout: .distantFuture)
             
-            return (error,result)
+            return (error,returnedItem)
             
         }
         
