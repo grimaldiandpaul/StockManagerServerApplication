@@ -18,10 +18,12 @@ extension FirebaseWrapper {
     class func createItem(_ item: InventoryItem, storeID: String) -> FirebaseWrapperVoidResult {
         #warning("check if store exists")
         let validationResult = DataValidation.validateFields(item: item)
+        let semaphore = DispatchSemaphore(value: 0)
         
         // if there is an error, return
         if let err = validationResult.error {
             print(err)
+            semaphore.signal()
             return (err, false)
         } else {
             var error: StockManagerError? = nil
@@ -39,19 +41,20 @@ extension FirebaseWrapper {
                         if let err = err {
                             print(err)
                             error = StockManagerError.DatabaseErrors.connectionError
+                            semaphore.signal()
                         } else {
                             result = true
+                            semaphore.signal()
                         }
                     }
                 } else {
                     error = StockManagerError.DatabaseErrors.nonUniqueIdentifier
+                    semaphore.signal()
                 }
             }
             
             // wait for the asynchronous Firebase retrieval and creation
-            while ( error == nil && !result ) {
-                usleep(1000)
-            }
+            let _ = semaphore.wait(wallTimeout: .distantFuture)
             
             return (error,result)
             

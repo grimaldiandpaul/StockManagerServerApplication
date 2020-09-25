@@ -24,6 +24,7 @@ extension FirebaseWrapper {
         #warning("this will need fixed on mac mini")
         let file = "/Users/joepauljoe/Downloads/keyandiv.txt"
         let path = URL(fileURLWithPath: file)
+        let semaphore = DispatchSemaphore(value: 0)
         
         // Try to read the key and iv from the local file
         if var iv = try? String(contentsOf: path) {
@@ -44,6 +45,7 @@ extension FirebaseWrapper {
                     if let _ = snapshotErr {
                         authenticationResult = false
                         error = StockManagerError.DatabaseErrors.connectionError
+                        semaphore.signal()
                     }
                     // else unwrap the documents from the snapshot
                     else if let docs = snapshot?.documents {
@@ -59,6 +61,7 @@ extension FirebaseWrapper {
                                 if pk == encrypted {
                                     user = User.from(data).json
                                     authenticationResult = true
+                                    semaphore.signal()
                                     
                                     // Set the lastLoginDate and add the current IP address to the user document
                                     if let userID = data["userID"] as? String {
@@ -82,40 +85,46 @@ extension FirebaseWrapper {
                                     print(decrypted)
                                     authenticationResult = false
                                     error = StockManagerError.AuthenticationErrors.invalidCredentials
+                                    semaphore.signal()
                                 }
                             } else {
                                 authenticationResult = false
                                 error = StockManagerError.AuthenticationErrors.missingCredentials
+                                semaphore.signal()
                             }
                             
                         } else if docs.count == 0 {
                             authenticationResult = false
                             error = StockManagerError.DatabaseErrors.noUserResultsFound
+                            semaphore.signal()
                         } else if docs.count != 1 {
                             authenticationResult = false
                             error = StockManagerError.DatabaseErrors.internalDatabaseSyncError
+                            semaphore.signal()
                         } else {
                             authenticationResult = false
                             error = StockManagerError.unreachableError
+                            semaphore.signal()
                         }
                     } else {
                         authenticationResult = false
                         error = StockManagerError.DatabaseErrors.connectionError
+                        semaphore.signal()
                     }
                 }
             } else {
                 authenticationResult = false
                 error = StockManagerError.IOErrors.encryptionError
+                semaphore.signal()
             }
         
         } else {
             authenticationResult = false
             error = StockManagerError.IOErrors.retrievalError
+            semaphore.signal()
         }
         
-        while( authenticationResult == nil ){
-            usleep(1000)
-        }
+        let _ = semaphore.wait(wallTimeout: .distantFuture)
         return (error, authenticationResult, user)
     }
     

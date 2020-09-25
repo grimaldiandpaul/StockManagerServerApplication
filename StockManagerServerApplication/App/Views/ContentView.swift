@@ -22,6 +22,9 @@ struct ContentView: View {
                 Button("Server Still Alive?") {
                     LoggingManager.log("THE SERVER IS ALIVE AND WELL!")
                 }
+                Button("Test Endpoints") {
+                    testHelloEndpoint()
+                }
             }
             ScrollView {
                 ForEach(self.sortedLogs, id:\.self) { log in

@@ -61,6 +61,8 @@ class GCDServer {
         
         GCDServer.main.server.addHandler(forMethod: "POST", path: "/user/authenticate", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
             
+            print(request)
+            
             var ipAddress: String? = nil
             if let ip = request.headers["X-Real-IP"] {
                 ipAddress = ip
@@ -259,6 +261,53 @@ class GCDServer {
                 return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
             }
             
+        }
+        
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/item/increment", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            let response = GCDWebServerDataResponse(jsonObject: [:])
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+
+        }
+        
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/item/increment", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            
+            
+            if let temp = request as? GCDWebServerDataRequest {
+                let data = temp.data
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
+                    if let dict = json as? [String:Any] {
+                        if let incrementValue = dict["value"] as? Int, let type = dict["type"] as? String {
+                            if let itemID = dict["userDesignatedID"] as? String {
+                                if let storeID = dict["storeID"] as? String {
+                                    let result = FirebaseWrapper.incrementItem(itemID, value: incrementValue, type: type, storeID: storeID)
+                                    if let error = result.error {
+                                        return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
+                                    } else {
+                                        return GCDWebServerErrorResponse(text: "Success")?.addHeaders()
+                                    }
+                                } else {
+                                    return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingStoreIDField.output)?.addHeaders()
+                                }
+                            } else {
+                                return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingUserDesignatedIDField.output)?.addHeaders()
+                            }
+                        } else {
+                            return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.missingData.output)?.addHeaders()
+                        }
+                    } else {
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
+                    }
+                } else {
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
+                }
+            } else {
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
+            }
         }
                                 
                                 

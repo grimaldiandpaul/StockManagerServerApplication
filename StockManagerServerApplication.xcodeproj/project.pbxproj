@@ -55,6 +55,7 @@
 		733B1CD124E33FF60034AE08 /* LocationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD024E33FF60034AE08 /* LocationExtensions.swift */; };
 		733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733B1CD224E341BE0034AE08 /* TelegraphServer.swift */; };
 		733B1CD624E342020034AE08 /* Telegraph in Frameworks */ = {isa = PBXBuildFile; productRef = 733B1CD524E342020034AE08 /* Telegraph */; };
+		735A50FC251E828E001E1583 /* FirebaseIncrementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735A50FB251E828E001E1583 /* FirebaseIncrementItem.swift */; };
 		7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46024E363A300A153EB /* ContentViewExtensions.swift */; };
 		7368C46424E3660700A153EB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 7368C46324E3660700A153EB /* Alamofire */; };
 		7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */; };
@@ -121,6 +122,7 @@
 		733B1CC924E1FEBC0034AE08 /* DataValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataValidation.swift; path = StockManagerServerApplication/App/Services/DataValidation/DataValidation.swift; sourceTree = SOURCE_ROOT; };
 		733B1CD024E33FF60034AE08 /* LocationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtensions.swift; sourceTree = "<group>"; };
 		733B1CD224E341BE0034AE08 /* TelegraphServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelegraphServer.swift; path = StockManagerServerApplication/App/Services/Routing/TelegraphServer.swift; sourceTree = SOURCE_ROOT; };
+		735A50FB251E828E001E1583 /* FirebaseIncrementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseIncrementItem.swift; sourceTree = "<group>"; };
 		7368C46024E363A300A153EB /* ContentViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewExtensions.swift; sourceTree = "<group>"; };
 		7368C46624E88D9B00A153EB /* FirebaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseExtensions.swift; sourceTree = "<group>"; };
 		7368C46824EA156F00A153EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				73BD3050250422370079622E /* FirebaseCreateUser.swift */,
 				12EAFC0125080EBA00BD7780 /* FirebaseItemQuery+ItemNumber.swift */,
 				12EAFC07250841D300BD7780 /* FirebaseItemImageQuery.swift */,
+				735A50FB251E828E001E1583 /* FirebaseIncrementItem.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				124E812324ECA2FC006ABA37 /* FirebaseCreateItem.swift in Sources */,
 				7368C46924EA156F00A153EB /* User.swift in Sources */,
 				12B4F89224E1EE270073DB58 /* DateExtensions.swift in Sources */,
+				735A50FC251E828E001E1583 /* FirebaseIncrementItem.swift in Sources */,
 				12B4F8BF24E2077F0073DB58 /* InventoryItem.swift in Sources */,
 				7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */,
 				12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */,

@@ -18,8 +18,8 @@ extension StockManagerError {
     class DatabaseErrors {
         
         static let connectionError = StockManagerError(title: "Unable to process",
-        message: "An internal error occurred connecting to cloud database service. Please try again later",
-        code: 1101)
+                                                       message: "An internal error occurred connecting to cloud database service. Please try again later",
+                                                       code: 1101)
         
         static let nonUniqueIdentifier = StockManagerError(title: "ID In Use",
                                                         message: "An item already exists with this ID. Please use a unique ID.",
@@ -58,7 +58,11 @@ extension StockManagerError {
                                                            message: "Please include either the id field.",
                                                            code: 1110)
         
-        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField]
+        static let badItemData = StockManagerError(title: "Bad Data",
+                                                           message: "One or more specified fields do not exist within an Item object.",
+                                                           code: 1111)
+        
+        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField, badItemData]
     }
     
 }

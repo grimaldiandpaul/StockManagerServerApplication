@@ -20,6 +20,7 @@ extension FirebaseWrapper {
         var error: StockManagerError? = nil
         var creationResult: Bool? = nil
         var user: [String:Any]? = nil
+        let semaphore = DispatchSemaphore(value: 0)
         
         #warning("this will need fixed on mac mini")
         let file = "/Users/joepauljoe/Downloads/keyandiv.txt"
@@ -37,6 +38,7 @@ extension FirebaseWrapper {
                                 if let _ = snapshotError {
                                     error = StockManagerError.DatabaseErrors.connectionError
                                     creationResult = false
+                                    semaphore.signal()
                                 } else if let docs = snapshot?.documents {
                                     if docs.count == 1, let doc = docs.first {
                                         let data = doc.data()
@@ -48,11 +50,13 @@ extension FirebaseWrapper {
                                                     if let _ = error {
                                                         error = StockManagerError.DatabaseErrors.connectionError
                                                         creationResult = false
+                                                        semaphore.signal()
                                                     } else {
                                                         // The account already exists
                                                         if (snapshot?.documents.count)! > 0 {
                                                             error = StockManagerError.AuthenticationErrors.accountAlreadyExists
                                                             creationResult = false
+                                                            semaphore.signal()
                                                         } else {
                                                             
                                                             // Start creating the account
@@ -77,8 +81,10 @@ extension FirebaseWrapper {
                                                                             if let _ = err {
                                                                                 error = StockManagerError.DatabaseErrors.connectionError
                                                                                 creationResult = false
+                                                                                semaphore.signal()
                                                                             } else {
                                                                                 creationResult = true
+                                                                                semaphore.signal()
                                                                             }
                                                                         }
                                                                     }
@@ -94,18 +100,22 @@ extension FirebaseWrapper {
                                                                             if let _ = err {
                                                                                 error = StockManagerError.DatabaseErrors.connectionError
                                                                                 creationResult = false
+                                                                                semaphore.signal()
                                                                             } else {
                                                                                 creationResult = true
+                                                                                semaphore.signal()
                                                                             }
                                                                         }
                                                                     }
                                                                 } else {
                                                                     error = StockManagerError.IOErrors.encryptionError
                                                                     creationResult = false
+                                                                    semaphore.signal()
                                                                 }
                                                             } else {
                                                                 error = StockManagerError.IOErrors.retrievalError
                                                                 creationResult = false
+                                                                semaphore.signal()
                                                             }
                                                         }
                                                     }
@@ -115,53 +125,62 @@ extension FirebaseWrapper {
                                             } else {
                                                 error = StockManagerError.AuthenticationErrors.incompleteInvitationCode
                                                 creationResult = false
+                                                semaphore.signal()
                                             }
                                         } else {
                                             error = StockManagerError.AuthenticationErrors.incompleteInvitationCode
                                             creationResult = false
+                                            semaphore.signal()
                                         }
                                     } else if docs.count == 0 {
                                         error = StockManagerError.DatabaseErrors.noInvitationCodeResultsFound
                                         creationResult = false
+                                        semaphore.signal()
                                     } else if docs.count != 1 {
                                         error = StockManagerError.DatabaseErrors.internalDatabaseSyncError
                                         creationResult = false
+                                        semaphore.signal()
                                     } else {
                                         error = StockManagerError.unreachableError
                                         creationResult = false
+                                        semaphore.signal()
                                     }
                                 } else {
                                     error = StockManagerError.DatabaseErrors.connectionError
                                     creationResult = false
+                                    semaphore.signal()
                                 }
                             }
                         } else {
                             error = StockManagerError.APIErrors.missingData
                             creationResult = false
+                            semaphore.signal()
                         }
                         
                     } else {
                         error = StockManagerError.APIErrors.missingData
                         creationResult = false
+                        semaphore.signal()
                     }
                 } else {
                     error = StockManagerError.APIErrors.missingData
                     creationResult = false
+                    semaphore.signal()
                 }
             } else {
                 error = StockManagerError.APIErrors.missingData
                 creationResult = false
+                semaphore.signal()
             }
         } else {
             error = StockManagerError.APIErrors.missingData
             creationResult = false
+            semaphore.signal()
         }
         
         
         
-        while( creationResult == nil ){
-            usleep(1000)
-        }
+        let _ = semaphore.wait(wallTimeout: .distantFuture)
         return (error, creationResult, user)
     }
 }

@@ -2,7 +2,7 @@
 //  FirebaseItemQuery+ItemNumber.swift
 //  StockManagerServerApplication
 //
-//  Created by Zachary Grimaldi on 9/8/20.
+//  Created by Zachary Grimaldi and Joseph Paul on 9/8/20.
 //
 
 import Foundation
@@ -20,6 +20,8 @@ extension FirebaseWrapper {
         var error: StockManagerError? = nil
         var itemRetrievalResult: [String:Any]? = nil
         
+        let semaphore = DispatchSemaphore(value: 0)
+        
         // Get the user document from Firebase
         FirebaseWrapper.itemReference(userDesignatedID: userDesignatedID, storeID: storeID).getDocuments { (snapshot, snapshotErr) in
             
@@ -27,6 +29,7 @@ extension FirebaseWrapper {
             if let _ = snapshotErr {
                 itemRetrievalResult = nil
                 error = StockManagerError.DatabaseErrors.connectionError
+                semaphore.signal()
             }
             // else unwrap the documents from the snapshot
             else if let docs = snapshot?.documents {
@@ -36,22 +39,24 @@ extension FirebaseWrapper {
                     if let validationError = DataValidation.validateFields(item: item).error {
                         itemRetrievalResult = nil
                         error = validationError
+                        semaphore.signal()
                     } else {
                         itemRetrievalResult = item.json
                         error = nil
+                        semaphore.signal()
                     }
                 } else {
                     itemRetrievalResult = nil
                     error = StockManagerError.DatabaseErrors.noItemResultsFound
+                    semaphore.signal()
                 }
             } else {
                 itemRetrievalResult = nil
                 error = StockManagerError.DatabaseErrors.connectionError
+                semaphore.signal()
             }
         }
-        while( error == nil && itemRetrievalResult == nil ){
-            usleep(1000)
-        }
+        let _ = semaphore.wait(wallTimeout: .distantFuture)
         return (error, itemRetrievalResult)
     }
     
