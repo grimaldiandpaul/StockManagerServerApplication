@@ -27,14 +27,14 @@ extension ContentView {
         testItemJson["storeID"] = "Test Store 1"
         let parameters: [String:Any] = ["storeID": "Test Store 1", "type": "customerAccessibleQuantity", "value": 999, "userDesignatedID": "123456"]
         
-//        if let url = URL(string: "https://rq30gjrh.burrow.io/create"){
+//        if let url = URL(string: "https://api.stockmanager.tech"){
 //            AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
 //                .responseString { (response) in
 //                    LoggingManager.log(response.description, source: .routing, type: .success)
 //            }
 //        }
         
-        if let url = URL(string: "https://b2cd31cbbc69.ngrok.io/item/decrement"){
+        if let url = URL(string: "https://api.stockmanager.tech/item/decrement"){
             AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
                 .responseString { (response) in
                                     LoggingManager.log(response.description, source: .routing, type: .success)

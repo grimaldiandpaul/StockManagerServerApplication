@@ -32,4 +32,23 @@ extension FirebaseWrapper {
         
     }
     
+    class func retrieveImageURL(itemUUID: String) -> FirebaseWrapperItemImageURLResult {
+        var error: StockManagerError? = nil
+        var url: String? = nil
+        let semaphore = DispatchSemaphore(value: 0)
+        let _ = Storage.storage().reference(withPath: "images/\(itemUUID).png").downloadURL { (imageURL, err) in
+            if let _ = err {
+                error = StockManagerError.DatabaseErrors.noItemImageResultsFound
+                semaphore.signal()
+            }
+            if let imageURL = imageURL {
+                url = imageURL.absoluteString
+            }
+            semaphore.signal()
+        }
+        let _ = semaphore.wait(wallTimeout: .distantFuture)
+        return (error, url)
+        
+    }
+    
 }

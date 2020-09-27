@@ -33,6 +33,8 @@ class FirebaseWrapper {
     
     typealias FirebaseWrapperItemImageResult = (error: StockManagerError?, image: Data?)
     
+    typealias FirebaseWrapperItemImageURLResult = (error: StockManagerError?, url: String?)
+    
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter itemUUIDString: the unique identifier for the item
     /// - Parameter storeID: the unique identifier for the store
