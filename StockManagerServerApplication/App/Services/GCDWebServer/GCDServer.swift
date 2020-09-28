@@ -430,10 +430,10 @@ class GCDServer {
                 let data = temp.data
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
                     if let dict = json as? [String:Any] {
-                        if let incrementValue = dict["value"] as? Int, let type = dict["type"] as? String {
+                        if let decrementValue = dict["value"] as? Int, let type = dict["type"] as? String {
                             if let itemID = dict["userDesignatedID"] as? String {
                                 if let storeID = dict["storeID"] as? String {
-                                    let result = FirebaseWrapper.decrementItem(itemID, value: incrementValue, type: type, storeID: storeID)
+                                    let result = FirebaseWrapper.decrementItem(itemID, value: decrementValue, type: type, storeID: storeID)
                                     if let error = result.error {
                                         return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
                                     } else {
