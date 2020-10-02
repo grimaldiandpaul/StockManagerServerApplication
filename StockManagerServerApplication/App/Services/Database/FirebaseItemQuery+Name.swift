@@ -23,7 +23,7 @@ extension FirebaseWrapper {
         let semaphore = DispatchSemaphore(value: 0)
         
         // Get the user document from Firebase
-        FirebaseWrapper.itemsReference(storeID: storeID).whereField("name", isEqualTo: name).getDocuments { (snapshot, snapshotErr) in
+        FirebaseWrapper.itemsReference(storeID: storeID).whereField("name", isGreaterThanOrEqualTo: name).getDocuments { (snapshot, snapshotErr) in
             
             // If there was an error, set the variables
             if let _ = snapshotErr {
@@ -34,6 +34,7 @@ extension FirebaseWrapper {
             // else unwrap the documents from the snapshot
             else if let docs = snapshot?.documents {
                 itemRetrievalResult = docs.map({InventoryItem.from($0.data()).json})
+                semaphore.signal()
             } else {
                 itemRetrievalResult = nil
                 error = StockManagerError.DatabaseErrors.connectionError
