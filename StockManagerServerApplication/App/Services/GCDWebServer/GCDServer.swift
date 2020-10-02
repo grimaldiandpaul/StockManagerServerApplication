@@ -191,6 +191,55 @@ class GCDServer {
             
         }
         
+        GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/item/query/name", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+            let response = GCDWebServerDataResponse(jsonObject: [:])
+            if let response = response?.addHeaders() {
+                return response
+            } else {
+                print("Error adding headers")
+            }
+            return response
+
+        }
+                                
+                                
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/item/query/name", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerResponse? in
+            
+            print(request)
+            if let requestData = request as? GCDWebServerDataRequest {
+                let data = requestData.data
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
+                    if let dict = json as? [String:Any] {
+                        if let storeID = dict["storeID"] as? String {
+                            if let name = dict["name"] as? String {
+                                let fetchResult = FirebaseWrapper.retrieveItems(name, storeID: storeID)
+                                if let error = fetchResult.error {
+                                    return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
+                                } else {
+                                    if let items = fetchResult.items {
+                                        return GCDWebServerDataResponse(jsonObject: items)?.addHeaders()
+                                    } else {
+                                        return GCDWebServerErrorResponse(text: StockManagerError.unreachableError.output)?.addHeaders()
+                                    }
+                                }
+                            } else {
+                                return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingNameField.output)?.addHeaders()
+                            }
+                        } else {
+                            return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingStoreIDField.output)?.addHeaders()
+                        }
+                    } else {
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
+                    }
+                } else {
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
+                }
+            } else {
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
+            }
+            
+        }
+        
         
         GCDServer.main.server.addHandler(forMethod: "OPTIONS", path: "/item/image", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
             let response = GCDWebServerDataResponse(jsonObject: [:])

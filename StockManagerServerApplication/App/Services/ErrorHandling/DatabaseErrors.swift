@@ -62,6 +62,10 @@ extension StockManagerError {
                                                            message: "One or more specified fields do not exist within an Item object.",
                                                            code: 1111)
         
+        static let missingNameField = StockManagerError(title: "Missing required field",
+                                                           message: "Please include the name field",
+                                                           code: 1112)
+        
         static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField, badItemData]
     }
     
