@@ -8,13 +8,13 @@
 import Foundation
 import Firebase
 
-/// An extension for our FirebaseWrapper class that contains the static function for creating an `InventoryItem`
+/// An extension for our FirebaseWrapper class that contains the static function for completing a task
 extension FirebaseWrapper {
     
-    /// static function for CREATING an `InventoryItem`
-    /// - Parameter item: the `InventoryItem` object to create
+    /// static function for COMPLETING an task
     /// - Parameter storeID: the unique identifier of the store to add the item to
-    /// - Returns: A FirebaseWrapperVoidResult (type-aliased from the tuple:  (error: String?, successful: Bool) )
+    /// - Parameter taskID: the unique identifier of the task
+    /// - Returns: A FirebaseWrapperTaskOperationResult (type-aliased from the tuple:  (error: String?, task: [String:Any]) )
     class func completeTask(storeID: String, taskID: String) -> FirebaseWrapperTaskOperationResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)

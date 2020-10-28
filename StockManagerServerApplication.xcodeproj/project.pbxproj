@@ -65,7 +65,8 @@
 		7368C46924EA156F00A153EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C46824EA156F00A153EB /* User.swift */; };
 		737F0F3424EB477200F97043 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F0F3324EB477200F97043 /* UserExtensions.swift */; };
 		73A495C7254A0DBB00EEE917 /* FirebaseCreateTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495C6254A0DBB00EEE917 /* FirebaseCreateTask.swift */; };
-		73A495CA254A178500EEE917 /* FirebaseWrapperCompleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495C9254A178500EEE917 /* FirebaseWrapperCompleteTask.swift */; };
+		73A495CA254A178500EEE917 /* FirebaseCompleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495C9254A178500EEE917 /* FirebaseCompleteTask.swift */; };
+		73A495CD254A1C3400EEE917 /* FirebaseApproveTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495CC254A1C3400EEE917 /* FirebaseApproveTask.swift */; };
 		73BD304C24FEE4940079622E /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 73BD304B24FEE4940079622E /* CryptoSwift */; };
 		73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD304E24FEFEB10079622E /* StringExtensions.swift */; };
 		73BD3051250422370079622E /* FirebaseCreateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD3050250422370079622E /* FirebaseCreateUser.swift */; };
@@ -136,7 +137,8 @@
 		7368C46824EA156F00A153EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		737F0F3324EB477200F97043 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		73A495C6254A0DBB00EEE917 /* FirebaseCreateTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateTask.swift; sourceTree = "<group>"; };
-		73A495C9254A178500EEE917 /* FirebaseWrapperCompleteTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapperCompleteTask.swift; sourceTree = "<group>"; };
+		73A495C9254A178500EEE917 /* FirebaseCompleteTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCompleteTask.swift; sourceTree = "<group>"; };
+		73A495CC254A1C3400EEE917 /* FirebaseApproveTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseApproveTask.swift; sourceTree = "<group>"; };
 		73BD304E24FEFEB10079622E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		73BD3050250422370079622E /* FirebaseCreateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateUser.swift; sourceTree = "<group>"; };
 		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
@@ -434,7 +436,8 @@
 				735A50FE251E93E8001E1583 /* FirebaseUpdateItem.swift */,
 				735A5101251E9E01001E1583 /* FirebaseDecrementItem.swift */,
 				73A495C6254A0DBB00EEE917 /* FirebaseCreateTask.swift */,
-				73A495C9254A178500EEE917 /* FirebaseWrapperCompleteTask.swift */,
+				73A495C9254A178500EEE917 /* FirebaseCompleteTask.swift */,
+				73A495CC254A1C3400EEE917 /* FirebaseApproveTask.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -648,11 +651,12 @@
 				12B4F8BF24E2077F0073DB58 /* InventoryItem.swift in Sources */,
 				7368C46724E88D9B00A153EB /* FirebaseExtensions.swift in Sources */,
 				73A495C7254A0DBB00EEE917 /* FirebaseCreateTask.swift in Sources */,
-				73A495CA254A178500EEE917 /* FirebaseWrapperCompleteTask.swift in Sources */,
+				73A495CA254A178500EEE917 /* FirebaseCompleteTask.swift in Sources */,
 				12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
 				733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */,
 				12283B6924EEDFC5003C642B /* JSONErrors.swift in Sources */,
+				73A495CD254A1C3400EEE917 /* FirebaseApproveTask.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
 				124E812524ECA341006ABA37 /* FirebaseAuthenticateUser.swift in Sources */,
 			);

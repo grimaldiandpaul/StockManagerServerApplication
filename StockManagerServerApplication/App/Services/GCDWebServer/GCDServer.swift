@@ -624,50 +624,37 @@ class GCDServer {
 
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        GCDServer.main.server.addHandler(forMethod: "POST", path: "/task/approve", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
-//            
-//            
-//            if let temp = request as? GCDWebServerDataRequest {
-//                let data = temp.data
-//                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
-//                    if let dict = json as? [String:Any] {
-//                        if let taskID = dict["taskID"] as? Int, let type = dict["type"] as? String {
-//                                if let storeID = dict["storeID"] as? String {
-//                                    let result = FirebaseWrapper.approveTask(storeID: storeID, taskID: taskID)
-//                                    if let error = result.error {
-//                                        return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
-//                                    } else {
-//                                        var responseJSON: [String:Any] = [:]
-//                                        responseJSON["result"] = "Success"
-//                                        return GCDWebServerDataResponse(jsonObject: responseJSON)?.addHeaders()
-//                                    }
-//                                } else {
-//                                    return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingStoreIDField.output)?.addHeaders()
-//                                }
-//                        } else {
-//                            return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.missingTaskID.output)?.addHeaders()
-//                        }
-//                    } else {
-//                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
-//                    }
-//                } else {
-//                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
-//                }
-//            } else {
-//                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
-//            }
-//        }
+        GCDServer.main.server.addHandler(forMethod: "POST", path: "/task/approve", request: GCDWebServerDataRequest.self) { (request) -> GCDWebServerDataResponse? in
+
+
+            if let temp = request as? GCDWebServerDataRequest {
+                let data = temp.data
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments){
+                    if let dict = json as? [String:Any] {
+                        if let taskID = dict["taskID"] as? String {
+                                if let storeID = dict["storeID"] as? String {
+                                    let result = FirebaseWrapper.approveTask(storeID: storeID, taskID: taskID)
+                                    if let error = result.error {
+                                        return GCDWebServerErrorResponse(text: error.output)?.addHeaders()
+                                    } else {
+                                        return GCDWebServerDataResponse(jsonObject: result.task)?.addHeaders()
+                                    }
+                                } else {
+                                    return GCDWebServerErrorResponse(text: StockManagerError.DatabaseErrors.missingStoreIDField.output)?.addHeaders()
+                                }
+                        } else {
+                            return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.missingTaskID.output)?.addHeaders()
+                        }
+                    } else {
+                        return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.castingError.output)?.addHeaders()
+                    }
+                } else {
+                    return GCDWebServerErrorResponse(text: StockManagerError.JSONErrors.serializationError.output)?.addHeaders()
+                }
+            } else {
+                return GCDWebServerErrorResponse(text: StockManagerError.APIErrors.castingError.output)?.addHeaders()
+            }
+        }
                                 
         
         
