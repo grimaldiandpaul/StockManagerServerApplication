@@ -37,6 +37,8 @@ class FirebaseWrapper {
     
     typealias FirebaseWrapperItemImageURLResult = (error: StockManagerError?, url: String?)
     
+    typealias FirebaseWrapperTaskOperationResult = (error: StockManagerError?, task: [String:Any])
+    
     
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter storeID: the unique identifier for the store
@@ -47,6 +49,19 @@ class FirebaseWrapper {
             .collection("Stores")
             .document(storeID)
             .collection("ItemList")
+    }
+    
+    /// This function is a re-usable function for the singleton that returns the `DocumentReference` for a task given a store.
+    /// - Parameter storeID: the unique identifier for the store
+    /// - Parameter taskID: the unique identifier for the task
+    /// - Returns: A `DocumentReference` to the task
+    ///
+    class func taskReference(storeID: String, taskID: String) -> DocumentReference {
+        return FirebaseWrapper.root
+            .collection("Stores")
+            .document(storeID)
+            .collection("Tasks")
+            .document(taskID)
     }
     
     

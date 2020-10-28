@@ -66,6 +66,10 @@ extension StockManagerError {
                                                            message: "Please include the name field",
                                                            code: 1112)
         
+        static let noTaskResultsFound = StockManagerError(title: "No results found",
+                                                          message: "No task could be found with this ID.",
+                                                          code: 1113)
+        
         static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField, badItemData]
     }
     
