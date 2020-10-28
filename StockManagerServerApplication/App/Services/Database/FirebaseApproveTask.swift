@@ -11,7 +11,7 @@ import Firebase
 /// An extension for our FirebaseWrapper class that contains the static function for approving a task
 extension FirebaseWrapper {
     
-    /// static function for APPROVING an task
+    /// static function for APPROVING a task
     /// - Parameter storeID: the unique identifier of the store to add the item to
     /// - Parameter taskID: the unique identifier of the task
     /// - Returns: A FirebaseWrapperTaskOperationResult (type-aliased from the tuple:  (error: String?, task: [String:Any]) )

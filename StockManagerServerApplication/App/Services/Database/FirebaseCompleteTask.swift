@@ -11,7 +11,7 @@ import Firebase
 /// An extension for our FirebaseWrapper class that contains the static function for completing a task
 extension FirebaseWrapper {
     
-    /// static function for COMPLETING an task
+    /// static function for COMPLETING a task
     /// - Parameter storeID: the unique identifier of the store to add the item to
     /// - Parameter taskID: the unique identifier of the task
     /// - Returns: A FirebaseWrapperTaskOperationResult (type-aliased from the tuple:  (error: String?, task: [String:Any]) )
