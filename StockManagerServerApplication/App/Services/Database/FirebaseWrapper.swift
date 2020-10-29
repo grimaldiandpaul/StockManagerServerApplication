@@ -41,6 +41,8 @@ class FirebaseWrapper {
     
     typealias FirebaseWrapperGetUsersResult = (error: StockManagerError?, users: [[String:Any]])
     
+    typealias FirebaseWrapperGetTasksResult = (error: StockManagerError?, tasks: [[String:Any]])
+    
     
     /// This function is a re-usable function for the singleton that returns the `DocumentReference` for an `InventoryItem` given a store.
     /// - Parameter storeID: the unique identifier for the store
@@ -66,6 +68,23 @@ class FirebaseWrapper {
             .document(taskID)
     }
     
+    /// This function is a re-usable function for the singleton that returns the `Query` for tasks given a store and user.
+    /// - Parameter storeID: the unique identifier for the store
+    /// - Parameter userID: the unique identifier for the user
+    /// - Returns: A `Query` of the tasks
+    ///
+    class func tasksReference(storeID: String, userID: String) -> Query {
+        return FirebaseWrapper.root
+            .collection("Stores")
+            .document(storeID)
+            .collection("Tasks")
+            .whereField("userID", isEqualTo: userID)
+    }
+    
+    /// This function is a re-usable function for the singleton that returns the `Query` for `User`s given a store.
+    /// - Parameter storeID: the unique identifier for the store
+    /// - Returns: A `Query` to the list of `User`s
+    ///
     class func usersReference(storeID: String) -> Query {
         return FirebaseWrapper.root
             .collection("UserList")
