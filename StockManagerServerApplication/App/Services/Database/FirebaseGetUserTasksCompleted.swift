@@ -13,15 +13,16 @@ extension FirebaseWrapper {
     
     /// static function for retrieving all users from the store
     /// - Parameter storeID: the unique identifier of the store to retrieve users
+    /// - Parameter userID: the unique identifier of the user
     /// - Returns: A FirebaseWrapperTaskOperationResult (type-aliased from the tuple:  (error: String?, task: [String:Any]) )
     class func getUserTasksCompleted(storeID: String, userID: String) -> FirebaseWrapperGetTasksResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var tasks : [[String:Any]] = [[:]]
+        var tasks = [[String:Any]]()
         
         var error: StockManagerError? = nil
             
-        // check to see if the document exists
+        // get the task documents
         FirebaseWrapper.tasksReference(storeID: storeID, userID: userID).getDocuments(completion: { (snapshot, err) in
             if let _ = err {
                 error = StockManagerError.DatabaseErrors.connectionError

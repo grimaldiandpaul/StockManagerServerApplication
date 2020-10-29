@@ -44,84 +44,93 @@ extension FirebaseWrapper {
                                         let data = doc.data()
                                         if let storeID = data["storeID"] as? String, storeID.count > 0 {
                                             if let companyID = data["companyID"] as? String, companyID.count > 0 {
+                                                if let expiry = data["timeExpires"] as? Int, expiry > Timestamp(date: Date()).seconds {
                                                 
                                                 // Check to see if the user already has an account
-                                                FirebaseWrapper.userReference(email: email).getDocuments { (snapshot, snapshotError) in
-                                                    if let _ = error {
-                                                        error = StockManagerError.DatabaseErrors.connectionError
-                                                        creationResult = false
-                                                        semaphore.signal()
-                                                    } else {
-                                                        // The account already exists
-                                                        if (snapshot?.documents.count)! > 0 {
-                                                            error = StockManagerError.AuthenticationErrors.accountAlreadyExists
+                                                    FirebaseWrapper.userReference(email: email).getDocuments { (snapshot, snapshotError) in
+                                                        if let _ = error {
+                                                            error = StockManagerError.DatabaseErrors.connectionError
                                                             creationResult = false
                                                             semaphore.signal()
                                                         } else {
-                                                            
-                                                            // Start creating the account
-                                                            if var iv = try? String(contentsOf: path) {
-                                                                let key = String(iv.prefix(while: {$0 != "\n"}))
-                                                                while iv.contains("\n"){
-                                                                    iv = String(iv.dropFirst())
-                                                                }
+                                                            // The account already exists
+                                                            if (snapshot?.documents.count)! > 0 {
+                                                                error = StockManagerError.AuthenticationErrors.accountAlreadyExists
+                                                                creationResult = false
+                                                                semaphore.signal()
+                                                            } else {
                                                                 
-                                                                // Encrypt the user's password for storage in database
-                                                                if let encrypted = try? password.encrypt(key: key, iv: iv) {
-                                                                    
-                                                                    // If there is an ipAddress, post the user's data to the firestore
-                                                                    if let ip = ipAddress {
-                                                                        let userID = UUID.uuidStringTwentyCharsNoDashes
-                                                                        user = User(userID: userID, firstName: firstName, lastName: lastName, email: email, storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [ip], userRole: .user).json
-                                                                        var firebaseJSON = User(userID: userID, firstName: firstName, lastName: lastName, email: email, storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [ip], userRole: .user).json
-                                                                        firebaseJSON["pk"] = encrypted
-                                                                        firebaseJSON["lastLoginDate"] = Timestamp(date: Date()).seconds
-                                                                        
-                                                                        FirebaseWrapper.userReference(userUUIDString: userID).setData(firebaseJSON) { (err) in
-                                                                            if let _ = err {
-                                                                                error = StockManagerError.DatabaseErrors.connectionError
-                                                                                creationResult = false
-                                                                                semaphore.signal()
-                                                                            } else {
-                                                                                creationResult = true
-                                                                                semaphore.signal()
-                                                                            }
-                                                                        }
+                                                                // Start creating the account
+                                                                if var iv = try? String(contentsOf: path) {
+                                                                    let key = String(iv.prefix(while: {$0 != "\n"}))
+                                                                    while iv.contains("\n"){
+                                                                        iv = String(iv.dropFirst())
                                                                     }
-                                                                    // Still post the user's data to the firestore, but without ipAddress
-                                                                    else {
-                                                                        let userID = UUID.uuidStringTwentyCharsNoDashes
-                                                                        user = User(userID: userID, firstName: firstName, lastName: lastName, email: email,storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [], userRole: .user).json
-                                                                        var firebaseJSON = User(userID: userID, firstName: firstName, lastName: lastName, email: email, storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [], userRole: .user).json
-                                                                        firebaseJSON["pk"] = encrypted
-                                                                        firebaseJSON["lastLoginDate"] = Timestamp(date: Date()).seconds
+                                                                    
+                                                                    // Encrypt the user's password for storage in database
+                                                                    if let encrypted = try? password.encrypt(key: key, iv: iv) {
+                                                                        
+                                                                        // If there is an ipAddress, post the user's data to the firestore
+                                                                        if let ip = ipAddress {
+                                                                            let userID = UUID.uuidStringTwentyCharsNoDashes
+                                                                            user = User(userID: userID, firstName: firstName, lastName: lastName, email: email, storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [ip], userRole: .user).json
+                                                                            var firebaseJSON = User(userID: userID, firstName: firstName, lastName: lastName, email: email, storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [ip], userRole: .user).json
+                                                                            firebaseJSON["pk"] = encrypted
+                                                                            firebaseJSON["lastLoginDate"] = Timestamp(date: Date()).seconds
                                                                             
-                                                                        FirebaseWrapper.userReference(userUUIDString: userID).setData(firebaseJSON) { (err) in
-                                                                            if let _ = err {
-                                                                                error = StockManagerError.DatabaseErrors.connectionError
-                                                                                creationResult = false
-                                                                                semaphore.signal()
-                                                                            } else {
-                                                                                creationResult = true
-                                                                                semaphore.signal()
+                                                                            FirebaseWrapper.userReference(userUUIDString: userID).setData(firebaseJSON) { (err) in
+                                                                                if let _ = err {
+                                                                                    error = StockManagerError.DatabaseErrors.connectionError
+                                                                                    creationResult = false
+                                                                                    semaphore.signal()
+                                                                                } else {
+                                                                                    creationResult = true
+                                                                                    semaphore.signal()
+                                                                                }
                                                                             }
                                                                         }
+                                                                        // Still post the user's data to the firestore, but without ipAddress
+                                                                        else {
+                                                                            let userID = UUID.uuidStringTwentyCharsNoDashes
+                                                                            user = User(userID: userID, firstName: firstName, lastName: lastName, email: email,storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [], userRole: .user).json
+                                                                            var firebaseJSON = User(userID: userID, firstName: firstName, lastName: lastName, email: email, storeID: storeID, companyID: companyID, lastLoginDate: nil, ipAddresses: [], userRole: .user).json
+                                                                            firebaseJSON["pk"] = encrypted
+                                                                            firebaseJSON["lastLoginDate"] = Timestamp(date: Date()).seconds
+                                                                                
+                                                                            FirebaseWrapper.userReference(userUUIDString: userID).setData(firebaseJSON) { (err) in
+                                                                                if let _ = err {
+                                                                                    error = StockManagerError.DatabaseErrors.connectionError
+                                                                                    creationResult = false
+                                                                                    semaphore.signal()
+                                                                                } else {
+                                                                                    creationResult = true
+                                                                                    semaphore.signal()
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    } else {
+                                                                        error = StockManagerError.IOErrors.encryptionError
+                                                                        creationResult = false
+                                                                        semaphore.signal()
                                                                     }
                                                                 } else {
-                                                                    error = StockManagerError.IOErrors.encryptionError
+                                                                    error = StockManagerError.IOErrors.retrievalError
                                                                     creationResult = false
                                                                     semaphore.signal()
                                                                 }
-                                                            } else {
-                                                                error = StockManagerError.IOErrors.retrievalError
-                                                                creationResult = false
-                                                                semaphore.signal()
+                                                                
+                                                                var updated : [String:Any] = [:]
+                                                                updated["uses"] = FieldValue.increment(Int64(1))
+                                                                codeReference(code: invitationCode).updateData(updated)
                                                             }
                                                         }
                                                     }
-                                                }
         
-                                                
+                                                } else {
+                                                    error = StockManagerError.AuthenticationErrors.expiredCode
+                                                    creationResult = false
+                                                    semaphore.signal()
+                                                }
                                             } else {
                                                 error = StockManagerError.AuthenticationErrors.incompleteInvitationCode
                                                 creationResult = false

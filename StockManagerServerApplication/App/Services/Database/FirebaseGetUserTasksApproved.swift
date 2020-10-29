@@ -17,11 +17,11 @@ extension FirebaseWrapper {
     class func getUserTasksApproved(storeID: String, userID: String) -> FirebaseWrapperGetTasksResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var tasks : [[String:Any]] = [[:]]
+        var tasks = [[String:Any]]()
         
         var error: StockManagerError? = nil
             
-        // check to see if the document exists
+        // retrieve the task documents
         FirebaseWrapper.tasksReference(storeID: storeID, userID: userID).getDocuments(completion: { (snapshot, err) in
             if let _ = err {
                 error = StockManagerError.DatabaseErrors.connectionError

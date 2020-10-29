@@ -46,7 +46,11 @@ extension StockManagerError {
         static let accountAlreadyExists = StockManagerError(title: "Account already exists",
                                                                 message: "Please try logging in.",
                                                                 code: 1208)
+        
+        static let expiredCode = StockManagerError(title: "Code Expired",
+                                                                message: "This code has either expired of been revoked. Please contact administation.",
+                                                                code: 1209)
 
-        static let all: [StockManagerError] = [connectionError, userNotFound, invalidCredentials, emptyEmail, emptyPassword, missingCredentials, incompleteInvitationCode, accountAlreadyExists]
+        static let all: [StockManagerError] = [connectionError, userNotFound, invalidCredentials, emptyEmail, emptyPassword, missingCredentials, incompleteInvitationCode, accountAlreadyExists, expiredCode]
     }
 }

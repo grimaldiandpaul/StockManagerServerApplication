@@ -17,11 +17,11 @@ extension FirebaseWrapper {
     class func getAllUsers(storeID: String) -> FirebaseWrapperGetUsersResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var users : [[String:Any]] = [[:]]
+        var users = [[String:Any]]()
         
         var error: StockManagerError? = nil
             
-        // check to see if the document exists
+        // get the users documents
         FirebaseWrapper.usersReference(storeID: storeID).getDocuments(completion: { (snapshot, err) in
             if let _ = err {
                 error = StockManagerError.DatabaseErrors.connectionError

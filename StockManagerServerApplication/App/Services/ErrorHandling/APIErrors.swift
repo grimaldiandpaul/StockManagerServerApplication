@@ -33,7 +33,7 @@ extension StockManagerError {
                                                       message: "Please include taskID field in body.",
                                                       code: 1304)
         
-        static let all: [StockManagerError] = [missingData, missingStoreID, castingError]
+        static let all: [StockManagerError] = [missingData, missingStoreID, castingError, missingTaskID]
     }
     
     

@@ -8,21 +8,17 @@
 import Foundation
 import Firebase
 
-/// An extension for our FirebaseWrapper class that contains the static function for getting all `user`s
+/// An extension for our FirebaseWrapper class that contains the static function for getting all `code`s
 extension FirebaseWrapper {
     
-    /// static function for retrieving all users from the store
-    /// - Parameter storeID: the unique identifier of the store to retrieve users
-    /// - Returns: A FirebaseWrapperTaskOperationResult (type-aliased from the tuple:  (error: String?, task: [String:Any]) )
-    class func getUserTasks(storeID: String, userID: String) -> FirebaseWrapperGetTasksResult {
+    class func getAllValidCodes(storeID: String) -> FirebaseWrapperGetCodesResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var tasks = [[String:Any]]()
+        var codes = [[String:Any]]()
         
         var error: StockManagerError? = nil
             
-        // get the task documents
-        FirebaseWrapper.tasksReference(storeID: storeID, userID: userID).getDocuments(completion: { (snapshot, err) in
+        FirebaseWrapper.codesReference(storeID: storeID).getDocuments(completion: { (snapshot, err) in
             if let _ = err {
                 error = StockManagerError.DatabaseErrors.connectionError
                 semaphore.signal()
@@ -32,10 +28,8 @@ extension FirebaseWrapper {
                 let docs = snapshot.documents
                 for doc in docs {
                     let data = doc.data()
-                    if let _ = data["timeCompleted"] as? Int {
-                    
-                    } else {
-                        tasks.append(data)
+                    if let expiry = data["timeExpires"] as? Int, expiry > Timestamp(date: Date()).seconds {
+                        codes.append(data)
                     }
                 }
                 semaphore.signal()
@@ -44,7 +38,7 @@ extension FirebaseWrapper {
             
         let _ = semaphore.wait(wallTimeout: .distantFuture)
             
-        return (error,tasks)
+        return (error, codes)
             
     }
     

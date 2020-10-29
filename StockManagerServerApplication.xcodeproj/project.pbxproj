@@ -71,6 +71,9 @@
 		73A495D4254A3F3200EEE917 /* FirebaseGetUserTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495D3254A3F3200EEE917 /* FirebaseGetUserTasks.swift */; };
 		73A495D7254A563800EEE917 /* FirebaseGetUserTasksCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495D6254A563800EEE917 /* FirebaseGetUserTasksCompleted.swift */; };
 		73A495DA254A56B400EEE917 /* FirebaseGetUserTasksApproved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495D9254A56B400EEE917 /* FirebaseGetUserTasksApproved.swift */; };
+		73A495DD254B603000EEE917 /* FirebaseCreateInvitationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495DC254B603000EEE917 /* FirebaseCreateInvitationCode.swift */; };
+		73A495E0254B678700EEE917 /* FirebaseRevokeInvitationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495DF254B678700EEE917 /* FirebaseRevokeInvitationCode.swift */; };
+		73A495E3254B6E9300EEE917 /* FirebaseGetCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A495E2254B6E9300EEE917 /* FirebaseGetCodes.swift */; };
 		73BD304C24FEE4940079622E /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 73BD304B24FEE4940079622E /* CryptoSwift */; };
 		73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD304E24FEFEB10079622E /* StringExtensions.swift */; };
 		73BD3051250422370079622E /* FirebaseCreateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD3050250422370079622E /* FirebaseCreateUser.swift */; };
@@ -147,6 +150,9 @@
 		73A495D3254A3F3200EEE917 /* FirebaseGetUserTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGetUserTasks.swift; sourceTree = "<group>"; };
 		73A495D6254A563800EEE917 /* FirebaseGetUserTasksCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGetUserTasksCompleted.swift; sourceTree = "<group>"; };
 		73A495D9254A56B400EEE917 /* FirebaseGetUserTasksApproved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGetUserTasksApproved.swift; sourceTree = "<group>"; };
+		73A495DC254B603000EEE917 /* FirebaseCreateInvitationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateInvitationCode.swift; sourceTree = "<group>"; };
+		73A495DF254B678700EEE917 /* FirebaseRevokeInvitationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRevokeInvitationCode.swift; sourceTree = "<group>"; };
+		73A495E2254B6E9300EEE917 /* FirebaseGetCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseGetCodes.swift; sourceTree = "<group>"; };
 		73BD304E24FEFEB10079622E /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		73BD3050250422370079622E /* FirebaseCreateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCreateUser.swift; sourceTree = "<group>"; };
 		73D9648B24E345F600B62A94 /* TelegraphServerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegraphServerExtensions.swift; sourceTree = "<group>"; };
@@ -450,6 +456,9 @@
 				73A495D3254A3F3200EEE917 /* FirebaseGetUserTasks.swift */,
 				73A495D6254A563800EEE917 /* FirebaseGetUserTasksCompleted.swift */,
 				73A495D9254A56B400EEE917 /* FirebaseGetUserTasksApproved.swift */,
+				73A495DC254B603000EEE917 /* FirebaseCreateInvitationCode.swift */,
+				73A495DF254B678700EEE917 /* FirebaseRevokeInvitationCode.swift */,
+				73A495E2254B6E9300EEE917 /* FirebaseGetCodes.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -649,6 +658,7 @@
 				12283B6524EEDF50003C642B /* APIErrors.swift in Sources */,
 				73A495DA254A56B400EEE917 /* FirebaseGetUserTasksApproved.swift in Sources */,
 				7368C46124E363A300A153EB /* ContentViewExtensions.swift in Sources */,
+				73A495E0254B678700EEE917 /* FirebaseRevokeInvitationCode.swift in Sources */,
 				73D9648C24E345F600B62A94 /* TelegraphServerExtensions.swift in Sources */,
 				73BD304F24FEFEB10079622E /* StringExtensions.swift in Sources */,
 				735A5102251E9E01001E1583 /* FirebaseDecrementItem.swift in Sources */,
@@ -670,10 +680,12 @@
 				73A495CA254A178500EEE917 /* FirebaseCompleteTask.swift in Sources */,
 				12B4F8BA24E2077F0073DB58 /* LocationType+Extensions.swift in Sources */,
 				12B4F88824E1E6970073DB58 /* LogEntryType.swift in Sources */,
+				73A495DD254B603000EEE917 /* FirebaseCreateInvitationCode.swift in Sources */,
 				733B1CD324E341BE0034AE08 /* TelegraphServer.swift in Sources */,
 				12283B6924EEDFC5003C642B /* JSONErrors.swift in Sources */,
 				73A495CD254A1C3400EEE917 /* FirebaseApproveTask.swift in Sources */,
 				12CE34B924E1E3B3008234FF /* AppDelegate.swift in Sources */,
+				73A495E3254B6E9300EEE917 /* FirebaseGetCodes.swift in Sources */,
 				124E812524ECA341006ABA37 /* FirebaseAuthenticateUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

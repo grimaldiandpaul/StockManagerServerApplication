@@ -18,11 +18,11 @@ extension FirebaseWrapper {
     class func completeTask(storeID: String, taskID: String) -> FirebaseWrapperTaskOperationResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var taskJSON : [String:Any] = [:]
+        var taskJSON = [String:Any]()
         
         var error: StockManagerError? = nil
             
-        // check to see if the document exists
+        // get the task document
         FirebaseWrapper.taskReference(storeID: storeID, taskID: taskID).getDocument { (doc, err) in
             if (!(doc?.exists ?? false)) {
                 error = StockManagerError.DatabaseErrors.noTaskResultsFound

@@ -11,7 +11,7 @@ import Firebase
 /// An extension for our FirebaseWrapper class that contains the static function for creating a task
 extension FirebaseWrapper {
     
-    /// static function for CREATING an task
+    /// static function for CREATING a task
     /// - Parameter storeID: the unique identifier of the store to add the item to
     /// - Parameter employeeID: the unique identifier of the employee
     /// - Parameter src: a dictionary of the source location
@@ -21,7 +21,7 @@ extension FirebaseWrapper {
     class func createTask(storeID: String, employeeID: String, src: [String:Any], dest: [String:Any], userDesignatedID: String) -> FirebaseWrapperTaskOperationResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var returnedTask : [String:Any] = [:]
+        var returnedTask = [String:Any]()
         
         var error: StockManagerError? = nil
         
@@ -33,7 +33,7 @@ extension FirebaseWrapper {
         returnedTask["timeAssigned"] = Timestamp(date: Date()).seconds
         returnedTask["id"] = taskID
             
-        // retrieve the item document from Firebase Cloud Firestore
+        // set the data for the task document from Firebase Cloud Firestore
         FirebaseWrapper.taskReference(storeID: storeID, taskID: taskID).setData(returnedTask) { (err) in
                 
             // if the document doesn't exist, create it below
@@ -47,9 +47,6 @@ extension FirebaseWrapper {
             
         // wait for the asynchronous Firebase retrieval and creation
         let _ = semaphore.wait(wallTimeout: .distantFuture)
-        
-        print("RETURNEDTASSK")
-        print(returnedTask)
         
         return (error,returnedTask)
         

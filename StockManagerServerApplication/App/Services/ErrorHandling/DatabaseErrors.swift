@@ -73,7 +73,19 @@ extension StockManagerError {
                                                          message: "Please include the userID field",
                                                          code: 1114)
         
-        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField, badItemData]
+        static let missingCompanyIDField = StockManagerError(title: "Missing required field",
+                                                             message: "Please include the companyID field",
+                                                             code: 1115)
+        
+        static let missingInvitationCode = StockManagerError(title: "Missing required field",
+                                                             message: "Please include the code field",
+                                                             code: 1116)
+        
+        static let noCodeFound = StockManagerError(title: "No code found",
+                                                             message: "This invitation code does not exist in the database",
+                                                             code: 1117)
+        
+        static let all: [StockManagerError] = [nonUniqueIdentifier, missingStoreIDField, missingUserDesignatedIDField, noUserResultsFound, noItemResultsFound, noInvitationCodeResultsFound, internalDatabaseSyncError, noItemImageResultsFound, missingItemIDField, badItemData, missingNameField, noTaskResultsFound, missingUserIDField, missingCompanyIDField, missingInvitationCode]
     }
     
 }
