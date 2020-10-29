@@ -42,10 +42,14 @@ extension FirebaseWrapper {
                 returnedTask = [:]
                 semaphore.signal()
             }
+            semaphore.signal()
         }
             
         // wait for the asynchronous Firebase retrieval and creation
         let _ = semaphore.wait(wallTimeout: .distantFuture)
+        
+        print("RETURNEDTASSK")
+        print(returnedTask)
         
         return (error,returnedTask)
         

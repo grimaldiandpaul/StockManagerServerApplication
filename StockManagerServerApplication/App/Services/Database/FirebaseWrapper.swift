@@ -78,7 +78,7 @@ class FirebaseWrapper {
             .collection("Stores")
             .document(storeID)
             .collection("Tasks")
-            .whereField("userID", isEqualTo: userID)
+            .whereField("assignedEmployeeID", isEqualTo: userID)
     }
     
     /// This function is a re-usable function for the singleton that returns the `Query` for `User`s given a store.

@@ -14,15 +14,15 @@ extension FirebaseWrapper {
     /// static function for retrieving all users from the store
     /// - Parameter storeID: the unique identifier of the store to retrieve users
     /// - Returns: A FirebaseWrapperTaskOperationResult (type-aliased from the tuple:  (error: String?, task: [String:Any]) )
-    class func getAllUsers(storeID: String) -> FirebaseWrapperGetUsersResult {
+    class func getUserTasksApproved(storeID: String, userID: String) -> FirebaseWrapperGetTasksResult {
         #warning("check if store exists")
         let semaphore = DispatchSemaphore(value: 0)
-        var users : [[String:Any]] = [[:]]
+        var tasks : [[String:Any]] = [[:]]
         
         var error: StockManagerError? = nil
             
         // check to see if the document exists
-        FirebaseWrapper.usersReference(storeID: storeID).getDocuments(completion: { (snapshot, err) in
+        FirebaseWrapper.tasksReference(storeID: storeID, userID: userID).getDocuments(completion: { (snapshot, err) in
             if let _ = err {
                 error = StockManagerError.DatabaseErrors.connectionError
                 semaphore.signal()
@@ -32,15 +32,8 @@ extension FirebaseWrapper {
                 let docs = snapshot.documents
                 for doc in docs {
                     let data = doc.data()
-                    if let fname = data["firstName"] as? String {
-                        if let lname = data["lastName"] as? String {
-                            if let id = data["userID"] as? String {
-                                var userJSON : [String:Any] = [:]
-                                userJSON["name"] = fname + " " + lname + " " + id.suffix(4).uppercased()
-                                userJSON["id"] = id
-                                users.append(userJSON)
-                            }
-                        }
+                    if let _ = data["timeApproved"] as? Int {
+                        tasks.append(data)
                     }
                 }
                 semaphore.signal()
@@ -49,7 +42,7 @@ extension FirebaseWrapper {
             
         let _ = semaphore.wait(wallTimeout: .distantFuture)
             
-        return (error,users)
+        return (error,tasks)
             
     }
     
