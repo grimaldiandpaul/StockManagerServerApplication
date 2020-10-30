@@ -36,46 +36,40 @@ extension FirebaseWrapper {
                 }
                 taskJSON["timeApproved"] = Timestamp(date: Date()).seconds
                 FirebaseWrapper.taskReference(storeID: storeID, taskID: taskID).updateData(taskJSON)
-                
                 // update the location of the inventory item
                 if let userDesignatedID = taskJSON["userDesignatedID"] as? String {
                     // check to see if the document exists
-                    FirebaseWrapper.itemReference(itemUUIDString: userDesignatedID, storeID: storeID).getDocument { (snapshot, err) in
-                        if (!(snapshot?.exists ?? false)) {
-                            error = StockManagerError.DatabaseErrors.noItemResultsFound
-                            semaphore.signal()
-                        } else {
-                            // update the item document from Firebase Cloud Firestore
-                            if let snapshot = snapshot {
-                                if var data = snapshot.data(), let locations = data["locations"] as? [[String:String]] {
-                                    if let src = taskJSON["src"] as? [String:Any], let srcAisle = src["aisle"] as? String {
-                                        if let srcAisleSection = src["aisleSection"] as? String {
-                                            if let srcSpot = taskJSON["spot"] as? String {
-                                                if let dest = taskJSON["dest"] as? [String:Any] {
-                                                    
-                                                    var locs = [Location]()
-                                                    var needsToBeAdded = true
-                                                    for location in locations {
-                                                        let loc = Location.from(location)
-                                                        if loc.aisle == srcAisle && loc.aisleSection == srcAisleSection && loc.spot == srcSpot {
-                                                            locs.append(Location.from(dest))
-                                                            needsToBeAdded = false
-                                                        } else {
-                                                            locs.append(loc)
-                                                        }
-                                                    }
-                                                    if needsToBeAdded {
+                    FirebaseWrapper.itemReference(userDesignatedID: userDesignatedID, storeID: storeID).getDocuments { (snapshot, err) in
+                        // update the item document from Firebase Cloud Firestore
+                        if let snapshot = snapshot {
+                            let doc = snapshot.documents.first!
+                            let documentID = doc.documentID
+                            var data = doc.data()
+                            if let locations = data["locations"] as? [[String:String]] {
+                                if let src = taskJSON["src"] as? [String:Any], let srcAisle = src["aisle"] as? String {
+                                    if let srcAisleSection = src["aisleSection"] as? String {
+                                        if let srcSpot = src["spot"] as? String {
+                                            if let dest = taskJSON["dest"] as? [String:Any] {
+                                                var locs = [Location]()
+                                                var needsToBeAdded = true
+                                                for location in locations {
+                                                    print(location)
+                                                    let loc = Location.from(location)
+                                                    if loc.aisle == srcAisle && loc.aisleSection == srcAisleSection && loc.spot == srcSpot {
                                                         locs.append(Location.from(dest))
+                                                        needsToBeAdded = false
+                                                    } else {
+                                                        locs.append(loc)
                                                     }
-                                                    
-                                                    data["locations"] = locs.map({$0.json})
-                                                    FirebaseWrapper.itemReference(itemUUIDString: userDesignatedID, storeID: storeID).updateData(data)
-                                                    semaphore.signal()
-                                                
-                                                } else {
-                                                    error = StockManagerError.ModelErrors.illegalLocationType
-                                                    semaphore.signal()
                                                 }
+                                                if needsToBeAdded {
+                                                    locs.append(Location.from(dest))
+                                                }
+                                                
+                                                data["locations"] = locs.map({$0.json})
+                                                FirebaseWrapper.itemReference(itemUUIDString: documentID, storeID: storeID).setData(data)
+                                                semaphore.signal()
+                                            
                                             } else {
                                                 error = StockManagerError.ModelErrors.illegalLocationType
                                                 semaphore.signal()
@@ -89,20 +83,22 @@ extension FirebaseWrapper {
                                         semaphore.signal()
                                     }
                                 } else {
-                                    error = StockManagerError.APIErrors.castingError
+                                    error = StockManagerError.ModelErrors.illegalLocationType
                                     semaphore.signal()
                                 }
                             } else {
-                                error = StockManagerError.DatabaseErrors.connectionError
+                                error = StockManagerError.APIErrors.castingError
                                 semaphore.signal()
                             }
+                        } else {
+                            error = StockManagerError.DatabaseErrors.noItemResultsFound
+                            semaphore.signal()
                         }
                     }
                 } else {
-                    error = StockManagerError.DatabaseErrors.noItemResultsFound
+                    error = StockManagerError.DatabaseErrors.missingUserDesignatedIDField
                     semaphore.signal()
                 }
-                
                 
                 semaphore.signal()
             }

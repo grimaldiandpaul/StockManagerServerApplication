@@ -24,6 +24,7 @@ extension FirebaseWrapper {
             
         // retrieve the item document from Firebase Cloud Firestore
         if type == "backstockQuantity" {
+            print("backstock upd")
             
             // query based on the userDesignatedID
             FirebaseWrapper.itemReference(userDesignatedID: itemID, storeID: storeID).getDocuments(completion: { (snapshot, err) in
